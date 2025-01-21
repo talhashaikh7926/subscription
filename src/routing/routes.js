@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Routes,
   Route,
@@ -7,21 +7,19 @@ import {
 } from "react-router-dom";
 
 import Menus from "./menus";
-import { createBrowserHistory } from "history";
-
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { BASEURL } from "../config";
 import axios from "axios";
 import SkeletonComponent from "../components/skeletonLoader";
 
 import Login from "../pages/login/login";
 
-const history = createBrowserHistory();
+
 
 const Router = () => {
-  const { validate,login } = useSelector((state) => { return state })
+  const { validate, login } = useSelector((state) => { return state })
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
- 
+
   axios.defaults.baseURL = BASEURL;
   axios.defaults.headers.common['Authorization'] = `Bearer ${validate?.payload?.message?.token}`;
   axios.interceptors.request.use(request => {
@@ -40,9 +38,9 @@ const Router = () => {
 
   return (
     <>
-      <HistoryRouter history={history}>
+      <HistoryRouter>
         {/* {load ? <SkeletonComponent /> : (!validate?.payload?.success ? ( */}
-        {login?.loading ? <SkeletonComponent /> : (!userInfo?.access_token?(
+        {login?.loading ? <SkeletonComponent /> : (!userInfo?.access_token ? (
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="*" element={<Redirect to="/" />} />

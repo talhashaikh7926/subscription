@@ -8,7 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Layout } from "antd";
 
-import { createBrowserHistory } from "history";
+//import { createBrowserHistory } from "history";
+import { useNavigate } from 'react-router-dom';
 // import logo from "../../images/ormelogo.svg";
 
 export const history = createBrowserHistory();
@@ -16,9 +17,10 @@ const { Header } = Layout;
 
 export default function MainHeader({ title, mobileSidebar, toggle1 }) {
   const [toggle, setToggle] = useState(toggle1);
+  const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("userInfo");
-    history.push("/");
+    navigate('/');
     window.location.reload();
   };
   return (

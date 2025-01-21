@@ -7,12 +7,10 @@ import './fonts/flaticon/_flaticon.scss';
 
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
+//import { createBrowserHistory } from 'history';
 import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 // import { AUTHENTICATE } from './redux/types/types';
-
-const history = createBrowserHistory({ forceRefresh: true });
 
 const App = () => {
 

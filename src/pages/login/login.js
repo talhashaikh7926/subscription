@@ -4,9 +4,6 @@ import { Form, Input, Button, Card, Layout, Row, Col, Typography, Divider, notif
 import { adminLogin, registerLogin } from '../../redux/actions/login.action'
 
 import { useNavigate } from 'react-router-dom';
-import { createBrowserHistory } from "history";
-
-export const history = createBrowserHistory();
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -48,7 +45,7 @@ const Login = () => {
                         className: "toast-success",
                         placement: "top"
                     });
-                    history.push("/dashboard");
+                    navigate("/dashboard");
                     window.location.reload();
                 } else {
                     notification.error({

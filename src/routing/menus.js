@@ -16,8 +16,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-
-import { createBrowserHistory } from "history";
+import { useNavigate } from 'react-router-dom';
 import { Layout, Menu, Button, Drawer } from "antd";
 import "../css/customstyle.scss";
 import NonIccidProduct from "../pages/nonIccidProducts/nonICCIDproducts";
@@ -25,10 +24,6 @@ import { getUsernameInfo } from '../redux/actions/userDetail.action'
 import "./menu.scss";
 
 const { Header, Sider, Content } = Layout;
-export const history = createBrowserHistory({
-  forceRefresh: true,
-});
-
 const App = () => {
   const ref = useRef();
   const location = useLocation();
@@ -38,6 +33,7 @@ const App = () => {
   const [toggle, setToggle] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const { getUserInfo } = useSelector((state) => { return state })
+    const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname === "/Mainpage/title") {
@@ -108,7 +104,7 @@ const App = () => {
   const handleLogout = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
-    history.push("/");
+    navigate("/");
     window.location.reload();
   };
 
