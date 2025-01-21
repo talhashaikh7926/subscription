@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout, Menu, Button, Drawer } from "antd";
 import "../css/customstyle.scss";
 import NonIccidProduct from "../pages/nonIccidProducts/nonICCIDproducts";
+import LearningVideo from "../pages/learning/video";
 import { getUsernameInfo } from '../redux/actions/userDetail.action'
 import "./menu.scss";
 
@@ -33,7 +34,7 @@ const App = () => {
   const [toggle, setToggle] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const { getUserInfo } = useSelector((state) => { return state })
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname === "/Mainpage/title") {
@@ -225,14 +226,14 @@ const App = () => {
             )}
 
             <Menu.Item
-              key="arrival-submission"
+              key="learning-video"
               icon={<FontAwesomeIcon icon={faDesktop} />}
               style={{ transition: "background-color 0.3s" }}
             >
               <Link
-                to="arrival-submission"
+                to="learning-video"
                 onClick={() => {
-                  changetitle("Arrival Date");
+                  changetitle("Learning Video");
                   setDrawerVisible(false);
                 }}
               >
@@ -260,6 +261,8 @@ const App = () => {
 
               <Route path="/dashboard" exact element={<NonIccidProduct />} />
               <Route path="/configuration" exact element={<Configurations />} />
+              <Route path="/learning-video" exact element={<LearningVideo />} />
+
 
 
             </Routes>
@@ -284,25 +287,6 @@ const App = () => {
           defaultSelectedKeys={[location.pathname.split("/")[1]]}
           style={{ backgroundColor: "#fff", padding: "0" }}
         >
-          <Menu.Item
-            key="my-profile"
-            style={{ transition: "background-color 0.3s" }}
-          >
-            <Link
-              to="my-profile"
-              onClick={() => {
-                changetitle("My Profile");
-                setDrawerVisible(false);
-              }}
-            >
-              <span>
-                <FontAwesomeIcon icon={faListUl} />
-                <span style={{ marginLeft: "8px" }}>My Profile</span>
-              </span>
-            </Link>
-          </Menu.Item>
-
-
 
           <Menu.Item
             key="dashboard"
@@ -341,18 +325,18 @@ const App = () => {
           )}
 
           <Menu.Item
-            key="arrival-submission"
+            key="learning-video"
             icon={<FontAwesomeIcon icon={faDesktop} />}
             style={{ transition: "background-color 0.3s" }}
           >
             <Link
-              to="arrival-submission"
+              to="learning-video"
               onClick={() => {
-                changetitle("Arrival Date");
+                changetitle("Learning Video");
                 setDrawerVisible(false);
               }}
             >
-              Arrival Date Submission
+              Learning Video
             </Link>
           </Menu.Item>
         </Menu>

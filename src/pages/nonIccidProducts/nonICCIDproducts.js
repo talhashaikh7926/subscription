@@ -25,7 +25,7 @@ const NonIccidProduct = () => {
         dispatch(getTemplate());
         dispatch(getCategories(token?.user_name));
         form.setFieldsValue({
-            inwardDate: moment(), // Set the current date as the default value
+            inwardDate: moment(),
         });
     }, [dispatch]);
 
@@ -159,7 +159,6 @@ const NonIccidProduct = () => {
 
     const showZPLPreviewModal = (imageUrls) => {
         Modal.info({
-            title: "ZPL Preview",
             content: (
                 <div style={{ textAlign: "center" }}>
                     <img src={imageUrls} alt="Label Preview" style={{ maxWidth: "100%" }} />

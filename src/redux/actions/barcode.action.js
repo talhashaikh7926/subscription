@@ -105,7 +105,7 @@ export const printTag = (userName, data) => (dispatch) => {
     const token = JSON.parse(localStorage.getItem('token'));
     return axios({
         method: 'POST',
-        url: `printLable`,
+        url: `printLabel`,
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`
