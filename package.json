@@ -67,11 +67,9 @@
     "npm": "8.x"
   },
   "scripts": {
-    "heroku-prebuild": "npm install --force",
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": [
