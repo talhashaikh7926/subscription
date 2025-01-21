@@ -1,0 +1,74 @@
+/* product.scss */
+
+.product-type-layout {
+    padding: 20px;
+    min-height: 100vh;
+    background-color: white;
+  }
+  
+  .product-type-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .product-type-table {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #f0f0f0;
+  }
+  
+  .product-type-form {
+    max-width: 600px;
+    margin: 20px 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .product-type-form {
+      max-width: 100%;
+      padding: 10px;
+    }
+  
+    .product-type-content {
+      padding: 10px;
+    }
+  
+    .product-type-table {
+      padding-bottom: 10px;
+    }
+  }
+  
+
+  @media only screen and (max-width: 600px) {
+    .form-container {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 10px !important;
+    }
+
+    .ant-table {
+        font-size: 12px;
+    }
+
+    .ant-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .ant-input, .ant-select-selector, .ant-textarea {
+        font-size: 12px;
+    }
+
+    .ant-space-item {
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,81 @@
+body {
+    font-family: "Lato" !important;
+    font-size: 13px !important;
+
+  }
+
+.custom-header {
+    z-index: 1;
+    -webkit-box-shadow: 0px 4px 20px -8px rgba(0,0,0,0.82);
+  -moz-box-shadow: 0px 4px 20px -8px rgba(0,0,0,0.82);
+  box-shadow: 0px 4px 20px -8px rgba(0,0,0,0.82);
+  }
+
+  .sidebar-style {
+    z-index: 1;
+    -webkit-box-shadow: 4px 0px 25px -8px rgba(0,0,0,0.82);
+    -moz-box-shadow: 4px 0px 25px -8px rgba(0,0,0,0.82);
+    box-shadow: 4px 0px 25px -8px rgba(0,0,0,0.82);
+
+    border-radius: 0px 10px 0px 0px;
+-moz-border-radius: 0px 10px 0px 0px;
+-webkit-border-radius: 0px 10px 0px 0px;
+
+  }
+
+  .ant-layout-content {
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
+
+  .ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active, .ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-light .ant-menu-submenu-active, .ant-menu-light .ant-menu-submenu-title:hover {
+    color: #000000;
+    background-color: #e9e9e9;
+    text-decoration: none;
+}
+.ant-menu-item a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #13c2c2;
+    color: #ffffff;
+}
+.ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+    color: #ffffff;
+}
+.ant-menu-submenu-selected {
+    color: #000000;
+}
+.ant-menu-vertical .ant-menu-submenu, .ant-menu-vertical-left .ant-menu-submenu, .ant-menu-vertical-right .ant-menu-submenu, .ant-menu-inline .ant-menu-submenu {
+    font-weight: 500;
+}
+
+.ant-input {
+    border: 1px solid #a7a7a7;
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border: 1px solid #a7a7a7;
+}
+.ant-form-item-label > label {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ant-btn:hover, .ant-btn:focus {
+    color: #ffffff;
+    border-color: #13c2c2;
+    background: #13c2c2;
+}
+
+.cancel-row {
+    background: red;
+    color: white;
+}
+.cancel-row:hover > td {
+    background: red !important; /* Keep the background red */
+    color: white !important;    /* Keep the text color white */
+    cursor: default !important; /* Remove the pointer cursor */
+}
+

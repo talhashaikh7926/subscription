@@ -1,0 +1,37 @@
+.mobile-menu-button {
+    cursor: pointer;
+    border: 1px solid rgb(156, 156, 156);
+    padding: 5px 5px;
+    font-size: 18px;
+}
+.header-title {
+    margin-bottom: 0;
+}
+.header-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+@media (max-width: 1200px) {
+    .mobile-menu-button {
+      display: inline-block;
+    }
+    .sidebar-style {
+      display: none;
+    }
+  }
+  
+  @media (min-width: 1201px) {
+    .mobile-menu-button {
+      display: none;
+    }
+    .sidebar-style {
+      display: block;
+    }
+  }
+  @media (max-width: 768px) {
+  .header-title {
+    font-size: 18px;
+}
+  }
