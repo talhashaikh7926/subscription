@@ -35,6 +35,8 @@ const Router = () => {
     });
     return null;
   }
+  console.log("sd");
+  
 
   return (
     <>
