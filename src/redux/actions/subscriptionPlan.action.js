@@ -53,7 +53,7 @@ export const checkout = (data) => (dispatch) => {
             price: data.subscription_price,
             subscriptionName: data.subscription_name,
             subscription_id: data.subscription_id,        
-            redirect_url: 'http://localhost:3000/dashboard'
+            redirect_url: 'https://front-end-lablepro-4e5494f0c23e.herokuapp.com/dashboard'
         }
     })
         .then((response) => {

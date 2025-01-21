@@ -205,7 +205,7 @@ const App = () => {
               </Link>
             </Menu.Item>
 
-            {getUserInfo?.payload?.accessible === false && (
+            {getUserInfo?.payload?.accessible === true && (
               <>
                 <Menu.Item
                   key="configuration"
@@ -304,7 +304,7 @@ const App = () => {
             </Link>
           </Menu.Item>
 
-          {getUserInfo?.payload?.accessible === false && (
+          {getUserInfo?.payload?.accessible === true && (
             <>
               <Menu.Item
                 key="configuration"

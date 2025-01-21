@@ -248,7 +248,7 @@ const NonIccidProduct = () => {
                         </div>
                     ) : (
                         <>
-                            {getUserInfo?.payload?.accessible === true ?
+                            {getUserInfo?.payload?.accessible === false ?
                                 <>
                                     {getSubscriptionPlan?.payload?.map((plan, index) => (
                                         <Col key={index} xs={24} sm={12} md={8}>
