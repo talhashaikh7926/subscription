@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 // import { AUTHENTICATE } from './redux/types/types';
 
 const App = () => {
-
+  const navigate = useNavigate();
   axios.interceptors.response.use(
     function (response) {
       return response;
@@ -31,8 +31,8 @@ const App = () => {
 
         localStorage.removeItem('token');
 
-      //  history.push('/');
-      //  window.location.reload();
+        navigate('/');
+        //  window.location.reload();
       }
 
       return Promise.reject(error);

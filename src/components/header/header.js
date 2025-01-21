@@ -21,7 +21,6 @@ export default function MainHeader({ title, mobileSidebar, toggle1 }) {
   const logout = () => {
     localStorage.removeItem("userInfo");
     navigate('/');
-    window.location.reload();
   };
   return (
     <>

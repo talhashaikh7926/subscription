@@ -46,7 +46,6 @@ const Login = () => {
                         placement: "top"
                     });
                     navigate("/dashboard");
-                    window.location.reload();
                 } else {
                     notification.error({
                         message: res.message,
