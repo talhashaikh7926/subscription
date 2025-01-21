@@ -108,6 +108,7 @@
     "zebra-browser-print": "^1.0.1"
   },
   "scripts": {
+    "heroku-prebuild": "npm install --force",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
