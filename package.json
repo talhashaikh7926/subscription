@@ -54,11 +54,11 @@
     "moment": "^2.29.3",
     "numeral": "^2.0.6",
     "query-string": "^7.1.1",
-    "react": "^18.1.0",
+    "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18.1.0",
+    "react-dom": "^17.0.2",
     "react-dropzone-uploader": "^2.11.0",
     "react-error-boundary": "^3.1.4",
     "react-helmet": "^6.1.0",
@@ -106,6 +106,10 @@
     "xlsx": "^0.18.5",
     "yarn": "^1.22.19",
     "zebra-browser-print": "^1.0.1"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
   },
   "scripts": {
     "heroku-prebuild": "npm install --force",
