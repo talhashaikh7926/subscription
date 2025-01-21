@@ -113,18 +113,18 @@ const NonIccidProduct = () => {
             });
             return;
         }
-       
+
         const data = {
             productName,
             retailPrice,
             finalPrice,
             barCode,
-            id: tag,  
-           
+            id: tag,
+
         };
 
         try {
-            const response = await dispatch(printTag(token.user_name,data));
+            const response = await dispatch(printTag(token.user_name, data));
 
             if (response.type === "PRINT_TAG_SUCCESS") {
                 notification.success({
@@ -135,7 +135,7 @@ const NonIccidProduct = () => {
                 });
 
                 setImageUrl(response?.payload?.url)
-               showZPLPreviewModal(response?.payload?.url); 
+                showZPLPreviewModal(response?.payload?.url);
 
             } else {
                 notification.error({
@@ -156,21 +156,82 @@ const NonIccidProduct = () => {
         }
     };
 
-    const showZPLPreviewModal = (imageUrls) => {
+    const showZPLPreviewModal = (imageUrl) => {
         Modal.info({
             content: (
                 <div style={{ textAlign: "center" }}>
-                    <img src={imageUrls} alt="" style={{ maxWidth: "100%" }} />
+                    <img
+                        src={imageUrl}
+                        alt="Preview"
+                        style={{
+                            maxWidth: "80%",
+                            maxHeight: "80vh",
+                            marginBottom: "20px",
+                        }}
+                    />
                     <Button
-                        style={{ marginTop: "10px" }}
-                        onClick={() => window.print()}
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "90px",
+                            width: "220px",
+                            fontSize: "24px",
+                            fontWeight: "bold",
+                            borderRadius: "12px",
+                            background: "linear-gradient(90deg, #b0bec5, #eceff1)",
+                            border: "none",
+                            color: "#000",
+                            cursor: "pointer",
+                            transition: "transform 0.2s, box-shadow 0.2s",
+                        }}
+                        onClick={() => {
+                            const printWindow = window.open("print", "_blank");            
+                            printWindow.document.write(`
+                                <html>
+                                    <head>
+                                        <title>Print Preview</title>
+                                        <style>
+                                            body {
+                                                margin: 0;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                height: 100vh;
+                                            }
+                                            img {
+                                                max-width: 100%;
+                                                max-height: 100%;
+                                            }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <img src="${imageUrl}" alt="Print Preview" />
+                                    </body>
+                                </html>
+                            `);
+        
+                            printWindow.document.close();
+                            printWindow.focus(); 
+                            setTimeout(() => {
+                                printWindow.print(); 
+                                printWindow.close(); 
+                            }, 500); 
+                        }}
                     >
                         Print
                     </Button>
                 </div>
             ),
-            onOk() { },
+            width: "60vw",
+            centered: true,
+            style: { top: 20 },
+            onOk() {},
         });
+        
+        
+        
+
     };
 
     const squareCall = async () => {
@@ -185,7 +246,7 @@ const NonIccidProduct = () => {
             });
             return;
         }
-     
+
 
         const data = {
             barCode,
@@ -198,7 +259,7 @@ const NonIccidProduct = () => {
         };
 
         try {
-            const response = await dispatch(pushSquare(token.user_name,data));
+            const response = await dispatch(pushSquare(token.user_name, data));
 
             if (response.type === "SQUARE_SUCCESS") {
                 notification.success({
@@ -208,7 +269,7 @@ const NonIccidProduct = () => {
                 });
 
                 console.log(response, "Data");
-             
+
             } else {
                 notification.error({
                     message: "Something Went Wrong!",
