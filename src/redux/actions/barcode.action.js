@@ -116,10 +116,8 @@ export const printTag = (userName, data) => (dispatch) => {
             retail_price: data?.retailPrice,
             our_price: data?.finalPrice,
             barcode: data?.barCode,
-            print_template: data?.template,
-            size: data?.size,
-            dpi: data?.dpi,
-
+            id: data?.id,
+            
         }
     })
         .then((response) => {

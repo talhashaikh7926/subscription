@@ -113,33 +113,14 @@ const NonIccidProduct = () => {
             });
             return;
         }
-
-        let parsedTag;
-        try {
-            parsedTag = JSON.parse(tag); 
-        } catch (error) {
-            notification.error({
-                message: "Invalid Tag Data",
-                description: "There was an issue with the selected tag. Please try again.",
-                placement: "top",
-            });
-            return;
-        }
-
-        const { template, size, dpi } = parsedTag;
-
-        const stringifiedTemplate = JSON.stringify(template);
-        const stringifiedSize = JSON.stringify(size);
-
        
         const data = {
             productName,
             retailPrice,
             finalPrice,
             barCode,
-            template: stringifiedTemplate,  
-            size: stringifiedSize,          
-            dpi,
+            id: tag,  
+           
         };
 
         try {
@@ -703,11 +684,7 @@ const NonIccidProduct = () => {
                                                                     placeholder="Select Tag Option"
                                                                 >
                                                                     {templates?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={JSON.stringify({
-                                                                            template: val?.template_message,
-                                                                            size: val?.size,
-                                                                            dpi: val?.dpi
-                                                                        })}>
+                                                                        <Option key={idx} value={val?.id}>
 
                                                                             {val.name}
                                                                         </Option>
