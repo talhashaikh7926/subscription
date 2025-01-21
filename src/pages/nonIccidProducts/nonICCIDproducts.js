@@ -134,9 +134,8 @@ const NonIccidProduct = () => {
                     placement: "top",
                 });
 
-                console.log(response, "Check Image");
-                setImageUrl(response)
-               showZPLPreviewModal(response?.payload); 
+                setImageUrl(response?.payload?.url)
+               showZPLPreviewModal(response?.payload?.url); 
 
             } else {
                 notification.error({
@@ -161,7 +160,7 @@ const NonIccidProduct = () => {
         Modal.info({
             content: (
                 <div style={{ textAlign: "center" }}>
-                    <img src={imageUrls} alt="Label Preview" style={{ maxWidth: "100%" }} />
+                    <img src={imageUrls} alt="" style={{ maxWidth: "100%" }} />
                     <Button
                         style={{ marginTop: "10px" }}
                         onClick={() => window.print()}
