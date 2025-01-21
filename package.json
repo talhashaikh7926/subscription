@@ -61,8 +61,12 @@
     "yarn": "^1.22.19",
     "zebra-browser-print": "^1.0.1"
   },
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
+  },
   "scripts": {
-    "heroku-prebuild": "npm install -g npm@11.0.0 --force",
+    "heroku-prebuild": "npm install --force",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
