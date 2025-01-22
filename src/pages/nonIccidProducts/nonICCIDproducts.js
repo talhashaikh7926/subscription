@@ -156,6 +156,7 @@ const NonIccidProduct = () => {
             console.error("API call error:", error);
         }
     };
+                                               
 
     const showZPLPreviewModal = (imageUrl,formattedSize) => {
         Modal.info({
@@ -197,10 +198,12 @@ const NonIccidProduct = () => {
                                             }
                                             body {
                                                 margin: 0;
+                                                padding: 0;
                                                 display: flex;
-                                                align-items: center;
+                                                align-items: flex-start;
                                                 justify-content: center;
                                                 height: 100vh;
+                                    
                                             }
                                             img {
                                               

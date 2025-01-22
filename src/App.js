@@ -30,7 +30,7 @@ const AxiosInterceptor = ({ children }) => {
           });
 
           localStorage.removeItem('token');
-          navigate('/'); // Ensure it navigates to the login page
+          navigate('/'); 
         }
 
         return Promise.reject(error);
