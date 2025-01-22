@@ -162,7 +162,7 @@ const NonIccidProduct = () => {
                 <div style={{ textAlign: "center" }}>
                     <img
                         src={imageUrl}
-                        alt="Preview"
+                       
                         style={{
                             maxWidth: "80%",
                             maxHeight: "80vh",
@@ -186,11 +186,11 @@ const NonIccidProduct = () => {
                             transition: "transform 0.2s, box-shadow 0.2s",
                         }}
                         onClick={() => {
-                            const printWindow = window.open("print", "_blank");
+                            const printWindow = window.open("", "_blank");
                             printWindow.document.write(`
                                 <html>
                                     <head>
-                                        <title>Print Preview</title>
+                                      
                                       <style>
                                         body {
                                               margin: 0;
