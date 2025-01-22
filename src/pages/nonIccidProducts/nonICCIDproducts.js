@@ -104,7 +104,8 @@ const NonIccidProduct = () => {
     }
     const templateFormat = async () => {
         const { productName, retailPrice, finalPrice, barCode, tag } = form.getFieldsValue();
-
+        const [id, size] = tag.split(" ");
+        const formattedSize = `${size}`;
         if (!tag) {
             notification.error({
                 message: "Validation Error",
@@ -119,7 +120,7 @@ const NonIccidProduct = () => {
             retailPrice,
             finalPrice,
             barCode,
-            id: tag,
+            id: id,
 
         };
 
@@ -135,7 +136,7 @@ const NonIccidProduct = () => {
                 });
 
                 setImageUrl(response?.payload?.url)
-                showZPLPreviewModal(response?.payload?.url);
+                showZPLPreviewModal(response?.payload?.url,formattedSize);
 
             } else {
                 notification.error({
@@ -156,13 +157,13 @@ const NonIccidProduct = () => {
         }
     };
 
-    const showZPLPreviewModal = (imageUrl) => {
+    const showZPLPreviewModal = (imageUrl,formattedSize) => {
         Modal.info({
             content: (
                 <div style={{ textAlign: "center" }}>
                     <img
                         src={imageUrl}
-                       
+                        alt="Barcode Preview"
                         style={{
                             maxWidth: "80%",
                             maxHeight: "80vh",
@@ -186,28 +187,31 @@ const NonIccidProduct = () => {
                             transition: "transform 0.2s, box-shadow 0.2s",
                         }}
                         onClick={() => {
-                            const printWindow = window.open(".", "_blank");
+                            const printWindow = window.open("", "_blank");
                             printWindow.document.write(`
                                 <html>
                                     <head>
-                                      
-                                      <style>
-                                        body {
-                                              margin: 0;
-                                             display: flex;
-                                              align-items: top;
-                                                 justify-content: top;
-                                                   height: 100vh;
-                                                   }
-                                                 img {
-                                             width: 100%; 
-                                              max-width: 3in;
-                                               max-height: 2in; 
+                                        <style>
+                                            @page {
+                                                margin: 0;
+                                            }
+                                            body {
+                                                margin: 0;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                height: 100vh;
+                                            }
+                                            img {
+                                              
+                                                max-width: ${formattedSize === "3x2" ? "3in" : "2in"};
+                                                max-height: ${formattedSize === "3x2" ? "2in" : "1in"};
+                                                object-fit: contain;
                                                 }
                                         </style>
                                     </head>
                                     <body>
-                                        <img src="${imageUrl}" />
+                                        <img src="${imageUrl}" alt="Barcode" />
                                     </body>
                                 </html>
                             `);
@@ -229,9 +233,6 @@ const NonIccidProduct = () => {
             style: { top: 20 },
             onOk() { },
         });
-
-
-
 
     };
 
@@ -744,7 +745,7 @@ const NonIccidProduct = () => {
                                                                     placeholder="Select Tag Option"
                                                                 >
                                                                     {templates?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={val?.id}>
+                                                                        <Option key={idx} value={val?.id +" "+val.size}>
 
                                                                             {val.name}
                                                                         </Option>
