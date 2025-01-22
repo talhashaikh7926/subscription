@@ -155,7 +155,7 @@ export const pushSquare = (userName,data) => (dispatch) => {
             product_desc: data?.Desc,
             categoryId: data?.categories,
             product_quantity: data?.quantity,
-            image_url: data?.imageUrl
+            image_url: data?.squareImageUrl
 
         }
     })

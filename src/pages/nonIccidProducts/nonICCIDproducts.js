@@ -16,6 +16,7 @@ const { Option } = Select;
 const NonIccidProduct = () => {
     const [form] = Form.useForm();
     const [imageUrl, setImageUrl] = useState("");
+    const [squareImageUrl, setSquareImageUrl] = useState("");
     const dispatch = useDispatch();
     const { getSubscriptionPlan, getUserInfo, templates, getCategory, barcodeDetails, getConfiguration } = useSelector((state) => state);
 
@@ -97,6 +98,7 @@ const NonIccidProduct = () => {
     const getDetail = () => {
         const BarCodeValue = form.getFieldValue("barCode");
         dispatch(getBarcodeDetail(BarCodeValue)).then((res) => {
+            setSquareImageUrl(res?.product_images)
             form.setFieldsValue({
                 Desc: res?.product_description,
                 productName: res?.product_title,
@@ -263,7 +265,7 @@ const NonIccidProduct = () => {
             Desc,
             categories,
             quantity,
-            imageUrl,
+            squareImageUrl,
         };
 
         try {
@@ -678,7 +680,7 @@ const NonIccidProduct = () => {
                                                                     placeholder="Select a category"
                                                                 >
                                                                     {getCategory?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={val.template_message}>
+                                                                        <Option key={idx} value={val.id}>
                                                                             {val.name}
                                                                         </Option>
                                                                     ))}
