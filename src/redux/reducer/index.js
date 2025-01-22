@@ -6,10 +6,11 @@ import getConfiguration from "./configurationData/configuration.reducer";
 import templates from "./barcodeForm/template.reducer";
 import barcodeDetails from "./barcodeForm/barcodeDetails.reducer";
 import getCategory from "./barcodeForm/categories.reducer";
+import location from "./location/location.reducer";
 
 export default combineReducers({
     login,
-  
+    location,
     getSubscriptionPlan,
     getUserInfo,
     getConfiguration,

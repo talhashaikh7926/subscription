@@ -186,37 +186,38 @@ const NonIccidProduct = () => {
                             transition: "transform 0.2s, box-shadow 0.2s",
                         }}
                         onClick={() => {
-                            const printWindow = window.open("print", "_blank");            
+                            const printWindow = window.open("print", "_blank");
                             printWindow.document.write(`
                                 <html>
                                     <head>
                                         <title>Print Preview</title>
-                                        <style>
-                                            body {
-                                                margin: 0;
-                                                display: flex;
-                                                align-items: center;
-                                                justify-content: center;
-                                                height: 100vh;
-                                            }
-                                            img {
-                                                max-width: 100%;
-                                                max-height: 100%;
-                                            }
+                                      <style>
+                                        body {
+                                              margin: 0;
+                                             display: flex;
+                                              align-items: top;
+                                                 justify-content: top;
+                                                   height: 100vh;
+                                                   }
+                                                 img {
+                                             width: 100%; 
+                                              max-width: 3in;
+                                               max-height: 2in; 
+                                                }
                                         </style>
                                     </head>
                                     <body>
-                                        <img src="${imageUrl}" alt="Print Preview" />
+                                        <img src="${imageUrl}" />
                                     </body>
                                 </html>
                             `);
-        
+
                             printWindow.document.close();
-                            printWindow.focus(); 
+                            printWindow.focus();
                             setTimeout(() => {
-                                printWindow.print(); 
-                                printWindow.close(); 
-                            }, 500); 
+                                printWindow.print();
+                                printWindow.close();
+                            }, 500);
                         }}
                     >
                         Print
@@ -226,11 +227,11 @@ const NonIccidProduct = () => {
             width: "60vw",
             centered: true,
             style: { top: 20 },
-            onOk() {},
+            onOk() { },
         });
-        
-        
-        
+
+
+
 
     };
 

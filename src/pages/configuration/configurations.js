@@ -34,8 +34,7 @@ const Configurations = () => {
         dispatch(getLocations(token?.user_name));
         dispatch(getConfig(token?.user_name));
     }, [dispatch, token?.user_name]);
-
-    // Set form values when getConfig API response is available
+   
     useEffect(() => {
         if (getConfiguration?.payload) {
             form.setFieldsValue({
