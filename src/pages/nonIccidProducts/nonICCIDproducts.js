@@ -186,7 +186,7 @@ const NonIccidProduct = () => {
                             transition: "transform 0.2s, box-shadow 0.2s",
                         }}
                         onClick={() => {
-                            const printWindow = window.open("", "_blank");
+                            const printWindow = window.open(".", "_blank");
                             printWindow.document.write(`
                                 <html>
                                     <head>

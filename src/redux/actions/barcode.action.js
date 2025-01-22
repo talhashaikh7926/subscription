@@ -114,7 +114,7 @@ export const printTag = (userName, data) => (dispatch) => {
             username: userName,
             product_name: data?.productName,
             retail_price: data?.retailPrice,
-            our_price: data?.finalPrice,
+            our_price: "$"+data?.finalPrice,
             barcode: data?.barCode,
             id: data?.id,
             
