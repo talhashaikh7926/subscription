@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined } from '@ant-design/icons';
 import { subscriptionPlan, checkout } from '../../redux/actions/subscriptionPlan.action'
 import { getTemplate, getCategories, getBarcodeDetail, printTag, pushSquare } from '../../redux/actions/barcode.action'
+import { getConfig } from "../../redux/actions/configuration.action";
 
 
 const { Content } = Layout;
@@ -16,13 +17,14 @@ const NonIccidProduct = () => {
     const [form] = Form.useForm();
     const [imageUrl, setImageUrl] = useState("");
     const dispatch = useDispatch();
-    const { getSubscriptionPlan, getUserInfo, templates, getCategory, barcodeDetails } = useSelector((state) => state);
+    const { getSubscriptionPlan, getUserInfo, templates, getCategory, barcodeDetails, getConfiguration } = useSelector((state) => state);
 
     const token = JSON.parse(localStorage.getItem("userInfo"));
 
     useEffect(() => {
         dispatch(subscriptionPlan());
         dispatch(getTemplate());
+        dispatch(getConfig(token?.user_name));
         dispatch(getCategories(token?.user_name));
         form.setFieldsValue({
             inwardDate: moment(),
@@ -136,7 +138,7 @@ const NonIccidProduct = () => {
                 });
 
                 setImageUrl(response?.payload?.url)
-                showZPLPreviewModal(response?.payload?.url,formattedSize);
+                showZPLPreviewModal(response?.payload?.url, formattedSize);
 
             } else {
                 notification.error({
@@ -156,9 +158,9 @@ const NonIccidProduct = () => {
             console.error("API call error:", error);
         }
     };
-                                               
 
-    const showZPLPreviewModal = (imageUrl,formattedSize) => {
+
+    const showZPLPreviewModal = (imageUrl, formattedSize) => {
         Modal.info({
             content: (
                 <div style={{ textAlign: "center" }}>
@@ -203,6 +205,7 @@ const NonIccidProduct = () => {
                                                 align-items: flex-start;
                                                 justify-content: center;
                                                 height: 100vh;
+                                               
                                     
                                             }
                                             img {
@@ -214,7 +217,7 @@ const NonIccidProduct = () => {
                                         </style>
                                     </head>
                                     <body>
-                                        <img src="${imageUrl}" alt="Barcode" />
+                                        <img src="${imageUrl}" />
                                     </body>
                                 </html>
                             `);
@@ -748,7 +751,7 @@ const NonIccidProduct = () => {
                                                                     placeholder="Select Tag Option"
                                                                 >
                                                                     {templates?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={val?.id +" "+val.size}>
+                                                                        <Option key={idx} value={val?.id + " " + val.size}>
 
                                                                             {val.name}
                                                                         </Option>
@@ -779,25 +782,26 @@ const NonIccidProduct = () => {
                                                 </Col>
 
                                                 {/* Push Square Button */}
-                                                <Col xs={24} md={24}>
-                                                    <Button
-                                                        style={{
-                                                            width: "100%",
-                                                            height: "40px",
-                                                            fontSize: "14px",
-                                                            fontWeight: "600",
-                                                            borderRadius: "8px",
-                                                            backgroundColor: "#13c2c2",
-                                                            color: "#fff",
-                                                            border: "none",
-
-                                                            fontFamily: "'Roboto', sans-serif",
-                                                        }}
-                                                        onClick={squareCall}
-                                                    >
-                                                        Push Square
-                                                    </Button>
-                                                </Col>
+                                                {getConfiguration?.payload?.squareToken !== "" && (
+                                                    <Col xs={24} md={24}>
+                                                        <Button
+                                                            style={{
+                                                                width: "100%",
+                                                                height: "40px",
+                                                                fontSize: "14px",
+                                                                fontWeight: "600",
+                                                                borderRadius: "8px",
+                                                                backgroundColor: "#13c2c2",
+                                                                color: "#fff",
+                                                                border: "none",
+                                                                fontFamily: "'Roboto', sans-serif",
+                                                            }}
+                                                            onClick={squareCall}
+                                                        >
+                                                            Push Square
+                                                        </Button>
+                                                    </Col>
+                                                )}
                                             </Row>
                                         </Form>
                                     </div>
