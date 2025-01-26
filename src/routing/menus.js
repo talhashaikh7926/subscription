@@ -263,6 +263,7 @@ const App = () => {
               <Route path="/configuration" exact element={<Configurations />} />
               <Route path="/learning-video" exact element={<LearningVideo />} />
 
+              
 
 
             </Routes>

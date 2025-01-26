@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 body {
-    font-family: "Lato" !important;
+    font-family: "Manrope", serif;
     font-size: 13px !important;
 
   }
@@ -77,5 +79,178 @@ body {
     background: red !important; /* Keep the background red */
     color: white !important;    /* Keep the text color white */
     cursor: default !important; /* Remove the pointer cursor */
+}
+
+.navbar-nav .nav-link {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0px 10px;
+}
+.fs17px{  font-size: 17px !important; }
+.fs18px{  font-size: 18px; }
+.fs19px{  font-size: 19px; }
+.fs20px{  font-size: 20px; }
+.fs23px{  font-size: 23px; }
+.fs24px{  font-size: 24px; }
+.fs25px{  font-size: 25px; }
+.fs30px { font-size: 30px; }
+.fs38px { font-size: 38px; }
+.fs39px { font-size: 39px; }
+.fs40px { font-size: 40px; }
+.fs42px { font-size: 42px; }
+.fs43px { font-size: 43px; }
+.fs44px { font-size: 44px; }
+.fs45px { font-size: 45px; }
+.fs46px { font-size: 46px; }
+.fs47px { font-size: 47px; }
+.fs48px { font-size: 42px; }
+.fs49px { font-size: 42px; }
+.fs50px { font-size: 42px; }
+.fs51px { font-size: 42px; }
+.fw-light { font-weight: 300; }
+.fw-normal { font-weight: 500 !important; }
+.fw-bolder { font-weight: 900 !important; }
+.fw-bold{ font-weight: 700 !important; }
+.bg-gradiant {
+    background: linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%);
+  }
+  
+.header-absolute{
+    left: 0;
+    right: 0;
+}
+.text-blue{ color: rgb(63 55 146) !important; }
+.bg-blue { background-color:  rgb(63 55 146) !important; }
+.download-btn {
+    border-color: rgb(63 55 146) !important;
+    border-width: 2px !important;
+    font-weight: 600 !important;
+    outline: none !important;
+    box-shadow: 0px 0px !important;
+}
+.pkg-plan-box ul li { margin-bottom: 10px; }
+.tabldesign thead {
+    background-color: #80ace9;
+    color: #fff;
+}
+.tabldesign thead tr th {
+    font-size: 17px;
+    border: 0px;
+    text-align: center;
+}
+.text-secondary{ background-color: rgb(47 195 109); }
+.tabldesign tr svg {
+    color: transparent !important;
+    border-radius: 50% 50%;
+    width: 17px;
+}
+.text-gray-300 { background-color: rgb(209 213 219); }
+.tabldesign tbody tr td {  text-align: center; }
+.tabldesign tbody tr td h5 {
+    font-weight: 400;
+    color: #80ace9;
+    text-align: left;
+}
+.cont-btn {
+    border: 1px solid #3f3792 !important;
+    outline: none !important;
+    box-shadow: 0px 0px !important;
+    padding: 9px 20px !important;
+    margin-top: 8px;
+    transition: all 0.4s ease !important;
+}
+.cont-btn:hover, .cont-btn:active, .cont-btn:focus{
+    background-color: #3f3792 !important;
+    color: #fff !important;
+}
+.curve-img{
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.z-1{ z-index: 1; }
+.pkg-plan-box { box-shadow: 2px 4px 11px -1px #d5d5d5; }
+.curve-img { overflow: hidden; }
+.curve-img svg {
+    width: 118%;
+    margin-left: -10%;
+}
+.pkg-plan-box {
+    position: relative;
+    top: 23px;
+}
+.icon-box .media-left i {
+    font-size: 27px;
+    margin-right: 17px;
+    color: #3f3792;
+    background-color: #f9f9f9;
+    border: 1px solid #3f3792;
+    padding: 12px;
+    border-radius: 5px 5px;
+}
+
+.icon-box .media-left {  margin: auto; }
+.icon-box .media-body .media-heading {
+    color: #3f3792;
+    font-weight: 600;
+    font-size: 19px;
+    margin-bottom: 6px;
+}
+.icon-box .media-body p {
+    font-size: 15px;
+    color: #555557;
+    margin-bottom: 2px;
+}
+.foo-navlist li {  list-style: none; }
+.foo-navlist li a {
+    color: #fff;
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+.terms-list li{ 
+    display: inline-block;
+    list-style: none;
+    border-right: 1px solid #fff;
+}
+.terms-list li a{ 
+    color: #fff; 
+    text-decoration: none; 
+    font-size: 15px;
+    margin: 0px 5px;
+}
+.terms-list li:last-child {  border-right: 0px; }
+
+
+
+
+
+
+@media only screen and (max-width : 640px) {
+    .tabldesign tbody tr td h5 {
+        font-size: 13px;
+    }
+    .tabldesign thead tr th {
+        font-size: 13px; }
+        .tabldesign tr td svg {  width: 10px;  }
+        .fs40px {  font-size: 29px;  }
+        .fs45px {  font-size: 35px; }
+        .fs25px {  font-size: 18px; }
+        .fs38px {  font-size: 30px; }
+        iframe { height: 185px; }
+        .container .ant-row {
+            padding-left: 1px !important;
+            padding-right: 1px !important;
+        }
+        .navbar-light .navbar-toggler-icon {
+            filter: invert(1);
+            border: 0px;
+        }
+        .navbar-light .navbar-toggler {   border: 0px; }
+        .ant-col {
+            padding-left: 3px !important;
+            padding-right: 3px !important;   
+        }
 }
 
