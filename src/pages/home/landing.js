@@ -84,14 +84,14 @@ const Landing = () => {
                                         href="/contact-us"
                                         className="fw-bold"
                                         style={{
-                                            width: "200px", // Increased width
-                                            height: "40px", // Increased height
-                                            borderRadius: "10px", // Slightly larger border radius for smoother corners
-                                            backgroundColor: "#ffffff", // Clean white background
-                                            color: "#004e92", // Blue text color
-                                            border: "3px solid #004e92", // Thicker blue border for emphasis
-                                            fontSize: "18px", // Larger font size for better readability
-                                            fontWeight: "bold", // Bold font weight for emphasis
+                                            width: "200px", 
+                                            height: "40px", 
+                                            borderRadius: "10px", 
+                                            backgroundColor: "#ffffff", 
+                                            color: "#004e92", 
+                                            border: "3px solid #004e92", 
+                                            fontSize: "18px", 
+                                            fontWeight: "bold", 
                                         }}
                                     >
                                         Contact Us
