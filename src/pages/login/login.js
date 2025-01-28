@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Input, Button, Card, Layout, Typography, Divider, notification, Row, Col } from "antd";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import { adminLogin, registerLogin } from "../../redux/actions/login.action";
 import { useNavigate } from "react-router-dom";
 
@@ -51,15 +55,47 @@ const Login = () => {
   };
 
   return (
+    
     <Layout
+    style={{
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%)",
+    }}
+  >
+    {/* Header Section */}
+    <Container
+      className="position-absolute"
       style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%)",
+        top: 0,
+        left: 0,
+        zIndex: 1000,
+        padding: "10px 20px",
       }}
     >
+      <Row>
+        <Col>
+          <Navbar expand="lg" className="w-100">
+            {/* Brand */}
+            <Navbar.Brand
+              href="/"
+              className="fs25px text-white fw-bold"
+              style={{
+                fontSize: "24px",
+                color: "#fff",
+                textDecoration: "none",
+              }}
+            >
+              LabelPro
+            </Navbar.Brand>
+          </Navbar>
+        </Col>
+      </Row>
+    </Container>
+
       <Content
         style={{
           display: "flex",

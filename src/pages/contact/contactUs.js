@@ -20,9 +20,9 @@ const ContactUs = () => {
       <Container fluid className="px-4">
         <Navbar expand="lg">
           {/* Brand */}
-          <Navbar.Brand href="/" className="fs-3 fw-bold text-white">
+          <a href="/" className="fs25px text-white fw-bold">
             LabelPro
-          </Navbar.Brand>
+          </a>
 
           {/* Mobile Toggle */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -41,11 +41,11 @@ const ContactUs = () => {
                   color: "#fff",
                 }}
               >
-                SignUp
+                Login
               </Nav.Link>
 
               {/* Login */}
-              <Nav.Link
+              {/* <Nav.Link
                 href="/login"
                 className="text-white fw-bold"
                 style={{
@@ -57,7 +57,7 @@ const ContactUs = () => {
                 }}
               >
                 Login
-              </Nav.Link>
+              </Nav.Link> */}
 
             
             </Nav>
@@ -89,7 +89,7 @@ const ContactUs = () => {
           <Row className="align-items-center">
             {/* Left Section */}
             <Col md={6} className="bg-placeholder-img position-relative">
-              <h3 className="fs39px position-relative" style={{ color: "#004e92", fontWeight: "bold" }}>Got a question about Label LIVE?</h3>
+              <h3 className="fs39px position-relative" style={{ color: "#004e92", fontWeight: "bold" }}>Got a question about LabelPro?</h3>
               <p className="fs17px position-relative text-blue mt-3">Try searching for an answer or get in touch today.</p>
             </Col>
 
@@ -190,7 +190,7 @@ const ContactUs = () => {
                     boxShadow: '0px 0px 0px'
                   }}
                 >
-                  Submit
+                  Message
                 </Button>
               </Form>
             </Col>
@@ -219,7 +219,7 @@ const ContactUs = () => {
                                 <li>How to add a new printer?</li>
                                 <li>How to change between printers?</li>
                               </ul>
-                              <Button
+                              {/* <Button
                                 variant="light"
                                 style={{
                                   backgroundColor: "#fff",
@@ -230,7 +230,7 @@ const ContactUs = () => {
                                 }}
                               >
                                 Learn More
-                              </Button>
+                              </Button> */}
                             </Col>
                         </Row>
                     </Container>
@@ -282,7 +282,7 @@ const ContactUs = () => {
                                   <i class="fa fa-file-text-o"></i>
                                     <h3 className="text-blue fw-bold"> Guides </h3>
                                     <p className="text-grey"> How to make Label LIVE work for you, in detail. </p>
-                                    <a href="#" className="btn read-btn"> Read the guides </a>
+                                    {/* <a href="#" className="btn read-btn"> Read the guides </a> */}
                                 </Col>
                         </Col>
 
@@ -291,7 +291,7 @@ const ContactUs = () => {
                                   <i class="fa fa-question"></i>
                                     <h3 className="text-blue fw-bold"> Find Answers </h3>
                                     <p className="text-grey"> If you have questions... we have answers. Check out our in-depth FAQs. </p>
-                                    <a href="#" className="btn read-btn"> View the FAQs </a>
+                                    {/* <a href="#" className="btn read-btn"> View the FAQs </a> */}
                                 </Col>
                         </Col>
 
@@ -300,7 +300,7 @@ const ContactUs = () => {
                                   <i class="fa fa-barcode"></i>
                                     <h3 className="text-blue fw-bold"> Barcodes </h3>
                                     <p className="text-grey"> See the barcodes we support and learn how to use them in your labels. </p>
-                                    <a href="#" className="btn read-btn"> See more barcodes </a>
+                                    {/* <a href="#" className="btn read-btn"> See more barcodes </a> */}
                                 </Col>
                         </Col>          
                     </Row>
@@ -317,15 +317,13 @@ const ContactUs = () => {
                         <Col className="col-sm-3">
                             <h5 className="text-white fw-bold mb-3"> Pages </h5>
                             <ul className="foo-navlist m-0 p-0">
-                                <li><a href="#"> Home </a></li>
-                                <li><a href="#"> Pricing</a> </li>
-                                <li><a href="#">About </a></li>
-                                <li><a href="#">Guides </a></li>
-                                <li><a href="#"> Contact </a></li>
-                                <li><a href="#"> Supported Printers </a></li>
+                                <li><a href="/"> Home </a></li>
+                                <li><a href="/"> Pricing</a> </li>
+                                <li><a href="/contact-us"> Contact Us </a></li>
+                                
                             </ul>
                         </Col>
-                        <Col className="col-sm-2">
+                        {/* <Col className="col-sm-2">
                             <h5 className="text-white fw-bold mb-3"> Features </h5>
                             <ul className="foo-navlist m-0 p-0">
                                 <li><a href="#"> App </a></li>
@@ -334,7 +332,7 @@ const ContactUs = () => {
                                 <li><a href="#"> Print </a></li>
 
                             </ul>
-                        </Col>
+                        </Col> */}
                         <Col className="col-sm-4">
                             <h5 className="text-white fw-bold mb-3"> Guides </h5>
                             <p className="text-white fs17px"> How to Print Labels from an Excel Spreadsheet How to Create Barcodes Without Printed Check Digit

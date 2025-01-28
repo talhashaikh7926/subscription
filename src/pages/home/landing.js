@@ -144,7 +144,7 @@ const Landing = () => {
                                     <li>Unlimited label printing</li>
                                 </ul>
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="btn download-btn fs17px px-3 text-blue pt-2 pb-2"
                                 >
                                     Download Now
@@ -170,7 +170,7 @@ const Landing = () => {
                                     <li>Same day support</li>
                                 </ul>
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="btn download-btn bg-blue fs17px px-3 text-white pt-2 pb-2"
                                 >
                                     Download Now
@@ -197,7 +197,7 @@ const Landing = () => {
                                     <li>Watch for batch import</li>
                                 </ul>
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="btn download-btn fs17px px-3 text-blue pt-2 pb-2"
                                 >
                                     Download Now
@@ -449,7 +449,7 @@ const Landing = () => {
                                     <li>Cancel anytime</li>
                                 </ul>
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="btn download-btn fs17px px-3 pt-2 pb-2"
                                     style={{
                                         backgroundColor: "rgb(27 92 149)", // Button background color
@@ -612,7 +612,7 @@ const Landing = () => {
                             transition={{ duration: 0.8 }}
                         >
                             <h2 className="fw-bold text-blue">Need more advice on what is right for you?</h2>
-                            <a href="#" className="btn bg-white text-blue fw-bold cont-btn fs19px">
+                            <a href="/contact-us" className="btn bg-white text-blue fw-bold cont-btn fs19px">
                                 Contact us
                             </a>
                         </motion.div>
@@ -681,15 +681,13 @@ const Landing = () => {
                         <Col className="col-sm-3">
                             <h5 className="text-white fw-bold mb-3"> Pages </h5>
                             <ul className="foo-navlist m-0 p-0">
-                                <li><a href="#"> Home </a></li>
-                                <li><a href="#"> Pricing</a> </li>
-                                <li><a href="#">About </a></li>
-                                <li><a href="#">Guides </a></li>
-                                <li><a href="#"> Contact </a></li>
-                                <li><a href="#"> Supported Printers </a></li>
+                                <li><a href="/"> Home </a></li>
+                                <li><a href="/"> Pricing</a> </li>
+                                <li><a href="/contact-us"> Contact </a></li>
+                              
                             </ul>
                         </Col>
-                        <Col className="col-sm-2">
+                        {/* <Col className="col-sm-2">
                             <h5 className="text-white fw-bold mb-3"> Features </h5>
                             <ul className="foo-navlist m-0 p-0">
                                 <li><a href="#"> App </a></li>
@@ -698,7 +696,7 @@ const Landing = () => {
                                 <li><a href="#"> Print </a></li>
 
                             </ul>
-                        </Col>
+                        </Col> */}
                         <Col className="col-sm-4">
                             <h5 className="text-white fw-bold mb-3"> Guides </h5>
                             <p className="text-white fs17px"> How to Print Labels from an Excel Spreadsheet How to Create Barcodes Without Printed Check Digit
