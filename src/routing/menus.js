@@ -111,238 +111,198 @@ const App = () => {
 
   return (
     <Layout
+    style={{
+      minHeight: "100vh",
+      backgroundColor: "#f0f2f5", // Light background for contrast
+      overflow: "hidden",
+    }}
+  >
+    {/* Header */}
+    <Header
+      className="site-layout-background custom-header"
       style={{
-        minHeight: "100vh",
-        backgroundColor: "#fff",
-        overflow: "hidden",
+        padding: "0 20px",
+        background: "linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%)",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        height: "83px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)", // Subtle shadow for depth
+        zIndex: 1000, // Ensure the header is above other content
       }}
     >
-      <Header
-        className="site-layout-background custom-header"
+      {/* Sidebar Toggle and Welcome */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <FontAwesomeIcon
+          onClick={() => setDrawerVisible(true)}
+          className="mobile-menu-button"
+          icon={faBars}
+          style={{
+            color: "white",
+            marginRight: "16px",
+            fontSize: "20px",
+            cursor: "pointer",
+          }}
+        />
+        <h4
+          style={{
+            margin: 0,
+            fontSize: "18px",
+            color: "white",
+            fontWeight: "500",
+            textTransform: "capitalize",
+          }}
+        >
+          Welcome, {getUserInfo?.payload?.username || "User"}
+        </h4>
+      </div>
+  
+  
+      {/* Logout Button */}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button
+          type="primary"
+          onClick={handleLogout}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "140px",
+            height: "40px",
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: "#fff",
+            background: "linear-gradient(135deg, #004e92 30%, #13c2c2 100%)",
+            border: "none",
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Add shadow for better look
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#002D69")}
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.background = "linear-gradient(135deg, #004e92 30%, #13c2c2 100%)")
+          }
+        >
+          <FontAwesomeIcon
+            icon={faSignOutAlt}
+            style={{ color: "white", marginRight: "8px", fontSize: "18px" }}
+          />
+          Logout
+        </Button>
+      </div>
+    </Header>
+  
+    {/* Main Layout */}
+    <Layout style={{ flexDirection: "row", flexGrow: 1, marginTop: "16px" }}>
+      {/* Sidebar */}
+      <Sider
+        className="sidebar-style"
         style={{
-          padding: "0 20px",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "83px",
+          background: "linear-gradient(135deg, #000428, #004e92, #6db3f2, #e5e5e5)", // Your gradient color
+          paddingTop: "40px",
+          boxShadow: "2px 0 8px rgba(0, 0, 0, 0.2)", // Subtle shadow for depth
+          marginTop: "-12px", // Space between the header and sidebar
+        }}
+        width={250}
+        breakpoint="xl"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          if (broken) {
+            setDrawerVisible(false);
+          }
         }}
       >
-        <div className="header-left">
-          <FontAwesomeIcon
-            onClick={() => setDrawerVisible(true)}
-            className="mobile-menu-button"
-            icon={faBars}
-            style={{ color: "black", marginRight: "8px" }}
-          />
-          <h4 className="header-title">Welcome  {getUserInfo?.payload?.username} </h4>
-        </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
-
-          <div className="menu-buttons" style={{ marginLeft: "16px" }}>
-            <Button
-              type="primary"
-              onClick={handleLogout}
-              style={{
-                width: "120px",
-                height: "40px",
-                fontSize: "16px",
-                backgroundColor: "white",
-                borderColor: "grey",
-                color: "black",
-                transition: "all 0.3s",
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                style={{ color: "black", marginRight: "8px" }}
-              />
-              Logout
-            </Button>
-          </div>
-        </div>
-      </Header>
-      <Layout style={{ flexDirection: "row", flexGrow: 1 }}>
-        <Sider
-          className="sidebar-style"
-          style={{
-            backgroundColor: "#fff",
-            paddingTop: "20px",
-            marginTop: "16px",
-          }}
-          width={250}
-          breakpoint="xl"
-          collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            if (broken) {
-              setDrawerVisible(false);
-            }
-          }}
-        >
-          <Menu
-            theme="light"
-            mode="inline"
-            openKeys={openKeys}
-            onOpenChange={onOpenChange}
-            defaultSelectedKeys={[location.pathname.split("/")[1]]}
-            style={{ backgroundColor: "#fff", padding: "0" }}
-          >
-
-
-            <Menu.Item
-              key="dashboard"
-              icon={<FontAwesomeIcon icon={faDesktop} />}
-              style={{ transition: "background-color 0.3s" }}
-            >
-              <Link
-                to="dashboard"
-                onClick={() => {
-                  changetitle("Subscription Plan");
-                  setDrawerVisible(false);
-                }}
-              >
-                Dashboard
-              </Link>
-            </Menu.Item>
-
-            {getUserInfo?.payload?.accessible === true && (
-              <>
-                <Menu.Item
-                  key="configuration"
-                  icon={<FontAwesomeIcon icon={faUsers} />}
-                  style={{ transition: "background-color 0.3s" }}
-                >
-                  <Link
-                    to="configuration"
-                    onClick={() => {
-                      changetitle("Configuration");
-                      setDrawerVisible(false);
-                    }}
-                  >
-                    Configuration
-                  </Link>
-                </Menu.Item>
-              </>
-            )}
-
-            <Menu.Item
-              key="learning-video"
-              icon={<FontAwesomeIcon icon={faDesktop} />}
-              style={{ transition: "background-color 0.3s" }}
-            >
-              <Link
-                to="learning-video"
-                onClick={() => {
-                  changetitle("Learning Video");
-                  setDrawerVisible(false);
-                }}
-              >
-                Learning Video
-              </Link>
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout
-          style={{
-            padding: "0 16px",
-            backgroundColor: "#f0f2f5",
-            marginTop: "16px",
-            flexGrow: 1,
-          }}
-        >
-          <Content
-            style={{
-              padding: 24,
-              background: "white",
-              minHeight: "calc(100vh - 131px)",
-            }}
-          >
-            <Routes>
-
-              <Route path="/dashboard" exact element={<NonIccidProduct />} />
-              <Route path="/configuration" exact element={<Configurations />} />
-              <Route path="/learning-video" exact element={<LearningVideo />} />
-
-              
-
-
-            </Routes>
-          </Content>
-        </Layout>
-      </Layout>
-
-      <Drawer
-        title="Menu"
-        placement="left"
-        closable={true}
-        onClose={() => setDrawerVisible(false)}
-        visible={drawerVisible}
-        bodyStyle={{ padding: 0 }}
-        className="mobile-drawer"
-      >
         <Menu
-          theme="light"
+          theme="dark"
           mode="inline"
-          openKeys={openKeysMb}
-          onOpenChange={onOpenChangeMobile}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
           defaultSelectedKeys={[location.pathname.split("/")[1]]}
-          style={{ backgroundColor: "#fff", padding: "0" }}
+          style={{
+            background: "transparent",
+            fontSize: "16px",
+            color: "#fff",
+          }}
         >
-
+          {/* Dashboard */}
           <Menu.Item
             key="dashboard"
-            icon={<FontAwesomeIcon icon={faDesktop} />}
-            style={{ transition: "background-color 0.3s" }}
+            icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
+            style={{
+              margin: "8px 0",
+              borderRadius: "8px",
+              transition: "all 0.3s ease",
+            }}
           >
-            <Link
-              to="dashboard"
-              onClick={() => {
-                changetitle("Subscription Plan");
-                setDrawerVisible(false);
-              }}
-            >
+            <Link to="dashboard" style={{ color: "white", fontWeight: "500" }}>
               Dashboard
             </Link>
           </Menu.Item>
-
+  
+          {/* Configuration (Conditional) */}
           {getUserInfo?.payload?.accessible === true && (
-            <>
-              <Menu.Item
-                key="configuration"
-                icon={<FontAwesomeIcon icon={faUsers} />}
-                style={{ transition: "background-color 0.3s" }}
-              >
-                <Link
-                  to="configuration"
-                  onClick={() => {
-                    changetitle("Configuration");
-                    setDrawerVisible(false);
-                  }}
-                >
-                  Configuration
-                </Link>
-              </Menu.Item>
-            </>
-          )}
-
-          <Menu.Item
-            key="learning-video"
-            icon={<FontAwesomeIcon icon={faDesktop} />}
-            style={{ transition: "background-color 0.3s" }}
-          >
-            <Link
-              to="learning-video"
-              onClick={() => {
-                changetitle("Learning Video");
-                setDrawerVisible(false);
+            <Menu.Item
+              key="configuration"
+              icon={<FontAwesomeIcon icon={faUsers} style={{ color: "#6db3f2" }} />}
+              style={{
+                margin: "8px 0",
+                borderRadius: "8px",
+                transition: "all 0.3s ease",
               }}
             >
+              <Link to="configuration" style={{ color: "white", fontWeight: "500" }}>
+                Configuration
+              </Link>
+            </Menu.Item>
+          )}
+  
+          {/* Learning Video */}
+          <Menu.Item
+            key="learning-video"
+            icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
+            style={{
+              margin: "8px 0",
+              borderRadius: "8px",
+              transition: "all 0.3s ease",
+            }}
+          >
+            <Link to="learning-video" style={{ color: "white", fontWeight: "500" }}>
               Learning Video
             </Link>
           </Menu.Item>
         </Menu>
-      </Drawer>
+      </Sider>
+  
+      {/* Content Area */}
+      <Layout
+        style={{
+          padding: "0 16px",
+          backgroundColor: "#f5f7fa", // Soft background
+          flexGrow: 1,
+          marginTop: "-16px", // Space between header and content
+        }}
+      >
+        <Content
+          style={{
+            padding: 24,
+            background: "#fff",
+            borderRadius: "8px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for card effect
+            minHeight: "calc(100vh - 131px)",
+          }}
+        >
+          <Routes>
+            <Route path="/dashboard" exact element={<NonIccidProduct />} />
+            <Route path="/configuration" exact element={<Configurations />} />
+            <Route path="/learning-video" exact element={<LearningVideo />} />
+          </Routes>
+        </Content>
+      </Layout>
     </Layout>
+  </Layout>
+  
+  
   );
 };
 

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { BASEURL } from "../config";
 import axios from "axios";
 import Landing from "../pages/home/landing";
-import ContactUs from "../pages/contact/contact";
+import ContactUs from "../pages/contact/contactUs";
 import SkeletonComponent from "../components/skeletonLoader";
 
 import Login from "../pages/login/login";
@@ -42,10 +42,10 @@ const Router = () => {
       {/* {load ? <SkeletonComponent /> : (!validate?.payload?.success ? ( */}
       {login?.loading ? <SkeletonComponent /> : (!userInfo?.access_token ? (
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<Redirect to="/" />} />
           <Route path="/contact-us" exact element={<ContactUs />} />
-          <Route path="/home" exact element={<Landing />} />
+          <Route path="/" exact element={<Landing />} />
         </Routes>
 
       ) : (

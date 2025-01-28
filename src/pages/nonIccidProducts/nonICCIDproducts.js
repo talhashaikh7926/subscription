@@ -301,9 +301,24 @@ const NonIccidProduct = () => {
     }
 
     return (
-        <Layout style={{ padding: '20px', minHeight: '100vh', backgroundColor: '#f9f9f9' }}>
-            <Content style={{ backgroundColor: '#ffffff', padding: '40px', borderRadius: '8px', boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' }}>
-                <Title level={2} style={{ textAlign: 'center', marginBottom: '40px', color: 'grey', fontFamily: "'Roboto', sans-serif", }}>Product Form</Title>
+        
+        <Layout >
+            <Content style={{
+                backgroundColor: "#ffffff",
+                padding: "40px",
+                borderRadius: "16px",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                maxWidth: "1200px",
+                margin: "0 auto",
+            }}
+            >
+                <Title level={2} style={{
+                    textAlign: "center",
+                    marginBottom: "40px",
+                    color: "#004e92",
+                    fontFamily: "'Roboto', sans-serif",
+                    fontWeight: "700",
+                }}>Product Form</Title>
                 <Row gutter={[16, 16]} justify="center">
                     {getSubscriptionPlan?.loading && getUserInfo?.loading ? (
                         <div
@@ -325,49 +340,107 @@ const NonIccidProduct = () => {
                                         <Col key={index} xs={24} sm={12} md={8}>
                                             <Card
                                                 title={
-                                                    <Title level={4} style={{ margin: 0, color: '#13c2c2' }}>
-
+                                                    <Title
+                                                        level={4}
+                                                        style={{
+                                                            margin: 0,
+                                                            color: "#004e92",
+                                                            fontWeight: "bold",
+                                                        }}
+                                                    >
                                                         {plan.subscription_currency + " " + plan.subscription_price}
                                                     </Title>
                                                 }
                                                 bordered={false}
                                                 style={{
-                                                    borderRadius: '16px',
-                                                    textAlign: 'center',
-                                                    backgroundColor: '#fafafa',
-                                                    boxShadow: '8px 12px 26px rgba(0, 0, 0, 0.1)',
+                                                    borderRadius: "16px",
+                                                    textAlign: "center",
+                                                    backgroundColor: "#ffffff",
+                                                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
+                                                    transition: "transform 0.3s, box-shadow 0.3s",
+                                                    position: "relative",
+                                                    overflow: "hidden",
+                                                    height: "350px", // Uniform card height
+                                                    maxWidth: "350px", // Uniform card width
+                                                    margin: "0 auto",
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    justifyContent: "space-between", // Ensure button stays at the bottom
+                                                    paddingBottom: "20px", // Space below content
+                                                }}
+                                                hoverable
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.transform = "scale(1.05)";
+                                                    e.currentTarget.style.boxShadow = "0 12px 30px rgba(0, 0, 0, 0.2)";
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.transform = "scale(1)";
+                                                    e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.15)";
                                                 }}
                                             >
-                                                <Title level={3} style={{ margin: '20px 0', color: '#595959' }}>
-                                                    {plan.subscription_name}
-                                                </Title>
-                                                <ul
+                                                {/* Ribbon or Highlight */}
+                                                <div
                                                     style={{
-                                                        listStyleType: 'none',
-                                                        padding: 0,
-                                                        textAlign: 'left',
-                                                        color: '#595959',
-                                                        fontSize: '16px',
+                                                        position: "absolute",
+                                                        top: 0,
+                                                        left: 0,
+                                                        height: "8px",
+                                                        width: "100%",
+                                                        background: "linear-gradient(135deg, #004e92, #13c2c2)",
                                                     }}
-                                                >
+                                                ></div>
 
-                                                    <li
-                                                        key={index}
+                                                {/* Card Content */}
+                                                <div>
+                                                    <Title level={3} style={{ margin: "20px 0", color: "#595959" }}>
+                                                        {plan.subscription_name}
+                                                    </Title>
+
+                                                    <ul
                                                         style={{
-                                                            marginBottom: '10px',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
+                                                            listStyleType: "none",
+                                                            padding: 0,
+                                                            textAlign: "left",
+                                                            color: "#595959",
+                                                            fontSize: "16px",
+                                                            lineHeight: "1.8",
                                                         }}
                                                     >
-                                                        <CheckOutlined style={{ color: 'green', marginRight: '8px' }} />
-                                                        {"Subscription Duration" + " " + plan?.subscription_duration + " " + "Days"}
-                                                    </li>
+                                                        <li
+                                                            style={{
+                                                                marginBottom: "10px",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                            }}
+                                                        >
+                                                            <CheckOutlined style={{ color: "green", marginRight: "8px" }} />
+                                                            {"Subscription Duration: " + plan?.subscription_duration + " Days"}
+                                                        </li>
+                                                    </ul>
+                                                </div>
 
-                                                </ul>
+                                                {/* Subscribe Button */}
                                                 <Button
                                                     onClick={() => subscribePlan(plan)}
                                                     size="large"
-                                                    style={{ marginTop: '20px', width: '100%' }}
+                                                    style={{
+                                                        width: "100%",
+                                                        background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                        color: "#fff",
+                                                        fontWeight: "bold",
+                                                        height: "45px",
+                                                        borderRadius: "8px",
+                                                        border: "none",
+                                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                                                        transition: "background 0.3s",
+                                                        marginTop: "auto", // Pushes the button to the bottom
+                                                    }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.background = "linear-gradient(135deg, #003366, #0a9e9e)";
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.background = "linear-gradient(135deg, #004e92, #13c2c2)";
+                                                    }}
                                                 >
                                                     Subscribe
                                                 </Button>
@@ -375,6 +448,8 @@ const NonIccidProduct = () => {
                                         </Col>
                                     ))}
                                 </>
+
+
                                 :
                                 <>
                                     <div
@@ -431,15 +506,13 @@ const NonIccidProduct = () => {
                                                     <Button
                                                         style={{
                                                             width: "100%",
-                                                            height: "40px", // Increased height for better clickability
-                                                            fontSize: "14px",
-                                                            fontWeight: "600",
-                                                            padding: "0 16px",
-                                                            borderRadius: "8px",
-                                                            backgroundColor: "#13c2c2",
+                                                            background: "linear-gradient(135deg, #004e92, #13c2c2)",
                                                             color: "#fff",
+                                                            fontWeight: "bold",
+                                                            height: "45px",
+                                                            borderRadius: "8px",
                                                             border: "none",
-                                                            fontFamily: "'Roboto', sans-serif",
+                                                            marginBottom: "20px",
 
 
                                                         }}
@@ -552,16 +625,13 @@ const NonIccidProduct = () => {
                                                             <Button
                                                                 style={{
                                                                     width: "100%",
-                                                                    height: "40px",
-                                                                    fontSize: "14px",
-                                                                    fontWeight: "600",
-                                                                    borderRadius: "8px",
-                                                                    backgroundColor: "#13c2c2",
+                                                                    background: "linear-gradient(135deg, #004e92, #13c2c2)",
                                                                     color: "#fff",
-                                                                    fontFamily: "'Roboto', sans-serif",
+                                                                    fontWeight: "bold",
+                                                                    height: "45px",
+                                                                    borderRadius: "8px",
                                                                     border: "none",
-
-
+                                                                    marginBottom: "20px",
                                                                 }}
                                                                 onClick={calculatePrice}
                                                             >
@@ -675,17 +745,19 @@ const NonIccidProduct = () => {
                                                                         width: "80%",
                                                                         borderRadius: "8px",
                                                                         fontFamily: "'Roboto', sans-serif",
-
                                                                     }}
                                                                     placeholder="Select a category"
+                                                                    disabled={!Array.isArray(getCategory?.payload) || getCategory.payload.length === 0}
                                                                 >
-                                                                    {getCategory?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={val.id}>
-                                                                            {val.name}
-                                                                        </Option>
-                                                                    ))}
+                                                                    {Array.isArray(getCategory?.payload) &&
+                                                                        getCategory.payload.map((val, idx) => (
+                                                                            <Option key={idx} value={val.id}>
+                                                                                {val.name}
+                                                                            </Option>
+                                                                        ))}
                                                                 </Select>
                                                             </Form.Item>
+
                                                         </Col>
                                                     </Row>
                                                 </Col>
@@ -764,16 +836,15 @@ const NonIccidProduct = () => {
                                                         </Col>
                                                         <Col xs={6} md={6}>
                                                             <Button
+
                                                                 style={{
                                                                     width: "100%",
-                                                                    height: "40px",
-                                                                    fontSize: "14px",
-                                                                    fontWeight: "600",
-                                                                    borderRadius: "8px",
-                                                                    backgroundColor: "#13c2c2",
+                                                                    background: "linear-gradient(135deg, #004e92, #13c2c2)",
                                                                     color: "#fff",
+                                                                    fontWeight: "bold",
+                                                                    height: "45px",
+                                                                    borderRadius: "8px",
                                                                     border: "none",
-                                                                    fontFamily: "'Roboto', sans-serif",
                                                                 }}
                                                                 onClick={templateFormat}
                                                             >
@@ -789,14 +860,13 @@ const NonIccidProduct = () => {
                                                         <Button
                                                             style={{
                                                                 width: "100%",
-                                                                height: "40px",
-                                                                fontSize: "14px",
+                                                                height: "45px",
+                                                                fontSize: "16px",
                                                                 fontWeight: "600",
                                                                 borderRadius: "8px",
-                                                                backgroundColor: "#13c2c2",
+                                                                background: "linear-gradient(135deg, #004e92, #13c2c2)",
                                                                 color: "#fff",
                                                                 border: "none",
-                                                                fontFamily: "'Roboto', sans-serif",
                                                             }}
                                                             onClick={squareCall}
                                                         >

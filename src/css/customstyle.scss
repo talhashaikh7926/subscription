@@ -119,10 +119,15 @@ body {
     left: 0;
     right: 0;
 }
-.text-blue{ color: rgb(63 55 146) !important; }
-.bg-blue { background-color:  rgb(63 55 146) !important; }
+.text-blue{ color: rgb(41 115 180) !important; }
+.bg-blue { background-color: rgb(27 92 149) !important; }
+.ant-btn-primary {
+    background: rgb(27 92 149) !important; 
+    border-color: rgb(27 92 149) !important;
+    border-radius: 3px 3px;
+}
 .download-btn {
-    border-color: rgb(63 55 146) !important;
+    border-color: rgb(23 78 126) !important;
     border-width: 2px !important;
     font-weight: 600 !important;
     outline: none !important;
@@ -130,7 +135,7 @@ body {
 }
 .pkg-plan-box ul li { margin-bottom: 10px; }
 .tabldesign thead {
-    background-color: #80ace9;
+    background-color: #1b5c95;
     color: #fff;
 }
 .tabldesign thead tr th {
@@ -142,13 +147,13 @@ body {
 .tabldesign tr svg {
     color: transparent !important;
     border-radius: 50% 50%;
-    width: 17px;
+    width: 15px;
 }
 .text-gray-300 { background-color: rgb(209 213 219); }
 .tabldesign tbody tr td {  text-align: center; }
 .tabldesign tbody tr td h5 {
     font-weight: 400;
-    color: #80ace9;
+    color: #1b5c95;
     text-align: left;
 }
 .cont-btn {
@@ -160,7 +165,7 @@ body {
     transition: all 0.4s ease !important;
 }
 .cont-btn:hover, .cont-btn:active, .cont-btn:focus{
-    background-color: #3f3792 !important;
+    background-color: #1b5c95 !important;
     color: #fff !important;
 }
 .curve-img{
@@ -169,7 +174,6 @@ body {
     right: 0;
 }
 .z-1{ z-index: 1; }
-.pkg-plan-box { box-shadow: 2px 4px 11px -1px #d5d5d5; }
 .curve-img { overflow: hidden; }
 .curve-img svg {
     width: 118%;
@@ -178,20 +182,22 @@ body {
 .pkg-plan-box {
     position: relative;
     top: 23px;
+    box-shadow: 2px 4px 11px -1px #d5d5d5;
+    border-radius: 10px 10px;
 }
 .icon-box .media-left i {
     font-size: 27px;
     margin-right: 17px;
-    color: #3f3792;
+    color: #1b5c95;
     background-color: #f9f9f9;
-    border: 1px solid #3f3792;
+    border: 1px solid #1b5c95;
     padding: 12px;
     border-radius: 5px 5px;
 }
 
 .icon-box .media-left {  margin: auto; }
 .icon-box .media-body .media-heading {
-    color: #3f3792;
+    color: #2973b4;
     font-weight: 600;
     font-size: 19px;
     margin-bottom: 6px;
@@ -221,7 +227,10 @@ body {
     margin: 0px 5px;
 }
 .terms-list li:last-child {  border-right: 0px; }
-
+.fix-panel {
+    height: 100%;
+    min-height: 212px;
+}
 
 
 

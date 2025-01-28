@@ -33,12 +33,70 @@ const Landing = () => {
                 <Row>
                     <Col className="col-sm-12">
                         <Navbar expand="lg" className="w-100">
-                            <Navbar.Brand href="/" className="fs25px text-white"> <strong> LabelPro </strong></Navbar.Brand>
+                            {/* Brand */}
+                            <Navbar.Brand href="/" className="fs25px text-white fw-bold">
+                                LabelPro
+                            </Navbar.Brand>
+
+                            {/* Mobile Toggle */}
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
                             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                                <Nav className="me-auto">
-                                    <Nav.Link href="#" className="text-white"> SignUp </Nav.Link>
-                                    <Nav.Link href="#" className="text-white"> Login </Nav.Link>
+                                <Nav className="me-auto d-flex align-items-center gap-3">
+                                    {/* SignUp */}
+                                    <Nav.Link
+                                        href="/login"
+                                        className="text-white fw-bold"
+                                        style={{
+                                            padding: "8px 16px",
+                                            borderRadius: "8px",
+                                            backgroundColor: "#004e92",
+                                            color: "#fff",
+                                            fontSize: "14px",
+                                            transition: "background-color 0.3s ease",
+                                        }}
+                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#0061c2")}
+                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#004e92")}
+                                    >
+                                        SignUp
+                                    </Nav.Link>
+
+                                    {/* Login */}
+                                    <Nav.Link
+                                        href="/login"
+                                        className="text-white fw-bold"
+                                        style={{
+                                            padding: "8px 16px",
+                                            borderRadius: "8px",
+                                            backgroundColor: "#002D69",
+                                            color: "#fff",
+                                            fontSize: "14px",
+                                            transition: "background-color 0.3s ease",
+                                        }}
+                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#004e92")}
+                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#002D69")}
+                                    >
+                                        Login
+                                    </Nav.Link>
+
+                                    {/* Contact Us Button */}
+                                    <Button
+                                        href="/contact-us"
+                                        className="fw-bold"
+                                        style={{
+                                            width: "200px", // Increased width
+                                            height: "40px", // Increased height
+                                            borderRadius: "10px", // Slightly larger border radius for smoother corners
+                                            backgroundColor: "#ffffff", // Clean white background
+                                            color: "#004e92", // Blue text color
+                                            border: "3px solid #004e92", // Thicker blue border for emphasis
+                                            fontSize: "18px", // Larger font size for better readability
+                                            fontWeight: "bold", // Bold font weight for emphasis
+                                        }}
+                                    >
+                                        Contact Us
+                                    </Button>
+
                                 </Nav>
                             </Navbar.Collapse>
                         </Navbar>
@@ -71,7 +129,7 @@ const Landing = () => {
                         {/* Pricing Cards */}
                         <Col className="col-sm-4 mt-2">
                             <motion.div
-                                className="text-center bg-white rounded px-4 pt-4 pb-4 pkg-plan-box"
+                                className="text-center bg-white px-4 pt-4 pb-4 pkg-plan-box"
                                 initial={{ x: -200, opacity: 0 }}
                                 animate={pricingInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
@@ -79,7 +137,7 @@ const Landing = () => {
                                 <h4 className="text-blue fw-bold fs25px">Home</h4>
                                 <h1 className="text-blue fw-bold fs45px">$47.99</h1>
                                 <p className="text-blue fs19px fw-normal">one-time</p>
-                                <ul className="text-left fs18px px-3 text-blue mb-4">
+                                <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
                                     <li>Text, Images and Shapes</li>
                                     <li>Use spreadsheet data</li>
                                     <li>Works with 40+ printers</li>
@@ -96,7 +154,7 @@ const Landing = () => {
 
                         <Col className="col-sm-4 mt-2">
                             <motion.div
-                                className="text-center bg-white rounded px-4 pt-5 pb-5 pkg-plan-box"
+                                className="text-center bg-white px-4 pt-5 pb-5 pkg-plan-box"
                                 initial={{ x: 200, opacity: 0 }}
                                 animate={pricingInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
@@ -122,7 +180,7 @@ const Landing = () => {
 
                         <Col className="col-sm-4 mt-2">
                             <motion.div
-                                className="text-center bg-white rounded px-4 pt-4 pb-4 pkg-plan-box"
+                                className="text-center bg-white px-4 pt-4 pb-4 pkg-plan-box"
                                 initial={{ x: -200, opacity: 0 }}
                                 animate={pricingInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
@@ -130,7 +188,7 @@ const Landing = () => {
                                 <h4 className="text-blue fw-bold fs25px">Logic</h4>
                                 <h1 className="text-blue fw-bold fs45px">$247.99</h1>
                                 <p className="text-blue fs19px fw-normal">one-time</p>
-                                <ul className="text-left fs18px text-blue px-3 mb-4">
+                                <ul className="text-left fs18px text-blue px-3 mb-4 fix-panel">
                                     <li>Everything in Business</li>
                                     <li>Script variables</li>
                                     <li>Advanced row selection</li>
@@ -172,7 +230,7 @@ const Landing = () => {
 
 
                 </Container>
-            </Container>;
+            </Container>
 
             <Container className="pt-5 pb-5">
                 <Row>
@@ -324,7 +382,7 @@ const Landing = () => {
                 ref={monthlyRef}
                 style={{ position: "relative", overflow: "hidden" }}
             >
-                <Container>
+                <Container className="pb-5">
                     <Row
                         className="pt-5 align-items-center justify-content-center"
                         style={{ position: "relative", zIndex: 2 }}
@@ -394,7 +452,7 @@ const Landing = () => {
                                     href="#"
                                     className="btn download-btn fs17px px-3 pt-2 pb-2"
                                     style={{
-                                        backgroundColor: "rgb(63, 55, 146)", // Button background color
+                                        backgroundColor: "rgb(27 92 149)", // Button background color
                                         color: "white", // Text color
                                         padding: "10px 20px", // Spacing
                                         borderRadius: "5px", // Rounded corners
