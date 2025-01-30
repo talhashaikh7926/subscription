@@ -17,53 +17,63 @@ const ContactUs = () => {
       }}
     >
       {/* Header Section */}
-      <Container fluid className="px-4">
-        <Navbar expand="lg">
-          {/* Brand */}
-          <a href="/" className="fs25px text-white fw-bold">
-            LabelPro
-          </a>
+      <Container className="header-absolute position-absolute mx-auto z-1">
+                <Row>
+                    <Col className="col-sm-12">
+                        <Navbar expand="lg" className="w-100">
+                            {/* Brand */}
+                            <Navbar.Brand href="/" className="fs25px text-white fw-bold">
+                                X LabelSync Pro
+                            </Navbar.Brand>
 
-          {/* Mobile Toggle */}
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            {/* Mobile Toggle */}
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-            <Nav className="d-flex align-items-center gap-3">
-              {/* SignUp */}
-              <Nav.Link
-                href="/login"
-                className="text-white fw-bold"
-                style={{
-                  padding: "10px 20px",
-                  borderRadius: "8px",
-                  background: "#004e92",
-                  fontSize: "16px",
-                  color: "#fff",
-                }}
-              >
-                Login
-              </Nav.Link>
+                            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+                                <Nav className="me-auto d-flex align-items-center gap-3">
+                                    {/* SignUp */}
+                                    <Nav.Link
+                                        href="/login"
+                                        className="text-white fw-bold"
+                                        style={{
+                                            padding: "8px 16px",
+                                            borderRadius: "8px",
+                                            backgroundColor: "#004e92",
+                                            color: "#fff",
+                                            fontSize: "14px",
+                                            transition: "background-color 0.3s ease",
+                                        }}
+                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#0061c2")}
+                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#004e92")}
+                                    >
+                                        SignUp
+                                    </Nav.Link>
 
-              {/* Login */}
-              {/* <Nav.Link
-                href="/login"
-                className="text-white fw-bold"
-                style={{
-                  padding: "10px 20px",
-                  borderRadius: "8px",
-                  background: "#002D69",
-                  fontSize: "16px",
-                  color: "#fff",
-                }}
-              >
-                Login
-              </Nav.Link> */}
+                                    {/* Login */}
+                                    <Nav.Link
+                                        href="/login"
+                                        className="text-white fw-bold"
+                                        style={{
+                                            padding: "8px 16px",
+                                            borderRadius: "8px",
+                                            backgroundColor: "#002D69",
+                                            color: "#fff",
+                                            fontSize: "14px",
+                                            transition: "background-color 0.3s ease",
+                                        }}
+                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#004e92")}
+                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#002D69")}
+                                    >
+                                        Login
+                                    </Nav.Link>
 
-            
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </Container>
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Navbar>
+                    </Col>
+                </Row>
+            </Container>
+
 
       {/* Main Content */}
       <div
@@ -73,7 +83,7 @@ const ContactUs = () => {
           alignItems: "center",
           justifyContent: "center",
           padding: "20px",
-        }}>
+        }} className="mt-sm-5 mt-5">
           <Col className="dots-contact-img">
               <Image src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F810x810%2Fc4c8d67ba8%2Forb-dots-gray.png&w=1920&q=75" className="img-fluid" />
           </Col>
@@ -88,13 +98,13 @@ const ContactUs = () => {
          className="mb-4 position-relative">
           <Row className="align-items-center">
             {/* Left Section */}
-            <Col md={6} className="bg-placeholder-img position-relative">
-              <h3 className="fs39px position-relative" style={{ color: "#004e92", fontWeight: "bold" }}>Got a question about LabelPro?</h3>
+            <Col md={6} xs={12} className="bg-placeholder-img position-relative">
+              <h3 className="fs39px position-relative" style={{ color: "#004e92", fontWeight: "bold" }}>Got a question about X LabelSync Pro?</h3>
               <p className="fs17px position-relative text-blue mt-3">Try searching for an answer or get in touch today.</p>
             </Col>
 
             {/* Right Section */}
-            <Col md={6}>
+            <Col md={6} xs={12}>
               <Form className="contact-form">
                 <Form.Group controlId="formName" className="mb-3">
                   <Form.Label>Name</Form.Label>
@@ -130,7 +140,7 @@ const ContactUs = () => {
                     as="textarea"
                     name="message"
                     rows={4}
-                    placeholder="I Love Label Pro, but how do I do this one specific thing?"
+                    placeholder="I Love X LabelSync Pro, but how do I do this one specific thing?"
                     required
                     style={{
                       borderRadius: "8px",
@@ -204,11 +214,11 @@ const ContactUs = () => {
           <Container fluid className="faq-bg-sec position-relative pt-4 pb-4">
                     <Container>
                         <Row>
-                            <Col className="col-sm-6">
+                            <Col className="col-sm-6 col-12">
                                 <Image src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F437x437%2Fff574f2738%2Ffaqs-icons.png&w=640&q=75" className="img-fluid" />
                             </Col>
 
-                        <Col className="col-sm-6 mt-auto mb-auto content-para">
+                        <Col className="col-sm-6 col-12 mt-auto mb-auto content-para">
                               <h2 className="fw-bold fs42px text-white">FAQs</h2>
                               <p style={{ color: "#fff", fontSize: "17px" }}>
                                 Find answers to the most commonly asked questions about Label LIVE.
@@ -241,7 +251,7 @@ const ContactUs = () => {
                     <Container>
                         <Row>
 
-                        <Col className="col-sm-5 mt-auto mb-auto content-para pr-4">
+                        <Col className="col-sm-5 col-12 mt-auto mb-auto content-para pr-4">
                               <h2 className="fw-bold fs42px text-white"> Don’t want to install any software? </h2>
                               {/* <p style={{ color: "#fff", fontSize: "17px" }}>
                                 Find answers to the most commonly asked questions about Label LIVE.
@@ -265,7 +275,7 @@ const ContactUs = () => {
                               </Button>
                             </Col>
 
-                            <Col className="col-sm-7 text-center">
+                            <Col className="col-sm-7 col-12 text-center mt-sm-0 mt-4">
                                 <Image src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F1142x868%2Fdcb03ca0c8%2Flabels.png&w=1200&q=75" className="img-fluid" width={'80%'} />
                             </Col>
                         </Row>
@@ -276,8 +286,8 @@ const ContactUs = () => {
           
           <Container fluid className="bg-white pt-5 pb-5">
                 <Container>
-                    <Row className="px-4">
-                        <Col className="col-sm-4">
+                    <Row className="px-sm-4 px-1">
+                        <Col className="col-sm-4 mb-4">
                                 <Col className="p-4 rounded card-box">
                                   <i class="fa fa-file-text-o"></i>
                                     <h3 className="text-blue fw-bold"> Guides </h3>
@@ -286,7 +296,7 @@ const ContactUs = () => {
                                 </Col>
                         </Col>
 
-                        <Col className="col-sm-4">
+                        <Col className="col-sm-4 mb-4">
                                 <Col className="p-4 rounded card-box">
                                   <i class="fa fa-question"></i>
                                     <h3 className="text-blue fw-bold"> Find Answers </h3>
@@ -295,7 +305,7 @@ const ContactUs = () => {
                                 </Col>
                         </Col>
 
-                        <Col className="col-sm-4">
+                        <Col className="col-sm-4 mb-4">
                                 <Col className="p-4 rounded card-box">
                                   <i class="fa fa-barcode"></i>
                                     <h3 className="text-blue fw-bold"> Barcodes </h3>
@@ -312,7 +322,7 @@ const ContactUs = () => {
                 <Container className="pt-2">
                     <Row>
                         <Col className="col-sm-3">
-                            <h2 className="text-white"> LabelPro </h2>
+                            <h2 className="text-white"> X LabelSync Pro </h2>
                         </Col>
                         <Col className="col-sm-3">
                             <h5 className="text-white fw-bold mb-3"> Pages </h5>
@@ -347,7 +357,7 @@ const ContactUs = () => {
                                 <li><a href="#">   Terms and Conditions </a></li>
                                 <li><a href="#">  End-User License Agreement </a></li>
                             </ul>
-                            <h6 className="mt-3 text-white fw-light" style={{ 'font-size': "13px" }}>&copy; Copyrights 2025 LabelPro. All Right Reserved  </h6>
+                            <h6 className="mt-3 text-white fw-light" style={{ 'font-size': "13px" }}>&copy; Copyrights 2025 X LabelSync Pro. All Right Reserved  </h6>
                         </Col>
                     </Row>
                 </Container>

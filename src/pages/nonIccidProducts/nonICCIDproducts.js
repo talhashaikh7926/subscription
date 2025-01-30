@@ -318,7 +318,7 @@ const NonIccidProduct = () => {
                     color: "#004e92",
                     fontFamily: "'Roboto', sans-serif",
                     fontWeight: "700",
-                }}>Product Form</Title>
+                }}>X LabelSync Pro</Title>
                 <Row gutter={[16, 16]} justify="center">
                     {getSubscriptionPlan?.loading && getUserInfo?.loading ? (
                         <div

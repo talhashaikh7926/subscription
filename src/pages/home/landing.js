@@ -35,7 +35,7 @@ const Landing = () => {
                         <Navbar expand="lg" className="w-100">
                             {/* Brand */}
                             <Navbar.Brand href="/" className="fs25px text-white fw-bold">
-                                LabelPro
+                                X LabelSync Pro
                             </Navbar.Brand>
 
                             {/* Mobile Toggle */}
@@ -84,14 +84,14 @@ const Landing = () => {
                                         href="/contact-us"
                                         className="fw-bold"
                                         style={{
-                                            width: "200px", 
-                                            height: "40px", 
-                                            borderRadius: "10px", 
-                                            backgroundColor: "#ffffff", 
-                                            color: "#004e92", 
-                                            border: "3px solid #004e92", 
-                                            fontSize: "18px", 
-                                            fontWeight: "bold", 
+                                            width: "200px",
+                                            height: "40px",
+                                            borderRadius: "10px",
+                                            backgroundColor: "#ffffff",
+                                            color: "#004e92",
+                                            border: "3px solid #004e92",
+                                            fontSize: "18px",
+                                            fontWeight: "bold",
                                         }}
                                     >
                                         Contact Us
@@ -106,7 +106,7 @@ const Landing = () => {
 
             <Container fluid className="pt-5 pb-2 bg-gradiant relative">
                 <Container ref={pricingRef}>
-                    <Row className="pt-5 align-items-center position-relative z-1">
+                    <Row className="pt-5 align-items-center position-relative z-1 justify-content-center">
                         <Col className="col-sm-12 text-center">
                             <motion.h2
                                 className="fw-bold fs40px text-white"
@@ -122,7 +122,7 @@ const Landing = () => {
                                 animate={pricingInView ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 1 }}
                             >
-                                Label LIVE is licensed per computer.
+                                X LabelSync pro is licensed per computer.
                             </motion.p>
                         </Col>
 
@@ -134,14 +134,16 @@ const Landing = () => {
                                 animate={pricingInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
                             >
-                                <h4 className="text-blue fw-bold fs25px">Home</h4>
-                                <h1 className="text-blue fw-bold fs45px">$47.99</h1>
+                                <h4 className="text-blue fw-bold fs25px">Monthly Plan</h4>
+                                <h1 className="text-blue fw-bold fs45px">$59</h1>
                                 <p className="text-blue fs19px fw-normal">one-time</p>
                                 <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
-                                    <li>Text, Images and Shapes</li>
-                                    <li>Use spreadsheet data</li>
-                                    <li>Works with 40+ printers</li>
+                                    <li>Works with 2+ printers</li>
                                     <li>Unlimited label printing</li>
+                                    <li>Preview Barcode</li>
+                                    <li>Zebra Printing</li>
+                                    <li>Support 300 & 200dpi</li>
+
                                 </ul>
                                 <a
                                     href="/login"
@@ -159,15 +161,15 @@ const Landing = () => {
                                 animate={pricingInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
                             >
-                                <h4 className="text-blue fw-bold fs25px">Business</h4>
-                                <h1 className="text-blue fw-bold fs45px">$147.99</h1>
+                                <h4 className="text-blue fw-bold fs25px">Yearly Plan</h4>
+                                <h1 className="text-blue fw-bold fs45px">$599</h1>
                                 <p className="text-blue fs19px fw-normal">one-time</p>
                                 <ul className="text-left fs18px text-blue px-3 mb-4 mt-3">
-                                    <li>Use at a Business</li>
                                     <li>Print Barcodes</li>
                                     <li>Dynamic images</li>
-                                    <li>Use thermal transfer printers</li>
+                                    <li>Unlimited Label printing</li>
                                     <li>Same day support</li>
+                                    <li className="text-success fw-bold">Support 300 to 200dpi With Customization</li>
                                 </ul>
                                 <a
                                     href="/login"
@@ -178,7 +180,7 @@ const Landing = () => {
                             </motion.div>
                         </Col>
 
-                        <Col className="col-sm-4 mt-2">
+                        {/* <Col className="col-sm-4 mt-2">
                             <motion.div
                                 className="text-center bg-white px-4 pt-4 pb-4 pkg-plan-box"
                                 initial={{ x: -200, opacity: 0 }}
@@ -203,7 +205,7 @@ const Landing = () => {
                                     Download Now
                                 </a>
                             </motion.div>
-                        </Col>
+                        </Col> */}
 
                     </Row>
                     <Col className="position-absolute curve-img w-100">
@@ -250,12 +252,7 @@ const Landing = () => {
                                 <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                             </tr>
-                            <tr>
-                                <td> <h5> Import Spreadsheet Data  </h5></td>
-                                <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                            </tr>
+                           
                             <tr>
                                 <td><h5> Works with USB Thermal Printers </h5>
                                 </td>
@@ -310,13 +307,7 @@ const Landing = () => {
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
                             </tr>
-                            <tr>
-                                <td> <h5> Advanced variable kinds </h5>
-                                </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-dot" class="svg-inline--fa fa-circle-dot text-gray-300" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-352a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"></path></svg> </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
-                            </tr>
+                        
                             <tr>
                                 <td> <h5> Save batch images and PDFs </h5>
                                 </td>
@@ -331,13 +322,7 @@ const Landing = () => {
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
                             </tr>
-                            <tr>
-                                <td> <h5> Save printed label data to a log file </h5>
-                                </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-dot" class="svg-inline--fa fa-circle-dot text-gray-300" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-352a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"></path></svg> </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
-                            </tr>
+                           
                             <tr>
                                 <td> <h5> Data form views </h5>
                                 </td>
@@ -345,28 +330,7 @@ const Landing = () => {
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
                             </tr>
-                            <tr>
-                                <td><h5> Script variables </h5>
-                                </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-dot" class="svg-inline--fa fa-circle-dot text-gray-300" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-352a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"></path></svg> </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
-                            </tr>
-                            <tr>
-                                <td> <h5> Advanced row selection </h5>
-                                </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-dot" class="svg-inline--fa fa-circle-dot text-gray-300" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-352a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"></path></svg> </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
-                            </tr>
-                            <tr>
-                                <td><h5> Dynamic hide/show </h5>
-                                </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-dot" class="svg-inline--fa fa-circle-dot text-gray-300" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-352a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"></path></svg> </td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
-                                <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
-                            </tr>
-
+                         
 
                         </tbody>
                     </Table>
@@ -431,7 +395,7 @@ const Landing = () => {
                                     className="text-blue fw-bold fs45px"
                                     style={{ color: "rgb(63, 55, 146)" }}
                                 >
-                                    $19.99
+                                    $59
                                 </h1>
                                 <p
                                     className="text-blue fs19px fw-normal"
@@ -443,10 +407,11 @@ const Landing = () => {
                                     className="text-left fs18px px-3 text-blue mb-4"
                                     style={{ color: "rgb(63, 55, 146)" }}
                                 >
-                                    <li>All features included</li>
-                                    <li>Affordable</li>
-                                    <li>Pay as you go</li>
-                                    <li>Cancel anytime</li>
+                                    <li>Works with 2+ printers</li>
+                                    <li>Unlimited label printing</li>
+                                    <li>Preview Barcode</li>
+                                    <li>Zebra Printing</li>
+                                    <li>Support 300 & 200dpi</li>
                                 </ul>
                                 <a
                                     href="/login"
@@ -553,7 +518,7 @@ const Landing = () => {
                             >
                                 <h3 className="text-blue fs38px mb-3 fw-bold">Used by thousands</h3>
                                 <p className="fs17px">
-                                    Anyone can download and use Label LIVE to print labels. It's easy to
+                                    Anyone can download and use X LabelSync Pro to print labels. It's easy to
                                     use, priced right, always available without Internet, helpfully
                                     supported by humans when you need us, and constantly improving based
                                     on your feedback.
@@ -579,8 +544,8 @@ const Landing = () => {
                                     Need a new label printer? Bundle and Save
                                 </h3>
                                 <p className="fs17px">
-                                    A complete label printing solution that works perfectly with Label
-                                    LIVE on Windows and macOS. The mydpi direct-thermal printer features
+                                    A complete label printing solution that works perfectly with X LabelSync Pro
+                                    on Windows and macOS. The mydpi direct-thermal printer features
                                     300 dots-per-inch, ideal for barcodes and tiny text. Easy replacement
                                     and alternative to DYMO 450/550.
                                 </p>
@@ -640,7 +605,7 @@ const Landing = () => {
                             </Col>
                             <Col className="media-body">
                                 <h4 className="media-heading"> Driverless Thermal Printing </h4>
-                                <p> Label LIVE directly supports popular thermal printers via USB </p>
+                                <p> X LabelSync Pro directly supports popular thermal printers via USB </p>
                             </Col>
                         </Col>
                     </Col>
@@ -676,7 +641,7 @@ const Landing = () => {
                 <Container className="pt-2">
                     <Row>
                         <Col className="col-sm-3">
-                            <h2 className="text-white"> LabelPro </h2>
+                            <h2 className="text-white"> X LabelSync Pro </h2>
                         </Col>
                         <Col className="col-sm-3">
                             <h5 className="text-white fw-bold mb-3"> Pages </h5>
@@ -684,7 +649,7 @@ const Landing = () => {
                                 <li><a href="/"> Home </a></li>
                                 <li><a href="/"> Pricing</a> </li>
                                 <li><a href="/contact-us"> Contact </a></li>
-                              
+
                             </ul>
                         </Col>
                         {/* <Col className="col-sm-2">
@@ -711,7 +676,7 @@ const Landing = () => {
                                 <li><a href="#">   Terms and Conditions </a></li>
                                 <li><a href="#">  End-User License Agreement </a></li>
                             </ul>
-                            <h6 className="mt-3 text-white fw-light" style={{ 'font-size': "13px" }}>&copy; Copyrights 2025 LabelPro. All Right Reserved  </h6>
+                            <h6 className="mt-3 text-white fw-light" style={{ 'font-size': "13px" }}>&copy; Copyrights 2025 XLabelSync Pro. All Right Reserved  </h6>
                         </Col>
                     </Row>
                 </Container>

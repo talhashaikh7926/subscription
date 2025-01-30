@@ -386,7 +386,7 @@ body{ overflow-x: hidden; }
 
 
 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 680px) {
     .tabldesign tbody tr td h5 {
         font-size: 13px;
     }
@@ -411,5 +411,22 @@ body{ overflow-x: hidden; }
             padding-left: 3px !important;
             padding-right: 3px !important;   
         }
+        .faq-bg-sec:before{ display: none; }
+        .fs42px {  font-size: 31px; }
+        .dots-contact-img img, .bg-placeholder-img:before { display: none; }
+        .fs39px {  font-size: 27px; }
+        .card-box h3 {  font-size: 22px; }
+        .navbar-nav {
+            position: relative;
+            z-index: 1;
+            background-color: #1e639f;
+            padding: 15px;
+            border-radius: 6px 6px;
+        }
+        .navbar-nav .nav-link {  margin-bottom: 7px; }
+        .content-para ul {   font-size: 15px !important; }
+        .foo-navlist li a { font-size: 13px; }
+        .fs17px { font-size: 14px !important; }
+        .terms-list li a {   font-size: 12px; }
 }
 
