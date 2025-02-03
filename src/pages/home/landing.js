@@ -129,14 +129,16 @@ const Landing = () => {
                         {/* Pricing Cards */}
                         <Col className="col-sm-4 mt-2">
                             <motion.div
-                                className="text-center bg-white px-4 pt-4 pb-4 pkg-plan-box"
+                                className="text-center bg-white px-4 pt-5 pb-5 pkg-plan-box"
                                 initial={{ x: -200, opacity: 0 }}
                                 animate={pricingInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
                             >
                                 <h4 className="text-blue fw-bold fs25px">Monthly Plan</h4>
                                 <h1 className="text-blue fw-bold fs45px">$59</h1>
-                                <p className="text-blue fs19px fw-normal"></p>
+                                <p className="text-blue fs19px fw-normal">-</p>
+                                
+
                                 <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
                                     <li>Works with 2+ printers</li>
                                     <li>Unlimited label printing</li>
@@ -147,7 +149,7 @@ const Landing = () => {
                                 </ul>
                                 <a
                                     href="/login"
-                                    className="btn download-btn fs17px px-3 text-blue pt-2 pb-2"
+                                    className="btn download-btn bg-blue fs17px px-3 text-white pt-2 pb-2"
                                 >
                                     Sign In
                                 </a>
@@ -574,7 +576,7 @@ const Landing = () => {
                             >
                                 <h3 className="text-blue fs38px mb-3 fw-bold">Used by thousands</h3>
                                 <p className="fs17px">
-                                    Anyone can download and use X LabelSync Pro to print labels. It's easy to
+                                    Anyone can SignUp and use X LabelSync Pro to print labels. It's easy to
                                     use, priced right, always available without Internet, helpfully
                                     supported by humans when you need us, and constantly improving based
                                     on your feedback.
@@ -718,11 +720,11 @@ const Landing = () => {
 
                             </ul>
                         </Col> */}
-                        <Col className="col-sm-4">
+                        {/* <Col className="col-sm-4">
                             <h5 className="text-white fw-bold mb-3"> Guides </h5>
                             <p className="text-white fs17px"> How to Print Labels from an Excel Spreadsheet How to Create Barcodes Without Printed Check Digit
                                 Create Food Rotation Labels With Automatic Relative Dates </p>
-                        </Col>
+                        </Col> */}
                     </Row>
 
                     <Row className="mt-4">

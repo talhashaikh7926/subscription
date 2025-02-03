@@ -27,33 +27,33 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log(formData,"Check");
         
-        // dispatch(contactUs(formData)).then((res) => {
-        //     if (res.type === "CONTACT_SUCCESS") {
-        //         notification.success({
-        //             message: res?.payload?.message || "Message sent successfully!",
-        //             className: "toast-success",
-        //             placement: "top",
-        //         });
+       dispatch(contactUs(formData)).then((res) => {
+            console.log(res,"----");
+            
+            if (res.type === "CONTACT_SUCCESS") {
+                notification.success({
+                    message: res?.payload?.message || "Message sent successfully!",
+                    className: "toast-success",
+                    placement: "top",
+                });
 
-        //         // Reset form fields after successful submission
-        //         setFormData({
-        //             name: "",
-        //             email: "",
-        //             message: "",
-        //             businessType: "Business",
-        //             deviceType: "Mac",
-        //         });
-        //     } else {
-        //         notification.error({
-        //             message: res?.message || "Failed to send message!",
-        //             className: "toast-error",
-        //             placement: "top",
-        //         });
-        //     }
-        // });
+                // Reset form fields after successful submission
+                setFormData({
+                    name: "",
+                    email: "",
+                    message: "",
+                    businessType: "Business",
+                    deviceType: "Mac",
+                });
+            } else {
+                notification.error({
+                    message: res?.message || "Failed to send message!",
+                    className: "toast-error",
+                    placement: "top",
+                });
+            }
+        });
     };
     return (
         <div
@@ -309,7 +309,7 @@ const ContactUs = () => {
                         <Col className="col-sm-6 col-12 mt-auto mb-auto content-para">
                             <h2 className="fw-bold fs42px text-white">FAQs</h2>
                             <p style={{ color: "#fff", fontSize: "17px" }}>
-                                Find answers to the most commonly asked questions about Label LIVE.
+                                Find answers to the most commonly asked questions about X LabelSync Pro.
                             </p>
                             <ul style={{ color: "#fff", fontSize: "17px" }}>
                                 <li>How to add data to a label?</li>
@@ -379,7 +379,7 @@ const ContactUs = () => {
                             <Col className="p-4 rounded card-box">
                                 <i class="fa fa-file-text-o"></i>
                                 <h3 className="text-blue fw-bold"> Guides </h3>
-                                <p className="text-grey"> How to make Label LIVE work for you, in detail. </p>
+                                <p className="text-grey"> How to make X LabelSync Pro work for you, in detail. </p>
                                 {/* <a href="#" className="btn read-btn"> Read the guides </a> */}
                             </Col>
                         </Col>
@@ -431,11 +431,11 @@ const ContactUs = () => {
 
                             </ul>
                         </Col> */}
-                        <Col className="col-sm-4">
+                        {/* <Col className="col-sm-4">
                             <h5 className="text-white fw-bold mb-3"> Guides </h5>
                             <p className="text-white fs17px"> How to Print Labels from an Excel Spreadsheet How to Create Barcodes Without Printed Check Digit
                                 Create Food Rotation Labels With Automatic Relative Dates </p>
-                        </Col>
+                        </Col> */}
                     </Row>
 
                     <Row className="mt-4">

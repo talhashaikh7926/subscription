@@ -41,16 +41,16 @@ export const contactUs = (data) => (dispatch) => {
     dispatch({ type: CONTACT_REQUEST });
     return axios({
         method: 'POST',
-        url: `contact`,
+        url: `contactus`,
         headers: {
             Accept: "application/json",
         },
         data: {
-            username: data.username,
-            price: data.subscription_price,
-            subscriptionName: data.subscription_name,
-            subscription_id: data.subscription_id,        
-            redirect_url: 'https://front-end-lablepro-4e5494f0c23e.herokuapp.com/dashboard'
+            name: data.name,
+            email: data.email,
+            message: data.message,
+            purpose: data.businessType,        
+            system_data: data.deviceType
         }
     })
         .then((response) => {
