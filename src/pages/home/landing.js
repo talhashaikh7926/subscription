@@ -136,8 +136,8 @@ const Landing = () => {
                             >
                                 <h4 className="text-blue fw-bold fs25px">Monthly Plan</h4>
                                 <h1 className="text-blue fw-bold fs45px">$59</h1>
-                                <p className="text-blue fs19px fw-normal">-</p>
-                                
+
+
 
                                 <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
                                     <li>Works with 2+ printers</li>
@@ -165,10 +165,11 @@ const Landing = () => {
                             >
                                 <h4 className="text-blue fw-bold fs25px">Yearly Plan</h4>
                                 <h1 className="text-blue fw-bold fs45px">$599</h1>
-                                <p className="text-blue fs19px fw-normal">one-time</p>
+                                {/* <p className="text-blue fs19px fw-normal">one-time</p> */}
+                                <p className="text-success fw-bold fs18px">Save 15% compared to monthly!</p>
                                 <ul className="text-left fs18px text-blue px-3 mb-4 mt-3">
                                     <li>Print Barcodes</li>
-                                    <li>Dynamic images</li>
+
                                     <li>Unlimited Label printing</li>
                                     <li>Same day support</li>
                                     <li className="text-success fw-bold">Support 300 to 200dpi With Customization</li>
@@ -248,42 +249,42 @@ const Landing = () => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><h5>Fully Integrated With Square Up POS</h5></td>
+                                <td><h5>Seamlessly Integrated With Square POS</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Print Retail Price and Discount Prices to Increase Sales</h5></td>
+                                <td><h5>Display Retail and Discounted Prices to Boost Sales</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Same Day Support</h5></td>
+                                <td><h5>Same-Day Customer Support</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Unlimited Printing at No Extra Cost</h5></td>
+                                <td><h5>Unlimited Printing with No Additional Fees</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Work with 300 & 200 dpi Printer</h5></td>
+                                <td><h5>Compatible with 300 & 200 dpi Printers</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Work with Mac & PC</h5></td>
+                                <td><h5>Compatible with Mac & PC</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Easiest & Fastest Tags Printing & Items Lister</h5></td>
+                                <td><h5> Fastest & Easiest Tag Printing & Item Listing</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5>Life Time Support no Extra Cost</h5></td>
+                                <td><h5>Life Time Support at No Extra Cost</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
