@@ -136,7 +136,7 @@ const Landing = () => {
                             >
                                 <h4 className="text-blue fw-bold fs25px">Monthly Plan</h4>
                                 <h1 className="text-blue fw-bold fs45px">$59</h1>
-                                <p className="text-blue fs19px fw-normal">one-time</p>
+                                <p className="text-blue fs19px fw-normal"></p>
                                 <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
                                     <li>Works with 2+ printers</li>
                                     <li>Unlimited label printing</li>
@@ -149,7 +149,7 @@ const Landing = () => {
                                     href="/login"
                                     className="btn download-btn fs17px px-3 text-blue pt-2 pb-2"
                                 >
-                                    Download Now
+                                    Sign In
                                 </a>
                             </motion.div>
                         </Col>
@@ -175,7 +175,7 @@ const Landing = () => {
                                     href="/login"
                                     className="btn download-btn bg-blue fs17px px-3 text-white pt-2 pb-2"
                                 >
-                                    Download Now
+                                    Sign In
                                 </a>
                             </motion.div>
                         </Col>
@@ -239,6 +239,61 @@ const Landing = () => {
                     <Table className="table tabldesign table-responsive">
                         <thead>
                             <tr>
+                                <th>Feature</th>
+                                <th>X LabelSync Pro</th>
+                                <th>Others</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><h5>Fully Integrated With Square Up POS</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Print Retail Price and Discount Prices to Increase Sales</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Same Day Support</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Unlimited Printing at No Extra Cost</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Work with 300 & 200 dpi Printer</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Work with Mac & PC</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Easiest & Fastest Tags Printing & Items Lister</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td><h5>Life Time Support no Extra Cost</h5></td>
+                                <td>✅</td>
+                                <td>❌</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Row>
+            </Container>
+            {/* <Container className="pt-5 pb-5">
+                <Row>
+                    <Table className="table tabldesign table-responsive">
+                        <thead>
+                            <tr>
                                 <th> </th>
                                 <th>Home</th>
                                 <th>Business </th>
@@ -252,7 +307,7 @@ const Landing = () => {
                                 <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                             </tr>
-                           
+
                             <tr>
                                 <td><h5> Works with USB Thermal Printers </h5>
                                 </td>
@@ -307,7 +362,7 @@ const Landing = () => {
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
                             </tr>
-                        
+
                             <tr>
                                 <td> <h5> Save batch images and PDFs </h5>
                                 </td>
@@ -322,7 +377,7 @@ const Landing = () => {
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
                             </tr>
-                           
+
                             <tr>
                                 <td> <h5> Data form views </h5>
                                 </td>
@@ -330,17 +385,17 @@ const Landing = () => {
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg></td>
                                 <td> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle text-secondary" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"></path></svg> </td>
                             </tr>
-                         
+
 
                         </tbody>
                     </Table>
                 </Row>
-            </Container>
+            </Container> */}
 
 
 
             {/* Pay Monthly Section */}
-            <Container
+            {/* <Container
                 fluid
                 className="pt-5 pb-4 bg-gradiant position-relative"
                 ref={monthlyRef}
@@ -370,7 +425,7 @@ const Landing = () => {
                             </motion.p>
                         </Col>
 
-                        {/* Pricing Card */}
+                        
                         <Col className="col-sm-4 mt-4 px-4">
                             <motion.div
                                 className="text-center bg-white rounded shadow-lg px-4 pt-4 pb-4 pkg-plan-box"
@@ -417,15 +472,15 @@ const Landing = () => {
                                     href="/login"
                                     className="btn download-btn fs17px px-3 pt-2 pb-2"
                                     style={{
-                                        backgroundColor: "rgb(27 92 149)", // Button background color
-                                        color: "white", // Text color
-                                        padding: "10px 20px", // Spacing
-                                        borderRadius: "5px", // Rounded corners
-                                        textDecoration: "none", // Remove underline
-                                        display: "inline-block", // Ensure it's inline-block for proper styling
-                                        fontWeight: "bold", // Make text bold
-                                        fontSize: "17px", // Adjust font size
-                                        textAlign: "center", // Center align text
+                                        backgroundColor: "rgb(27 92 149)", 
+                                        color: "white", 
+                                        padding: "10px 20px", 
+                                        borderRadius: "5px",
+                                        textDecoration: "none", 
+                                        display: "inline-block", 
+                                        fontWeight: "bold", 
+                                        fontSize: "17px", 
+                                        textAlign: "center", 
                                     }}
                                 >
                                     Download Now
@@ -435,7 +490,7 @@ const Landing = () => {
                         </Col>
                     </Row>
 
-                    {/* Gradient Curve with Inline CSS */}
+                    
                     <Col
                         className="position-absolute curve-img w-100"
                         style={{
@@ -469,7 +524,7 @@ const Landing = () => {
                         </svg>
                     </Col>
                 </Container>
-            </Container>
+            </Container> */}
 
 
 
@@ -479,7 +534,7 @@ const Landing = () => {
                 <Container className="pt-5 pb-5" ref={iframeRef}>
                     <Row>
                         <Col className="text-center mx-auto col-sm-7">
-                            <motion.iframe
+                            {/* <motion.iframe
                                 width="100%"
                                 height="412"
                                 src="https://www.youtube.com/embed/hnqUP1CZd24"
@@ -492,7 +547,7 @@ const Landing = () => {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={iframeInView ? { opacity: 1, scale: 1 } : {}}
                                 transition={{ duration: 0.8 }}
-                            ></motion.iframe>
+                            ></motion.iframe> */}
                         </Col>
                     </Row>
                 </Container>
@@ -502,13 +557,14 @@ const Landing = () => {
                     <Row className="pt-3 px-4">
                         <Col className="col-sm-6 px-4">
                             <motion.img
-                                src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F1000x456%2F65fb8b81f4%2Flabel-live-2024-world.png&w=1920&q=75"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1200px-World_map_-_low_resolution.svg.png"
                                 width="400px"
                                 className="img-fluid"
                                 initial={{ x: -200, opacity: 0 }}
                                 animate={imageTextInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
                             />
+
                         </Col>
                         <Col className="col-sm-6 mt-auto mb-auto">
                             <motion.div
@@ -547,7 +603,7 @@ const Landing = () => {
                                     A complete label printing solution that works perfectly with X LabelSync Pro
                                     on Windows and macOS. The mydpi direct-thermal printer features
                                     300 dots-per-inch, ideal for barcodes and tiny text. Easy replacement
-                                    and alternative to DYMO 450/550.
+                                    and alternative to Recommen Zebra ZD421 300dpi.
                                 </p>
                                 <a
                                     href="#"
@@ -558,14 +614,14 @@ const Landing = () => {
                             </motion.div>
                         </Col>
                         <Col className="col-sm-6 px-4 text-end">
-                            <motion.img
+                            {/* <motion.img
                                 src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F480x316%2F7d7706418b%2Fmydpi-label-animation-r2.gif&w=1920&q=75"
                                 width="400px"
                                 className="img-fluid"
                                 initial={{ x: 200, opacity: 0 }}
                                 animate={recommendInView ? { x: 0, opacity: 1 } : {}}
                                 transition={{ duration: 1 }}
-                            />
+                            /> */}
                         </Col>
                     </Row>
 
