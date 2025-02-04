@@ -211,7 +211,7 @@ const Landing = () => {
                         </Col> */}
 
                     </Row>
-                    <Col className="position-absolute curve-img w-100">
+                    {/* <Col className="position-absolute curve-img w-100">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="100%"
@@ -231,7 +231,7 @@ const Landing = () => {
                                 d="M0,128L60,96L120,160L180,96L240,128L300,64L360,96L420,32L480,64L540,32L600,96L660,32L720,96L780,64L840,128L900,64L960,128L1020,96L1080,64L1140,128L1200,64L1260,96L1320,32L1380,64L1440,32L1440,320L1380,320L1320,320L1260,320L1200,320L1140,320L1080,320L1020,320L960,320L900,320L840,320L780,320L720,320L660,320L600,320L540,320L480,320L420,320L360,320L300,320L240,320L180,320L120,320L60,320L0,320Z"
                             ></path>
                         </svg>
-                    </Col>
+                    </Col> */}
 
 
                 </Container>
