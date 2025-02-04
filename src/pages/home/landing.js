@@ -279,7 +279,7 @@ const Landing = () => {
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td><h5> Fastest & Easiest Tag Printing & Item Listing</h5></td>
+                                <td><h5> Fastest & Easiest Tag Printing And Item Listing</h5></td>
                                 <td>✅</td>
                                 <td>❌</td>
                             </tr>
