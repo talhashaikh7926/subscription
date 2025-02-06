@@ -13,6 +13,7 @@ import ContactUs from "../pages/contact/contactUs";
 import SkeletonComponent from "../components/skeletonLoader";
 
 import Login from "../pages/login/login";
+import Faq from "../pages/faq/faq";
 
 
 
@@ -45,7 +46,9 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Redirect to="/" />} />
           <Route path="/contact-us" exact element={<ContactUs />} />
+          <Route path="/faq" exact element={<Faq/>} />
           <Route path="/" exact element={<Landing />} />
+
         </Routes>
 
       ) : (

@@ -5,12 +5,19 @@ import { useDispatch } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
+import { useNavigate } from 'react-router-dom';
 import Nav from "react-bootstrap/Nav";
 import { contactUs } from "../../redux/actions/userDetail.action";
 import { notification } from "antd"; // Import Ant Design notifications
 
 const ContactUs = () => {
     const dispatch = useDispatch();
+
+    const navigate = useNavigate(); // Initialize navigate hook
+
+    const handleShowMore = () => {
+        navigate("/faq"); // Navigate to /faq when the button is clicked
+    };
 
     // State for form fields
     const [formData, setFormData] = useState({
@@ -27,10 +34,10 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-       dispatch(contactUs(formData)).then((res) => {
-            console.log(res,"----");
-            
+
+        dispatch(contactUs(formData)).then((res) => {
+            console.log(res, "----");
+
             if (res.type === "CONTACT_SUCCESS") {
                 notification.success({
                     message: res?.payload?.message || "Message sent successfully!",
@@ -317,18 +324,22 @@ const ContactUs = () => {
                                 <li>How to add a new printer?</li>
                                 <li>How to change between printers?</li>
                             </ul>
-                            {/* <Button
+
+                            {/* Show More Button */}
+                            <Button
                                 variant="light"
+                                onClick={handleShowMore}
                                 style={{
-                                  backgroundColor: "#fff",
-                                  color: "#004e92",
-                                  borderRadius: "8px",
-                                  padding: "8px 20px",
-                                  fontWeight: "bold",
+                                    backgroundColor: "#fff",
+                                    color: "#004e92",
+                                    borderRadius: "8px",
+                                    padding: "8px 20px",
+                                    fontWeight: "bold",
+                                    marginTop: "20px", // Adds space between the FAQ list and button
                                 }}
-                              >
-                                Learn More
-                              </Button> */}
+                            >
+                                Show More
+                            </Button>
                         </Col>
                     </Row>
                 </Container>
