@@ -537,10 +537,10 @@ const Landing = () => {
                 <Container className="pt-5 pb-5" ref={iframeRef}>
                     <Row>
                         <Col className="text-center mx-auto col-sm-7">
-                            {/* <motion.iframe
+                            <motion.iframe
                                 width="100%"
                                 height="412"
-                                src="https://www.youtube.com/embed/hnqUP1CZd24"
+                                src="https://photos.onedrive.com/share/786723E1B453155C!sdb5f745ffd0143b38317364534fb86be?cid=786723E1B453155C&resId=786723E1B453155C!sdb5f745ffd0143b38317364534fb86be&ithint=video&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy83ODY3MjNlMWI0NTMxNTVjL0VWOTBYOXNCX2JORGd4YzJSVFQ3aHI0Qk8zdnhodFRZczI0Y2xLb2JYN1Z6UXc"
                                 title="Introducing Label Printer Design Software For Mac And Windows"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -550,7 +550,7 @@ const Landing = () => {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={iframeInView ? { opacity: 1, scale: 1 } : {}}
                                 transition={{ duration: 0.8 }}
-                            ></motion.iframe> */}
+                            ></motion.iframe>
                         </Col>
                     </Row>
                 </Container>

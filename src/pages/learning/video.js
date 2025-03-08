@@ -44,7 +44,7 @@ const LearningVideo = () => {
                         textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
                     }}
                 >
-                    Demo Video
+                    How to Use X LabelSync Pro
                 </Title>
                 <hr
                     style={{
@@ -68,7 +68,7 @@ const LearningVideo = () => {
                 >
                     <iframe
                         title="Demo Video"
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        src="https://photos.onedrive.com/share/786723E1B453155C!sdb5f745ffd0143b38317364534fb86be?cid=786723E1B453155C&resId=786723E1B453155C!sdb5f745ffd0143b38317364534fb86be&ithint=video&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy83ODY3MjNlMWI0NTMxNTVjL0VWOTBYOXNCX2JORGd4YzJSVFQ3aHI0Qk8zdnhodFRZczI0Y2xLb2JYN1Z6UXc"
                         style={{
                             width: '100%',
                             height: '100%',
