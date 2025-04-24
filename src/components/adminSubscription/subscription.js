@@ -23,7 +23,7 @@ const AdminSubscription = () => {
     useEffect(() => {
         dispatch(SubscriptionSearch());
     }, [dispatch]);
-
+    
     const handleEdit = (subscription) => {
         setEditingSubscription(subscription);
         form.setFieldsValue(subscription);
@@ -32,7 +32,8 @@ const AdminSubscription = () => {
 
     const handleAddEdit = (values) => {
         if (editingSubscription) {
-            dispatch(updateSubscription({ ...values, subscription_id: editingSubscription.subscription_id })).then((res) => {
+            
+            dispatch(updateSubscription({ ...values, id: editingSubscription.id })).then((res) => {
                 if (res.type === "UPDATE_SUBSCRIPTION_SUCCESS") {
                     notification.success({
                         message: "Subscription Updated Successfully",
@@ -92,6 +93,12 @@ const AdminSubscription = () => {
 
     const columns = [
         {
+            title: 'Subscription ID',
+            dataIndex: 'subscription_id',
+            key: 'subscription_id',
+            width: '20%',
+        },
+        {
             title: 'Subscription Name',
             dataIndex: 'subscription_name',
             key: 'subscription_name',
@@ -116,7 +123,7 @@ const AdminSubscription = () => {
             render: (text, record) => (
                 <Space size="middle">
                     <Button icon={<EditOutlined />} onClick={() => handleEdit(record)}>Edit</Button>
-                    <Popconfirm title="Are you sure to delete this subscription?" onConfirm={() => handleDelete(record.subscription_id)}>
+                    <Popconfirm title="Are you sure to delete this subscription?" onConfirm={() => handleDelete(record.id)}>
                         <Button danger icon={<DeleteOutlined />}>Delete</Button>
                     </Popconfirm>
                 </Space>
@@ -148,7 +155,7 @@ const AdminSubscription = () => {
                     <Table
                         dataSource={getSubscription?.payload}
                         columns={columns}
-                        rowKey="subscription_id"
+                        rowKey="sub_id"
                         loading={getSubscription?.loading}
                         bordered
                         pagination={{ pageSize: 5 }}
@@ -172,6 +179,14 @@ const AdminSubscription = () => {
                         layout="vertical"
                         onFinish={handleAddEdit}
                     >
+                        <Form.Item
+                            label="Subscription ID"
+                            name="subscription_id"
+                            rules={[{ required: true, message: 'Please input the subscription ID!' }]}
+                        >
+                            <Input placeholder="Enter subscription ID..." />
+                        </Form.Item>
+                        
                         <Form.Item
                             label="Subscription Name"
                             name="subscription_name"

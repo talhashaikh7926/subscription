@@ -71,12 +71,12 @@ export const deleteSubscription = (id) => (dispatch) => {
 };
 
 export const updateSubscription = (data) => (dispatch) => {
-
+    
     dispatch({ type: UPDATE_SUBSCRIPTION_REQUEST });
     const token = JSON.parse(localStorage.getItem('token'));
     return axios({
         method: 'PUT',
-        url: `subscriptions/${data?.subscription_id}`,
+        url: `subscriptions/${data?.id}`,
         headers: {
             Accept: "application/json",
             Authorization: `Bearer ${token}`

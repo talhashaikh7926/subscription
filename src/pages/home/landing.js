@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Card, Layout, Row, Col, Typography, Divider, notification } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Table } from 'react-bootstrap';
+import { SubscriptionSearch } from '../../redux/actions/createSubscription.action';
+import { getVideo } from '../../redux/actions/createVideo.action';
+
 
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +20,7 @@ const { Title } = Typography;
 
 const Landing = () => {
 
-
+    const [publicVideoUrl, setPublicVideoUrl] = useState(null);
     const [pricingRef, pricingInView] = useInView({ triggerOnce: true, threshold: 0.2 });
     const [monthlyRef, monthlyInView] = useInView({ triggerOnce: true, threshold: 0.2 });
     const [usedByRef, usedByInView] = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -25,6 +29,24 @@ const Landing = () => {
     const [recommendRef, recommendInView] = useInView({ triggerOnce: true, threshold: 0.2 });
     const [adviceRef, adviceInView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
+    const dispatch = useDispatch();
+    const { getSubscription, getVideos } = useSelector((state) => state);
+    useEffect(() => {
+        dispatch(SubscriptionSearch());
+        dispatch(getVideo());
+    }, [dispatch]);
+    const subscriptions = getSubscription?.payload || [];
+    useEffect(() => {
+        if (getVideos?.payload?.length > 0) {
+            const publicVideos = getVideos.payload.filter(video => video.is_public === true);
+            if (publicVideos.length > 0) {
+                const randomIndex = Math.floor(Math.random() * publicVideos.length);
+                setPublicVideoUrl(publicVideos[randomIndex].video_url);
+                console.log(publicVideoUrl, 'cCheck video');
+
+            }
+        }
+    }, [getVideos]);
 
 
     return (
@@ -127,61 +149,46 @@ const Landing = () => {
                         </Col>
 
                         {/* Pricing Cards */}
-                        <Col className="col-sm-4 mt-2">
-                            <motion.div
-                                className="text-center bg-white px-4 pt-5 pb-5 pkg-plan-box"
-                                initial={{ x: -200, opacity: 0 }}
-                                animate={pricingInView ? { x: 0, opacity: 1 } : {}}
-                                transition={{ duration: 1 }}
-                            >
-                                <h4 className="text-blue fw-bold fs25px">Monthly Plan</h4>
-                                <h1 className="text-blue fw-bold fs45px">$59</h1>
-
-
-
-                                <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
-                                    <li>Works with 2+ printers</li>
-                                    <li>Unlimited label printing</li>
-                                    <li>Preview Barcode</li>
-                                    <li>Zebra Printing</li>
-                                    <li>Support 300 & 200dpi</li>
-
-                                </ul>
-                                <a
-                                    href="/login"
-                                    className="btn download-btn bg-blue fs17px px-3 text-white pt-2 pb-2"
+                        {subscriptions.map((plan, index) => (
+                            <Col className="col-sm-4 mt-2" key={plan.id}>
+                                <motion.div
+                                    className="text-center bg-white px-4 pt-5 pb-5 pkg-plan-box"
+                                    initial={{ x: index === 0 ? -200 : index === 2 ? 200 : 0, opacity: 0 }}
+                                    animate={pricingInView ? { x: 0, opacity: 1 } : {}}
+                                    transition={{ duration: 1 }}
                                 >
-                                    Sign In
-                                </a>
-                            </motion.div>
-                        </Col>
+                                    <h4 className="text-blue fw-bold fs25px">{plan.subscription_name}</h4>
+                                    <h1 className="text-blue fw-bold fs45px">
+                                        {plan.subscription_currency}{plan.subscription_price}
+                                    </h1>
 
-                        <Col className="col-sm-4 mt-2">
-                            <motion.div
-                                className="text-center bg-white px-4 pt-5 pb-5 pkg-plan-box"
-                                initial={{ x: 200, opacity: 0 }}
-                                animate={pricingInView ? { x: 0, opacity: 1 } : {}}
-                                transition={{ duration: 1 }}
-                            >
-                                <h4 className="text-blue fw-bold fs25px">Yearly Plan</h4>
-                                <h1 className="text-blue fw-bold fs45px">$599</h1>
-                                {/* <p className="text-blue fs19px fw-normal">one-time</p> */}
-                                <p className="text-success fw-bold fs18px">Save 15% compared to monthly!</p>
-                                <ul className="text-left fs18px text-blue px-3 mb-4 mt-3">
-                                    <li>Print Barcodes</li>
+                                    {/* Optional: Custom label for yearly plans */}
+                                    {plan.subscription_duration > 100 && (
+                                        <p className="text-success fw-bold fs18px">Save 15% compared to monthly!</p>
+                                    )}
 
-                                    <li>Unlimited Label printing</li>
-                                    <li>Same day support</li>
-                                    <li className="text-success fw-bold">Support 300 to 200dpi With Customization</li>
-                                </ul>
-                                <a
-                                    href="/login"
-                                    className="btn download-btn bg-blue fs17px px-3 text-white pt-2 pb-2"
-                                >
-                                    Sign In
-                                </a>
-                            </motion.div>
-                        </Col>
+                                    {/* Static feature list — assuming it's same for all plans */}
+                                    <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
+                                        <li>Unlimited label printing</li>
+                                        <li>Preview Barcode</li>
+                                        <li>Zebra Printing</li>
+                                        <li>Support 300 & 200dpi</li>
+                                        {plan.subscription_duration > 100 && (
+                                            <li className="text-success fw-bold">
+                                                Support 300 to 200dpi With Customization
+                                            </li>
+                                        )}
+                                    </ul>
+
+                                    <a
+                                        href="/login"
+                                        className="btn download-btn bg-blue fs17px px-3 text-white pt-2 pb-2"
+                                    >
+                                        Sign In
+                                    </a>
+                                </motion.div>
+                            </Col>
+                        ))}
 
                         {/* <Col className="col-sm-4 mt-2">
                             <motion.div
@@ -534,26 +541,47 @@ const Landing = () => {
 
             <div>
                 {/* Video Section */}
+                {/* Video Section */}
                 <Container className="pt-5 pb-5" ref={iframeRef}>
                     <Row>
-                        <Col className="text-center mx-auto col-sm-7">
-                            <motion.iframe
-                                width="100%"
-                                height="412"
-                                src="https://photos.onedrive.com/share/786723E1B453155C!sdb5f745ffd0143b38317364534fb86be?cid=786723E1B453155C&resId=786723E1B453155C!sdb5f745ffd0143b38317364534fb86be&ithint=video&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy83ODY3MjNlMWI0NTMxNTVjL0VWOTBYOXNCX2JORGd4YzJSVFQ3aHI0Qk8zdnhodFRZczI0Y2xLb2JYN1Z6UXc"
-                                title="Introducing Label Printer Design Software For Mac And Windows"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                className="mx-auto"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                allowFullScreen
+                        <Col className="text-center mx-auto col-sm-8">
+                            <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={iframeInView ? { opacity: 1, scale: 1 } : {}}
                                 transition={{ duration: 0.8 }}
-                            ></motion.iframe>
+                                style={{
+                                    padding: '20px', // Padding around the video player
+                                    backgroundColor: '#fff', // White background
+                                    borderRadius: '8px', // Rounded corners
+                                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)', // Soft shadow
+                                    maxWidth: '100%', // Ensures the video doesn’t overflow the container
+                                    margin: '0 auto', // Centers the video container
+                                }}
+                            >
+                                {/* Conditionally render video after fetching URL */}
+                                {publicVideoUrl ? (
+                                    <video
+                                        width="110%" // Increased width
+                                        height="500px" // Increased height
+                                        controls
+                                        autoplay
+                                        poster="your-image-placeholder.jpg" // Optional: Add a thumbnail before video loads
+                                        style={{
+                                            borderRadius: '8px', // Rounded corners for the video player
+                                            overflow: 'hidden', // Ensures rounded corners are respected
+                                        }}
+                                    >
+                                        <source src={publicVideoUrl} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                ) : (
+                                    <p>Loading video...</p> // Show a loading message if the video is not yet available
+                                )}
+                            </motion.div>
                         </Col>
                     </Row>
                 </Container>
+
 
                 {/* Image and Text Section */}
                 <Container className="pb-4" ref={imageTextRef}>

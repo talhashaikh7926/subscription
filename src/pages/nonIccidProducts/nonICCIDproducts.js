@@ -33,8 +33,6 @@ const NonIccidProduct = () => {
         });
     }, [dispatch]);
 
-    console.log(getUserInfo, '-=-=');
-
 
     const calculatePrice = () => {
         const { retailPrice, operations, ourPrice } = form.getFieldsValue();
@@ -71,7 +69,6 @@ const NonIccidProduct = () => {
 
         form.setFieldsValue({ finalPrice: finalPrice.toFixed(2) });
     };
-
 
     const subscribePlan = (data) => {
 
