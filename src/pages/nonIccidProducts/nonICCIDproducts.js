@@ -6,6 +6,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { subscriptionPlan, checkout } from '../../redux/actions/subscriptionPlan.action'
 import { getTemplate, getCategories, getBarcodeDetail, printTag, pushSquare } from '../../redux/actions/barcode.action'
 import { getConfig } from "../../redux/actions/configuration.action";
+import AdminDashboard from '../../components/adminDashboard/dashboard';
 
 
 const { Content } = Layout;
@@ -31,6 +32,8 @@ const NonIccidProduct = () => {
             inwardDate: moment(),
         });
     }, [dispatch]);
+
+    console.log(getUserInfo, '-=-=');
 
 
     const calculatePrice = () => {
@@ -301,7 +304,7 @@ const NonIccidProduct = () => {
     }
 
     return (
-        
+
         <Layout >
             <Content style={{
                 backgroundColor: "#ffffff",
@@ -334,294 +337,182 @@ const NonIccidProduct = () => {
                         </div>
                     ) : (
                         <>
-                            {getUserInfo?.payload?.accessible === false ?
-                                <>
-                                    {getSubscriptionPlan?.payload?.map((plan, index) => (
-                                        <Col key={index} xs={24} sm={12} md={8}>
-                                            <Card
-                                                title={
-                                                    <Title
-                                                        level={4}
-                                                        style={{
-                                                            margin: 0,
-                                                            color: "#004e92",
-                                                            fontWeight: "bold",
-                                                        }}
-                                                    >
-                                                        {plan.subscription_currency + " " + plan.subscription_price}
-                                                    </Title>
-                                                }
-                                                bordered={false}
-                                                style={{
-                                                    borderRadius: "16px",
-                                                    textAlign: "center",
-                                                    backgroundColor: "#ffffff",
-                                                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
-                                                    transition: "transform 0.3s, box-shadow 0.3s",
-                                                    position: "relative",
-                                                    overflow: "hidden",
-                                                    height: "350px", // Uniform card height
-                                                    maxWidth: "350px", // Uniform card width
-                                                    margin: "0 auto",
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    justifyContent: "space-between", // Ensure button stays at the bottom
-                                                    paddingBottom: "20px", // Space below content
-                                                }}
-                                                hoverable
-                                                onMouseEnter={(e) => {
-                                                    e.currentTarget.style.transform = "scale(1.05)";
-                                                    e.currentTarget.style.boxShadow = "0 12px 30px rgba(0, 0, 0, 0.2)";
-                                                }}
-                                                onMouseLeave={(e) => {
-                                                    e.currentTarget.style.transform = "scale(1)";
-                                                    e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.15)";
-                                                }}
-                                            >
-                                                {/* Ribbon or Highlight */}
-                                                <div
-                                                    style={{
-                                                        position: "absolute",
-                                                        top: 0,
-                                                        left: 0,
-                                                        height: "8px",
-                                                        width: "100%",
-                                                        background: "linear-gradient(135deg, #004e92, #13c2c2)",
-                                                    }}
-                                                ></div>
 
-                                                {/* Card Content */}
-                                                <div>
-                                                    <Title level={3} style={{ margin: "20px 0", color: "#595959" }}>
-                                                        {plan.subscription_name}
-                                                    </Title>
+                            {getUserInfo?.payload?.is_admin === true
+                                ?
 
-                                                    <ul
-                                                        style={{
-                                                            listStyleType: "none",
-                                                            padding: 0,
-                                                            textAlign: "left",
-                                                            color: "#595959",
-                                                            fontSize: "16px",
-                                                            lineHeight: "1.8",
-                                                        }}
-                                                    >
-                                                        <li
-                                                            style={{
-                                                                marginBottom: "10px",
-                                                                display: "flex",
-                                                                alignItems: "center",
-                                                            }}
-                                                        >
-                                                            <CheckOutlined style={{ color: "green", marginRight: "8px" }} />
-                                                            {"Subscription Duration: " + plan?.subscription_duration + " Days"}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                {/* Subscribe Button */}
-                                                <Button
-                                                    onClick={() => subscribePlan(plan)}
-                                                    size="large"
-                                                    style={{
-                                                        width: "100%",
-                                                        background: "linear-gradient(135deg, #004e92, #13c2c2)",
-                                                        color: "#fff",
-                                                        fontWeight: "bold",
-                                                        height: "45px",
-                                                        borderRadius: "8px",
-                                                        border: "none",
-                                                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                                                        transition: "background 0.3s",
-                                                        marginTop: "auto", // Pushes the button to the bottom
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.currentTarget.style.background = "linear-gradient(135deg, #003366, #0a9e9e)";
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.currentTarget.style.background = "linear-gradient(135deg, #004e92, #13c2c2)";
-                                                    }}
-                                                >
-                                                    Subscribe
-                                                </Button>
-                                            </Card>
-                                        </Col>
-                                    ))}
-                                </>
-
-
+                                <AdminDashboard />
                                 :
                                 <>
-                                    <div
-                                        style={{
-                                            maxWidth: "800px", // Container width
-                                            margin: "0 auto",
-                                            backgroundColor: "#ffffff", // Slightly different background for better contrast
-                                            padding: "20px", // Increased padding for better spacing
-                                            borderRadius: "12px", // Larger border radius for smoother edges
-                                            border: "1px solid #e0e0e0", // Soft border for inputs and buttons
-                                            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for 3D effect
-                                        }}
-                                    >
-                                        <Form form={form} layout="horizontal">
-                                            <Row gutter={[16, 16]} align="middle">
-                                                {/* Barcode Field */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-
-                                                        <Col xs={6} md={4}><label
+                                    {getUserInfo?.payload?.accessible === false ?
+                                        <>
+                                            {getSubscriptionPlan?.payload?.map((plan, index) => (
+                                                <Col key={index} xs={24} sm={12} md={8}>
+                                                    <Card
+                                                        title={
+                                                            <Title
+                                                                level={4}
+                                                                style={{
+                                                                    margin: 0,
+                                                                    color: "#004e92",
+                                                                    fontWeight: "bold",
+                                                                }}
+                                                            >
+                                                                {plan.subscription_currency + " " + plan.subscription_price}
+                                                            </Title>
+                                                        }
+                                                        bordered={false}
+                                                        style={{
+                                                            borderRadius: "16px",
+                                                            textAlign: "center",
+                                                            backgroundColor: "#ffffff",
+                                                            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.15)",
+                                                            transition: "transform 0.3s, box-shadow 0.3s",
+                                                            position: "relative",
+                                                            overflow: "hidden",
+                                                            height: "350px", // Uniform card height
+                                                            maxWidth: "350px", // Uniform card width
+                                                            margin: "0 auto",
+                                                            display: "flex",
+                                                            flexDirection: "column",
+                                                            justifyContent: "space-between", // Ensure button stays at the bottom
+                                                            paddingBottom: "20px", // Space below content
+                                                        }}
+                                                        hoverable
+                                                        onMouseEnter={(e) => {
+                                                            e.currentTarget.style.transform = "scale(1.05)";
+                                                            e.currentTarget.style.boxShadow = "0 12px 30px rgba(0, 0, 0, 0.2)";
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            e.currentTarget.style.transform = "scale(1)";
+                                                            e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.15)";
+                                                        }}
+                                                    >
+                                                        {/* Ribbon or Highlight */}
+                                                        <div
                                                             style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
+                                                                position: "absolute",
+                                                                top: 0,
+                                                                left: 0,
+                                                                height: "8px",
+                                                                width: "100%",
+                                                                background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                            }}
+                                                        ></div>
+
+                                                        {/* Card Content */}
+                                                        <div>
+                                                            <Title level={3} style={{ margin: "20px 0", color: "#595959" }}>
+                                                                {plan.subscription_name}
+                                                            </Title>
+
+                                                            <ul
+                                                                style={{
+                                                                    listStyleType: "none",
+                                                                    padding: 0,
+                                                                    textAlign: "left",
+                                                                    color: "#595959",
+                                                                    fontSize: "16px",
+                                                                    lineHeight: "1.8",
+                                                                }}
+                                                            >
+                                                                <li
+                                                                    style={{
+                                                                        marginBottom: "10px",
+                                                                        display: "flex",
+                                                                        alignItems: "center",
+                                                                    }}
+                                                                >
+                                                                    <CheckOutlined style={{ color: "green", marginRight: "8px" }} />
+                                                                    {"Subscription Duration: " + plan?.subscription_duration + " Days"}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
+                                                        {/* Subscribe Button */}
+                                                        <Button
+                                                            onClick={() => subscribePlan(plan)}
+                                                            size="large"
+                                                            style={{
+                                                                width: "100%",
+                                                                background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                                color: "#fff",
+                                                                fontWeight: "bold",
+                                                                height: "45px",
+                                                                borderRadius: "8px",
+                                                                border: "none",
+                                                                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                                                                transition: "background 0.3s",
+                                                                marginTop: "auto", // Pushes the button to the bottom
+                                                            }}
+                                                            onMouseEnter={(e) => {
+                                                                e.currentTarget.style.background = "linear-gradient(135deg, #003366, #0a9e9e)";
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                e.currentTarget.style.background = "linear-gradient(135deg, #004e92, #13c2c2)";
                                                             }}
                                                         >
-                                                            Barcode:
-                                                        </label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="barCode">
-                                                                <Input
-                                                                    required
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        padding: "0 12px",
-                                                                    }}
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-                                                    </Row>
+                                                            Subscribe
+                                                        </Button>
+                                                    </Card>
                                                 </Col>
-
-                                                <Col xs={24} md={24}>
-                                                    <Button
-                                                        style={{
-                                                            width: "100%",
-                                                            background: "linear-gradient(135deg, #004e92, #13c2c2)",
-                                                            color: "#fff",
-                                                            fontWeight: "bold",
-                                                            height: "45px",
-                                                            borderRadius: "8px",
-                                                            border: "none",
-                                                            marginBottom: "20px",
+                                            ))}
+                                        </>
 
 
-                                                        }}
-                                                        onClick={getDetail}
-                                                    >
-                                                        Get Barcode Detail
-                                                    </Button>
-                                                </Col>
+                                        :
+                                        <>
+                                            <div
+                                                style={{
+                                                    maxWidth: "800px", // Container width
+                                                    margin: "0 auto",
+                                                    backgroundColor: "#ffffff", // Slightly different background for better contrast
+                                                    padding: "20px", // Increased padding for better spacing
+                                                    borderRadius: "12px", // Larger border radius for smoother edges
+                                                    border: "1px solid #e0e0e0", // Soft border for inputs and buttons
+                                                    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for 3D effect
+                                                }}
+                                            >
+                                                <Form form={form} layout="horizontal">
+                                                    <Row gutter={[16, 16]} align="middle">
+                                                        {/* Barcode Field */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
 
-                                                {/* Retail Price Field */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Retail Price:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="retailPrice">
-                                                                <Input
+                                                                <Col xs={6} md={4}><label
                                                                     style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        border: "1px solid #d1d1d1",
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
                                                                         fontFamily: "'Roboto', sans-serif",
-                                                                        padding: "0 12px",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
                                                                     }}
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Operations Field */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Operations:</label>
-                                                        </Col>
-                                                        <Col xs={12} md={14}>
-                                                            <Form.Item name="operations">
-                                                                <Select
-                                                                    style={{
-                                                                        width: "100%",
-                                                                        height: "30px",
-                                                                        fontSize: "14px",
-                                                                        borderRadius: "12px",
-
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                    }}
-                                                                    placeholder="Select Operation"
                                                                 >
-                                                                    <Option value="percentage_addition">PERCENTAGE ADDITION</Option>
-                                                                    <Option value="flat_addition">FLAT RATE ADDITION</Option>
-                                                                    <Option value="percentage_subtraction">PERCENTAGE SUBSTRACTION</Option>
-                                                                    <Option value="flat_substraction">FLAT RATE SUBSTRACTION</Option>
-                                                                </Select>
-                                                            </Form.Item>
+                                                                    Barcode:
+                                                                </label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="barCode">
+                                                                        <Input
+                                                                            required
+                                                                            style={{
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                padding: "0 12px",
+                                                                            }}
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                        <Col xs={6} md={6}>
-                                                            <Form.Item name="ourPrice">
-                                                                <Input
-                                                                    style={{
-                                                                        width: "100%",
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        borderRadius: "8px",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        fontFamily: "'Roboto', sans-serif",
 
-                                                                    }}
-                                                                    placeholder="Enter value"
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Our Price Field */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Our Price:</label>
-                                                        </Col>
-                                                        <Col xs={10} md={10}>
+                                                        <Col xs={24} md={24}>
                                                             <Button
                                                                 style={{
                                                                     width: "100%",
@@ -632,252 +523,373 @@ const NonIccidProduct = () => {
                                                                     borderRadius: "8px",
                                                                     border: "none",
                                                                     marginBottom: "20px",
+
+
                                                                 }}
-                                                                onClick={calculatePrice}
+                                                                onClick={getDetail}
                                                             >
-                                                                Calculate Price
+                                                                Get Barcode Detail
                                                             </Button>
                                                         </Col>
-                                                        <Col xs={8} md={10}>
-                                                            <Form.Item name="finalPrice">
-                                                                <Input
+
+                                                        {/* Retail Price Field */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Retail Price:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="retailPrice">
+                                                                        <Input
+                                                                            style={{
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                                padding: "0 12px",
+                                                                            }}
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Operations Field */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Operations:</label>
+                                                                </Col>
+                                                                <Col xs={12} md={14}>
+                                                                    <Form.Item name="operations">
+                                                                        <Select
+                                                                            style={{
+                                                                                width: "100%",
+                                                                                height: "30px",
+                                                                                fontSize: "14px",
+                                                                                borderRadius: "12px",
+
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                            }}
+                                                                            placeholder="Select Operation"
+                                                                        >
+                                                                            <Option value="percentage_addition">PERCENTAGE ADDITION</Option>
+                                                                            <Option value="flat_addition">FLAT RATE ADDITION</Option>
+                                                                            <Option value="percentage_subtraction">PERCENTAGE SUBSTRACTION</Option>
+                                                                            <Option value="flat_substraction">FLAT RATE SUBSTRACTION</Option>
+                                                                        </Select>
+                                                                    </Form.Item>
+                                                                </Col>
+                                                                <Col xs={6} md={6}>
+                                                                    <Form.Item name="ourPrice">
+                                                                        <Input
+                                                                            style={{
+                                                                                width: "100%",
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                fontFamily: "'Roboto', sans-serif",
+
+                                                                            }}
+                                                                            placeholder="Enter value"
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Our Price Field */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Our Price:</label>
+                                                                </Col>
+                                                                <Col xs={10} md={10}>
+                                                                    <Button
+                                                                        style={{
+                                                                            width: "100%",
+                                                                            background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                                            color: "#fff",
+                                                                            fontWeight: "bold",
+                                                                            height: "45px",
+                                                                            borderRadius: "8px",
+                                                                            border: "none",
+                                                                            marginBottom: "20px",
+                                                                        }}
+                                                                        onClick={calculatePrice}
+                                                                    >
+                                                                        Calculate Price
+                                                                    </Button>
+                                                                </Col>
+                                                                <Col xs={8} md={10}>
+                                                                    <Form.Item name="finalPrice">
+                                                                        <Input
+                                                                            style={{
+                                                                                width: "100%",
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                                padding: "0 12px",
+                                                                            }}
+                                                                            placeholder="Display value"
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Product Name */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Product Name:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="productName">
+                                                                        <Input
+                                                                            style={{
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                                padding: "0 12px",
+                                                                            }}
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Product Description */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Product Desc:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="Desc">
+                                                                        <Input.TextArea
+                                                                            rows={2}
+                                                                            style={{
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                padding: "12px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                            }}
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Category */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Category:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="categories">
+                                                                        <Select
+                                                                            style={{
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                width: "80%",
+                                                                                borderRadius: "8px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                            }}
+                                                                            placeholder="Select a category"
+                                                                            disabled={!Array.isArray(getCategory?.payload) || getCategory.payload.length === 0}
+                                                                        >
+                                                                            {Array.isArray(getCategory?.payload) &&
+                                                                                getCategory.payload.map((val, idx) => (
+                                                                                    <Option key={idx} value={val.id}>
+                                                                                        {val.name}
+                                                                                    </Option>
+                                                                                ))}
+                                                                        </Select>
+                                                                    </Form.Item>
+
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Product Quantity */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Product Quantity:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="quantity">
+                                                                        <Input
+                                                                            style={{
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                padding: "0 12px",
+                                                                            }}
+                                                                            placeholder="Enter quantity"
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Print Tag Section */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={{
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "500",
+                                                                        color: "#555",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 8px",
+                                                                        display: "block",
+                                                                        marginBottom: "8px",
+                                                                    }}>Print Tag:</label>
+                                                                </Col>
+                                                                <Col xs={12} md={12}>
+                                                                    <Form.Item name="tag">
+                                                                        <Select
+
+                                                                            style={{
+                                                                                height: "40px",
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+
+
+                                                                            }}
+                                                                            placeholder="Select Tag Option"
+                                                                        >
+                                                                            {templates?.payload?.map((val, idx) => (
+                                                                                <Option key={idx} value={val?.id + " " + val.size}>
+
+                                                                                    {val.name}
+                                                                                </Option>
+                                                                            ))}
+                                                                        </Select>
+                                                                    </Form.Item>
+
+                                                                </Col>
+                                                                <Col xs={6} md={6}>
+                                                                    <Button
+
+                                                                        style={{
+                                                                            width: "100%",
+                                                                            background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                                            color: "#fff",
+                                                                            fontWeight: "bold",
+                                                                            height: "45px",
+                                                                            borderRadius: "8px",
+                                                                            border: "none",
+                                                                        }}
+                                                                        onClick={templateFormat}
+                                                                    >
+                                                                        Print Label
+                                                                    </Button>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Push Square Button */}
+                                                        {getConfiguration?.payload?.squareToken !== "" && (
+                                                            <Col xs={24} md={24}>
+                                                                <Button
                                                                     style={{
                                                                         width: "100%",
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
+                                                                        height: "45px",
+                                                                        fontSize: "16px",
+                                                                        fontWeight: "600",
                                                                         borderRadius: "8px",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                        padding: "0 12px",
+                                                                        background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                                        color: "#fff",
+                                                                        border: "none",
                                                                     }}
-                                                                    placeholder="Display value"
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Product Name */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Product Name:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="productName">
-                                                                <Input
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                        padding: "0 12px",
-                                                                    }}
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Product Description */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Product Desc:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="Desc">
-                                                                <Input.TextArea
-                                                                    rows={2}
-                                                                    style={{
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        padding: "12px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                    }}
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Category */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Category:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="categories">
-                                                                <Select
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "80%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                    }}
-                                                                    placeholder="Select a category"
-                                                                    disabled={!Array.isArray(getCategory?.payload) || getCategory.payload.length === 0}
+                                                                    onClick={squareCall}
                                                                 >
-                                                                    {Array.isArray(getCategory?.payload) &&
-                                                                        getCategory.payload.map((val, idx) => (
-                                                                            <Option key={idx} value={val.id}>
-                                                                                {val.name}
-                                                                            </Option>
-                                                                        ))}
-                                                                </Select>
-                                                            </Form.Item>
-
-                                                        </Col>
+                                                                    Push Square
+                                                                </Button>
+                                                            </Col>
+                                                        )}
                                                     </Row>
-                                                </Col>
+                                                </Form>
+                                            </div>
 
-                                                {/* Product Quantity */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Product Quantity:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="quantity">
-                                                                <Input
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        padding: "0 12px",
-                                                                    }}
-                                                                    placeholder="Enter quantity"
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Print Tag Section */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Print Tag:</label>
-                                                        </Col>
-                                                        <Col xs={12} md={12}>
-                                                            <Form.Item name="tag">
-                                                                <Select
-
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-
-
-                                                                    }}
-                                                                    placeholder="Select Tag Option"
-                                                                >
-                                                                    {templates?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={val?.id + " " + val.size}>
-
-                                                                            {val.name}
-                                                                        </Option>
-                                                                    ))}
-                                                                </Select>
-                                                            </Form.Item>
-
-                                                        </Col>
-                                                        <Col xs={6} md={6}>
-                                                            <Button
-
-                                                                style={{
-                                                                    width: "100%",
-                                                                    background: "linear-gradient(135deg, #004e92, #13c2c2)",
-                                                                    color: "#fff",
-                                                                    fontWeight: "bold",
-                                                                    height: "45px",
-                                                                    borderRadius: "8px",
-                                                                    border: "none",
-                                                                }}
-                                                                onClick={templateFormat}
-                                                            >
-                                                                Print Label
-                                                            </Button>
-                                                        </Col>
-                                                    </Row>
-                                                </Col>
-
-                                                {/* Push Square Button */}
-                                                {getConfiguration?.payload?.squareToken !== "" && (
-                                                    <Col xs={24} md={24}>
-                                                        <Button
-                                                            style={{
-                                                                width: "100%",
-                                                                height: "45px",
-                                                                fontSize: "16px",
-                                                                fontWeight: "600",
-                                                                borderRadius: "8px",
-                                                                background: "linear-gradient(135deg, #004e92, #13c2c2)",
-                                                                color: "#fff",
-                                                                border: "none",
-                                                            }}
-                                                            onClick={squareCall}
-                                                        >
-                                                            Push Square
-                                                        </Button>
-                                                    </Col>
-                                                )}
-                                            </Row>
-                                        </Form>
-                                    </div>
-
+                                        </>
+                                    }
                                 </>
                             }
                         </>

@@ -7,6 +7,9 @@ import templates from "./barcodeForm/template.reducer";
 import barcodeDetails from "./barcodeForm/barcodeDetails.reducer";
 import getCategory from "./barcodeForm/categories.reducer";
 import location from "./location/location.reducer";
+import getVideos from "./video/video.action";
+import getFaq from "./faq/faq.action";
+import getSubscription from "./subscription/subscription.reducer"
 
 export default combineReducers({
     login,
@@ -16,6 +19,9 @@ export default combineReducers({
     getConfiguration,
     templates,
     barcodeDetails,
-    getCategory
+    getCategory,
+    getVideos,
+    getSubscription,
+    getFaq
 
 });

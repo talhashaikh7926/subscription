@@ -14,6 +14,9 @@ import {
   faListUl,
   faBars,
   faUsers,
+  faQuestion,
+  faVideo,
+  faSubscript,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +26,9 @@ import NonIccidProduct from "../pages/nonIccidProducts/nonICCIDproducts";
 import LearningVideo from "../pages/learning/video";
 import { getUsernameInfo } from '../redux/actions/userDetail.action'
 import "./menu.scss";
+import AdminFaq from "../components/adminFaq/faq";
+import AdminVideo from "../components/adminVideo/video";
+import AdminSubscription from "../components/adminSubscription/subscription";
 
 const { Header, Sider, Content } = Layout;
 const App = () => {
@@ -111,198 +117,254 @@ const App = () => {
 
   return (
     <Layout
-    style={{
-      minHeight: "100vh",
-      backgroundColor: "#f0f2f5", // Light background for contrast
-      overflow: "hidden",
-    }}
-  >
-    {/* Header */}
-    <Header
-      className="site-layout-background custom-header"
       style={{
-        padding: "0 20px",
-        background: "linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%)",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        height: "83px",
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)", // Subtle shadow for depth
-        zIndex: 1000, // Ensure the header is above other content
+        minHeight: "100vh",
+        backgroundColor: "#f0f2f5", // Light background for contrast
+        overflow: "hidden",
       }}
     >
-      {/* Sidebar Toggle and Welcome */}
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <FontAwesomeIcon
-          onClick={() => setDrawerVisible(true)}
-          className="mobile-menu-button"
-          icon={faBars}
-          style={{
-            color: "white",
-            marginRight: "16px",
-            fontSize: "20px",
-            cursor: "pointer",
-          }}
-        />
-        <h4
-          style={{
-            margin: 0,
-            fontSize: "18px",
-            color: "white",
-            fontWeight: "500",
-            textTransform: "capitalize",
-          }}
-        >
-          Welcome, {getUserInfo?.payload?.username || "User"}
-        </h4>
-      </div>
-  
-  
-      {/* Logout Button */}
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Button
-          type="primary"
-          onClick={handleLogout}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "140px",
-            height: "40px",
-            fontSize: "16px",
-            fontWeight: "bold",
-            color: "#fff",
-            background: "linear-gradient(135deg, #004e92 30%, #13c2c2 100%)",
-            border: "none",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Add shadow for better look
-            cursor: "pointer",
-            transition: "all 0.3s ease",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "#002D69")}
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.background = "linear-gradient(135deg, #004e92 30%, #13c2c2 100%)")
-          }
-        >
-          <FontAwesomeIcon
-            icon={faSignOutAlt}
-            style={{ color: "white", marginRight: "8px", fontSize: "18px" }}
-          />
-          Logout
-        </Button>
-      </div>
-    </Header>
-  
-    {/* Main Layout */}
-    <Layout style={{ flexDirection: "row", flexGrow: 1, marginTop: "16px" }}>
-      {/* Sidebar */}
-      <Sider
-        className="sidebar-style"
+      {/* Header */}
+      <Header
+        className="site-layout-background custom-header"
         style={{
-          background: "linear-gradient(135deg, #000428, #004e92, #6db3f2, #e5e5e5)", // Your gradient color
-          paddingTop: "40px",
-          boxShadow: "2px 0 8px rgba(0, 0, 0, 0.2)", // Subtle shadow for depth
-          marginTop: "-12px", // Space between the header and sidebar
-        }}
-        width={250}
-        breakpoint="xl"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          if (broken) {
-            setDrawerVisible(false);
-          }
+          padding: "0 20px",
+          background: "linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          height: "83px",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)", // Subtle shadow for depth
+          zIndex: 1000, // Ensure the header is above other content
         }}
       >
-        <Menu
-          theme="dark"
-          mode="inline"
-          openKeys={openKeys}
-          onOpenChange={onOpenChange}
-          defaultSelectedKeys={[location.pathname.split("/")[1]]}
-          style={{
-            background: "transparent",
-            fontSize: "16px",
-            color: "#fff",
-          }}
-        >
-          {/* Dashboard */}
-          <Menu.Item
-            key="dashboard"
-            icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
+        {/* Sidebar Toggle and Welcome */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <FontAwesomeIcon
+            onClick={() => setDrawerVisible(true)}
+            className="mobile-menu-button"
+            icon={faBars}
             style={{
-              margin: "8px 0",
-              borderRadius: "8px",
-              transition: "all 0.3s ease",
+              color: "white",
+              marginRight: "16px",
+              fontSize: "20px",
+              cursor: "pointer",
+            }}
+          />
+          <h4
+            style={{
+              margin: 0,
+              fontSize: "18px",
+              color: "white",
+              fontWeight: "500",
+              textTransform: "capitalize",
             }}
           >
-            <Link to="dashboard" style={{ color: "white", fontWeight: "500" }}>
-              Dashboard
-            </Link>
-          </Menu.Item>
-  
-          {/* Configuration (Conditional) */}
-          {getUserInfo?.payload?.accessible === true && (
+            Welcome, {getUserInfo?.payload?.username || "User"}
+          </h4>
+        </div>
+
+
+        {/* Logout Button */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Button
+            type="primary"
+            onClick={handleLogout}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "140px",
+              height: "40px",
+              fontSize: "16px",
+              fontWeight: "bold",
+              color: "#fff",
+              background: "linear-gradient(135deg, #004e92 30%, #13c2c2 100%)",
+              border: "none",
+              borderRadius: "8px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Add shadow for better look
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#002D69")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.background = "linear-gradient(135deg, #004e92 30%, #13c2c2 100%)")
+            }
+          >
+            <FontAwesomeIcon
+              icon={faSignOutAlt}
+              style={{ color: "white", marginRight: "8px", fontSize: "18px" }}
+            />
+            Logout
+          </Button>
+        </div>
+      </Header>
+
+      {/* Main Layout */}
+      <Layout style={{ flexDirection: "row", flexGrow: 1, marginTop: "16px" }}>
+        {/* Sidebar */}
+        <Sider
+          className="sidebar-style"
+          style={{
+            background: "linear-gradient(135deg, #000428, #004e92, #6db3f2, #e5e5e5)", // Your gradient color
+            paddingTop: "40px",
+            boxShadow: "2px 0 8px rgba(0, 0, 0, 0.2)", // Subtle shadow for depth
+            marginTop: "-12px", // Space between the header and sidebar
+          }}
+          width={250}
+          breakpoint="xl"
+          collapsedWidth="0"
+          onBreakpoint={(broken) => {
+            if (broken) {
+              setDrawerVisible(false);
+            }
+          }}
+        >
+          <Menu
+            theme="dark"
+            mode="inline"
+            openKeys={openKeys}
+            onOpenChange={onOpenChange}
+            defaultSelectedKeys={[location.pathname.split("/")[1]]}
+            style={{
+              background: "transparent",
+              fontSize: "16px",
+              color: "#fff",
+            }}
+          >
+            {/* Dashboard */}
             <Menu.Item
-              key="configuration"
-              icon={<FontAwesomeIcon icon={faUsers} style={{ color: "#6db3f2" }} />}
+              key="dashboard"
+              icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
               style={{
                 margin: "8px 0",
                 borderRadius: "8px",
                 transition: "all 0.3s ease",
               }}
             >
-              <Link to="configuration" style={{ color: "white", fontWeight: "500" }}>
-                Configuration
+              <Link to="dashboard" style={{ color: "white", fontWeight: "500" }}>
+                Dashboard
               </Link>
             </Menu.Item>
-          )}
-  
-          {/* Learning Video */}
-          <Menu.Item
-            key="learning-video"
-            icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
-            style={{
-              margin: "8px 0",
-              borderRadius: "8px",
-              transition: "all 0.3s ease",
-            }}
-          >
-            <Link to="learning-video" style={{ color: "white", fontWeight: "500" }}>
-              Learning Video
-            </Link>
-          </Menu.Item>
-        </Menu>
-      </Sider>
-  
-      {/* Content Area */}
-      <Layout
-        style={{
-          padding: "0 16px",
-          backgroundColor: "#f5f7fa", // Soft background
-          flexGrow: 1,
-          marginTop: "-16px", // Space between header and content
-        }}
-      >
-        <Content
+
+
+
+            {/* Configuration (Conditional) */}
+            {getUserInfo?.payload?.is_admin === true ?
+              <>
+                <Menu.Item
+                  key="admin-faq"
+                  icon={<FontAwesomeIcon icon={faQuestion} style={{ color: "#6db3f2" }} />}
+                  style={{
+                    margin: "8px 0",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <Link to="admin-faq" style={{ color: "white", fontWeight: "500" }}>
+                    FAQ
+                  </Link>
+                </Menu.Item>
+            
+                <Menu.Item
+                  key="admin-video"
+                  icon={<FontAwesomeIcon icon={faVideo} style={{ color: "#6db3f2" }} />}
+                  style={{
+                    margin: "8px 0",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <Link to="admin-video" style={{ color: "white", fontWeight: "500" }}>
+                    Create Video
+                  </Link>
+                </Menu.Item>
+            
+                <Menu.Item
+                  key="admin-sub"
+                  icon={<FontAwesomeIcon icon={faSubscript} style={{ color: "#6db3f2" }} />}
+                  style={{
+                    margin: "8px 0",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <Link to="admin-sub" style={{ color: "white", fontWeight: "500" }}>
+                    Add Subscription
+                  </Link>
+                </Menu.Item>
+              </>
+              :
+              <>
+                {getUserInfo?.payload?.accessible === true && (
+                  <Menu.Item
+                    key="configuration"
+                    icon={<FontAwesomeIcon icon={faUsers} style={{ color: "#6db3f2" }} />}
+                    style={{
+                      margin: "8px 0",
+                      borderRadius: "8px",
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    <Link to="configuration" style={{ color: "white", fontWeight: "500" }}>
+                      Configuration
+                    </Link>
+                  </Menu.Item>
+                )}
+
+                {/* Learning Video */}
+                <Menu.Item
+                  key="learning-video"
+                  icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
+                  style={{
+                    margin: "8px 0",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <Link to="learning-video" style={{ color: "white", fontWeight: "500" }}>
+                    Learning Video
+                  </Link>
+                </Menu.Item>
+              </>
+            }
+          </Menu>
+        </Sider>
+
+        {/* Content Area */}
+        <Layout
           style={{
-            padding: 24,
-            background: "#fff",
-            borderRadius: "8px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for card effect
-            minHeight: "calc(100vh - 131px)",
+            padding: "0 16px",
+            backgroundColor: "#f5f7fa", // Soft background
+            flexGrow: 1,
+            marginTop: "-16px", // Space between header and content
           }}
         >
-          <Routes>
-            <Route path="/dashboard" exact element={<NonIccidProduct />} />
-            <Route path="/configuration" exact element={<Configurations />} />
-            <Route path="/learning-video" exact element={<LearningVideo />} />
-          </Routes>
-        </Content>
+          <Content
+            style={{
+              padding: 24,
+              background: "#fff",
+              borderRadius: "8px",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Subtle shadow for card effect
+              minHeight: "calc(100vh - 131px)",
+            }}
+          >
+            <Routes>
+              <Route path="/dashboard" exact element={<NonIccidProduct />} />
+              <Route path="/configuration" exact element={<Configurations />} />
+              <Route path="/learning-video" exact element={<LearningVideo />} />
+                
+              ---------------- For Admin --------------- 
+              
+              <Route path="/admin-faq" exact element={<AdminFaq />} />
+              <Route path="/admin-video" exact element={<AdminVideo />} />
+              <Route path="admin-sub" exact element={<AdminSubscription />} />
+            </Routes>
+          </Content>
+        </Layout>
       </Layout>
     </Layout>
-  </Layout>
-  
-  
+
+
   );
 };
 
