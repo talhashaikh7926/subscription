@@ -292,6 +292,35 @@ const App = () => {
                     Add Subscription
                   </Link>
                 </Menu.Item>
+
+                <Menu.Item
+                  key="learning-video"
+                  icon={<FontAwesomeIcon icon={faDesktop} style={{ color: "#6db3f2" }} />}
+                  style={{
+                    margin: "8px 0",
+                    borderRadius: "8px",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <Link to="learning-video" style={{ color: "white", fontWeight: "500" }}>
+                    Learning Video
+                  </Link>
+                </Menu.Item>
+
+                <Menu.Item
+                    key="configuration"
+                    icon={<FontAwesomeIcon icon={faUsers} style={{ color: "#6db3f2" }} />}
+                    style={{
+                      margin: "8px 0",
+                      borderRadius: "8px",
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    <Link to="configuration" style={{ color: "white", fontWeight: "500" }}>
+                      Configuration
+                    </Link>
+                  </Menu.Item>
+                  
               </>
               :
               <>
