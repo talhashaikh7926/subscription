@@ -9,7 +9,9 @@ import getCategory from "./barcodeForm/categories.reducer";
 import location from "./location/location.reducer";
 import getVideos from "./video/video.action";
 import getFaq from "./faq/faq.action";
-import getSubscription from "./subscription/subscription.reducer"
+import getSubscription from "./subscription/subscription.reducer" 
+import Shopifylocation from "./location/shopifyLocation.reducer"
+import getShopifyType from "./barcodeForm/shopifyType.reducer"
 
 export default combineReducers({
     login,
@@ -22,6 +24,8 @@ export default combineReducers({
     getCategory,
     getVideos,
     getSubscription,
-    getFaq
+    getFaq,
+    Shopifylocation,
+    getShopifyType
 
 });

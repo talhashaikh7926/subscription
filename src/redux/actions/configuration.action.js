@@ -48,13 +48,7 @@ export const configToken = (data) => (dispatch) => {
             Accept: "application/json",
             Authorization: `Bearer ${token}`
         },
-        data: {
-           username: data.username,
-           squareToken: data.token,
-           squareLocationId: data.location,
-           squareLocationName: "",
-           storeName: data.storeName
-        }
+        data,
     })
         .then((response) => {
             return dispatch({

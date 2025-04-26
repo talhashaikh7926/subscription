@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Form, Input, Button, Typography, Card, Row, Col, notification, Modal, Select, Spin } from 'antd';
+import { Layout, Form, Input, Button, Typography, Card, Row, Col, notification, Modal, Select, Spin, Tabs } from 'antd';
 import moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined } from '@ant-design/icons';
 import { subscriptionPlan, checkout } from '../../redux/actions/subscriptionPlan.action'
-import { getTemplate, getCategories, getBarcodeDetail, printTag, pushSquare } from '../../redux/actions/barcode.action'
+import { getTemplate, getCategories, getBarcodeDetail, printTag, pushSquare, getProductType, pushShopify } from '../../redux/actions/barcode.action'
 import { getConfig } from "../../redux/actions/configuration.action";
 import AdminDashboard from '../../components/adminDashboard/dashboard';
 
@@ -13,13 +13,16 @@ const { Content } = Layout;
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
+const { TabPane } = Tabs;
 
 const NonIccidProduct = () => {
     const [form] = Form.useForm();
+    const [activeTab, setActiveTab] = useState("print");
     const [imageUrl, setImageUrl] = useState("");
-    const [squareImageUrl, setSquareImageUrl] = useState("");
+    const [squareImageUrl, setSquareImageUrl] = useState([]);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const dispatch = useDispatch();
-    const { getSubscriptionPlan, getUserInfo, templates, getCategory, barcodeDetails, getConfiguration } = useSelector((state) => state);
+    const { Shopifylocation, getSubscriptionPlan, getUserInfo, templates, getCategory, barcodeDetails, getConfiguration, getShopifyType } = useSelector((state) => state);
 
     const token = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -28,6 +31,7 @@ const NonIccidProduct = () => {
         dispatch(getTemplate());
         dispatch(getConfig(token?.user_name));
         dispatch(getCategories(token?.user_name));
+        dispatch(getProductType(token?.user_name));
         form.setFieldsValue({
             inwardDate: moment(),
         });
@@ -279,6 +283,7 @@ const NonIccidProduct = () => {
                 });
 
                 console.log(response, "Data");
+                form.resetFields();
 
             } else {
                 notification.error({
@@ -300,6 +305,112 @@ const NonIccidProduct = () => {
 
     }
 
+    const pushShopifyCall = async () => {
+        const { productName, Desc, productType, finalPrice, quantity, barCode, compareAtPrice, cost, vendor, sku } = form.getFieldsValue();
+
+        if (!barCode) {
+            notification.error({
+                message: "Validation Error",
+                description: "Please Input BarCode.",
+                placement: "top",
+            });
+            return;
+        }
+
+        const data = {
+            barCode,
+            finalPrice,
+            productName,
+            Desc,
+            productType,
+            quantity,
+            squareImageUrl,
+            compareAtPrice,
+            cost,
+            vendor,
+            sku
+
+        };
+
+        try {
+            const response = await dispatch(pushShopify(token.user_name, data));
+
+            if (response.type === "SHOPIFY_SUCCESS") {
+                notification.success({
+                    message: "Request Successful",
+                    className: "toast-success",
+                    placement: "top",
+                });
+
+                console.log(response, "Data");
+
+            } else {
+                notification.error({
+                    message: "Something Went Wrong!",
+                    description: response?.message || "Please try again later.",
+                    className: "toast-error",
+                    placement: "top",
+                });
+            }
+        } catch (error) {
+            notification.error({
+                message: "API Call Failed",
+                description: "There was an issue while communicating with the server. Please try again later.",
+                className: "toast-error",
+                placement: "top",
+            });
+            console.error("API call error:", error);
+        }
+
+    }
+
+    const labelStyle = {
+        fontSize: "16px",
+        fontWeight: "500",
+        color: "#555",
+        fontFamily: "'Roboto', sans-serif",
+        padding: "0 8px",
+        display: "block",
+        marginBottom: "8px",
+    };
+
+    const inputStyle = {
+        height: "40px",
+        fontSize: "14px",
+        width: "100%",
+        borderRadius: "8px",
+        fontFamily: "'Roboto', sans-serif",
+        padding: "0 12px",
+        border: "1px solid #d1d1d1",
+    };
+
+    const selectStyle = {
+        height: "40px",
+        fontSize: "14px",
+        width: "100%",
+        borderRadius: "8px",
+        fontFamily: "'Roboto', sans-serif",
+    };
+
+    const buttonStyle = {
+        width: "100%",
+        background: "linear-gradient(135deg, #004e92, #13c2c2)",
+        color: "#fff",
+        fontWeight: "bold",
+        height: "45px",
+        borderRadius: "8px",
+        border: "none",
+    };
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
 
         <Layout >
@@ -312,13 +423,43 @@ const NonIccidProduct = () => {
                 margin: "0 auto",
             }}
             >
-                <Title level={2} style={{
-                    textAlign: "center",
-                    marginBottom: "40px",
-                    color: "#004e92",
-                    fontFamily: "'Roboto', sans-serif",
-                    fontWeight: "700",
-                }}>X LabelSync Pro</Title>
+                <div style={{ textAlign: "center", position: "relative", marginBottom: "40px" }}>
+                    <Title level={2} style={{
+                        color: "#004e92",
+                        fontFamily: "'Roboto', sans-serif",
+                        fontWeight: "700",
+                        margin: 0,
+                    }}>
+                        X LabelSync Pro
+                    </Title>
+
+                    {/* Button positioned absolute inside the div */}
+                    {squareImageUrl?.length > 0 && (
+                        <Button
+                            type="primary"
+                            onClick={showModal}
+                            style={{
+                                position: "absolute",
+                                right: "0",
+                                top: "50%",
+                                transform: "translateY(-50%)",
+                                background: "linear-gradient(135deg, #13c2c2, #004e92)",
+                                border: "none",
+                                padding: "0 20px",
+                                height: "40px",
+                                fontWeight: "600",
+                                fontSize: "15px",
+                                borderRadius: "20px",
+                                fontFamily: "'Roboto', sans-serif",
+                                boxShadow: "0 4px 12px rgba(0, 78, 146, 0.3)",
+                                transition: "all 0.3s ease",
+                            }}
+
+                        >
+                            Preview Images
+                        </Button>
+                    )}
+                </div>
                 <Row gutter={[16, 16]} justify="center">
                     {getSubscriptionPlan?.loading && getUserInfo?.loading ? (
                         <div
@@ -361,13 +502,13 @@ const NonIccidProduct = () => {
                                                     transition: "transform 0.3s, box-shadow 0.3s",
                                                     position: "relative",
                                                     overflow: "hidden",
-                                                    height: "350px", // Uniform card height
-                                                    maxWidth: "350px", // Uniform card width
+                                                    height: "350px",
+                                                    maxWidth: "350px",
                                                     margin: "0 auto",
                                                     display: "flex",
                                                     flexDirection: "column",
-                                                    justifyContent: "space-between", // Ensure button stays at the bottom
-                                                    paddingBottom: "20px", // Space below content
+                                                    justifyContent: "space-between",
+                                                    paddingBottom: "20px",
                                                 }}
                                                 hoverable
                                                 onMouseEnter={(e) => {
@@ -453,6 +594,7 @@ const NonIccidProduct = () => {
 
                                 :
                                 <>
+
                                     <div
                                         style={{
                                             maxWidth: "800px", // Container width
@@ -609,9 +751,11 @@ const NonIccidProduct = () => {
                                                 </Col>
 
                                                 {/* Our Price Field */}
+                                                {/* Our Price, Compare At, and Cost Fields */}
                                                 <Col xs={24} md={24}>
                                                     <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
+                                                        {/* Our Price and Display Value together */}
+                                                        <Col xs={24} md={8}>
                                                             <label style={{
                                                                 fontSize: "16px",
                                                                 fontWeight: "500",
@@ -621,25 +765,21 @@ const NonIccidProduct = () => {
                                                                 display: "block",
                                                                 marginBottom: "8px",
                                                             }}>Our Price:</label>
-                                                        </Col>
-                                                        <Col xs={10} md={10}>
                                                             <Button
                                                                 style={{
                                                                     width: "100%",
                                                                     background: "linear-gradient(135deg, #004e92, #13c2c2)",
                                                                     color: "#fff",
                                                                     fontWeight: "bold",
-                                                                    height: "45px",
+                                                                    height: "81px",
                                                                     borderRadius: "8px",
                                                                     border: "none",
-                                                                    marginBottom: "20px",
+                                                                    marginBottom: "4px",
                                                                 }}
                                                                 onClick={calculatePrice}
                                                             >
                                                                 Calculate Price
                                                             </Button>
-                                                        </Col>
-                                                        <Col xs={8} md={10}>
                                                             <Form.Item name="finalPrice">
                                                                 <Input
                                                                     style={{
@@ -655,8 +795,65 @@ const NonIccidProduct = () => {
                                                                 />
                                                             </Form.Item>
                                                         </Col>
+
+                                                        {/* Compare At Field */}
+                                                        <Col xs={24} md={8}>
+                                                            <label style={{
+                                                                fontSize: "16px",
+                                                                fontWeight: "500",
+                                                                color: "#555",
+                                                                fontFamily: "'Roboto', sans-serif",
+                                                                padding: "0 8px",
+                                                                display: "block",
+                                                                marginBottom: "8px",
+                                                            }}>Compare At:</label>
+                                                            <Form.Item name="compareAtPrice">
+                                                                <Input
+                                                                    style={{
+
+                                                                        width: "100%",
+                                                                        height: "40px",
+                                                                        fontSize: "14px",
+                                                                        borderRadius: "8px",
+                                                                        border: "1px solid #d1d1d1",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 12px",
+                                                                    }}
+                                                                    placeholder="Enter compare at price"
+                                                                />
+                                                            </Form.Item>
+                                                        </Col>
+
+                                                        {/* Cost Field */}
+                                                        <Col xs={24} md={8}>
+                                                            <label style={{
+                                                                fontSize: "16px",
+                                                                fontWeight: "500",
+                                                                color: "#555",
+                                                                fontFamily: "'Roboto', sans-serif",
+                                                                padding: "0 8px",
+                                                                display: "block",
+                                                                marginBottom: "8px",
+                                                            }}>Cost:</label>
+                                                            <Form.Item name="cost">
+                                                                <Input
+                                                                    style={{
+                                                                        width: "100%",
+                                                                        height: "40px",
+                                                                        fontSize: "14px",
+                                                                        borderRadius: "8px",
+                                                                        border: "1px solid #d1d1d1",
+                                                                        fontFamily: "'Roboto', sans-serif",
+                                                                        padding: "0 12px",
+                                                                    }}
+                                                                    placeholder="Enter cost price"
+                                                                />
+                                                            </Form.Item>
+                                                        </Col>
                                                     </Row>
                                                 </Col>
+
+
 
                                                 {/* Product Name */}
                                                 <Col xs={24} md={24}>
@@ -690,173 +887,271 @@ const NonIccidProduct = () => {
                                                     </Row>
                                                 </Col>
 
-                                                {/* Product Description */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Product Desc:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="Desc">
-                                                                <Input.TextArea
-                                                                    rows={2}
-                                                                    style={{
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        padding: "12px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                    }}
-                                                                />
-                                                            </Form.Item>
-                                                        </Col>
 
-                                                    </Row>
+
+                                                {/* Tabs */}
+                                                <Col xs={24} md={24}>
+                                                    <Tabs
+                                                        defaultActiveKey="print"
+                                                        onChange={(key) => setActiveTab(key)}
+                                                        style={{ minWidth: 320, fontSize: "20px", fontWeight: 700, textTransform: "uppercase", marginBottom: "16px" }}
+                                                        tabBarGutter={32}
+                                                        tabBarStyle={{
+                                                            fontSize: "20px",
+                                                            fontWeight: 700,
+                                                            textTransform: "uppercase",
+                                                            backgroundColor: "#f0f2f5",  // Set a subtle background color for the inactive tabs
+                                                            borderRadius: "8px", // Rounded corners for the tab container
+                                                        }}
+                                                        className="custom-tabs"
+                                                        centered
+                                                    >
+                                                        <TabPane tab="Print" key="print" />
+                                                        <TabPane tab="Shopify" key="shopify" />
+                                                        <TabPane tab="Square" key="square" />
+                                                    </Tabs>
                                                 </Col>
 
-                                                {/* Category */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Category:</label>
-                                                        </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="categories">
-                                                                <Select
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "80%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                    }}
-                                                                    placeholder="Select a category"
-                                                                    disabled={!Array.isArray(getCategory?.payload) || getCategory.payload.length === 0}
-                                                                >
-                                                                    {Array.isArray(getCategory?.payload) &&
-                                                                        getCategory.payload.map((val, idx) => (
-                                                                            <Option key={idx} value={val.id}>
+                                                {/* Add this style in your component directly */}
+                                                <style>
+                                                    {`
+        /* Highlight active tab */
+        .custom-tabs .ant-tabs-tab-active {
+            background-color: #e6f7ff; /* Light blue background */
+            border-radius: 8px 8px 0 0;
+            color: #1890ff; /* Change text color of active tab */
+        }
+
+        /* Optional: add padding and smoother feel */
+        .custom-tabs .ant-tabs-tab {
+            padding: 12px 24px;
+            transition: background 0.3s ease;
+        }
+    `}
+                                                </style>
+
+
+
+                                                {/* === Print Tab === */}
+                                                {activeTab === "print" && (
+                                                    <Col xs={24} md={24}>
+                                                        <Row align="middle" gutter={[16, 8]}>
+                                                            <Col xs={6} md={4}>
+                                                                <label style={labelStyle}>Print Tag:</label>
+                                                            </Col>
+                                                            <Col xs={12} md={12}>
+                                                                <Form.Item name="tag">
+                                                                    <Select style={selectStyle} placeholder="Select Tag Option">
+                                                                        {templates?.payload?.map((val, idx) => (
+                                                                            <Option key={idx} value={val?.id + " " + val.size}>
                                                                                 {val.name}
                                                                             </Option>
                                                                         ))}
-                                                                </Select>
-                                                            </Form.Item>
+                                                                    </Select>
+                                                                </Form.Item>
+                                                            </Col>
+                                                            <Col xs={6} md={6}>
+                                                                <Button style={buttonStyle} onClick={templateFormat}>
+                                                                    Print Label
+                                                                </Button>
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                )}
 
+                                                {/* === Shopify Tab === */}
+                                                {activeTab === "shopify" && (
+                                                    <>
+                                                        {/* Product Type */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Product Type:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="productType">
+                                                                        <Select
+                                                                            style={{ ...selectStyle, width: "80%" }}
+                                                                            placeholder="Select a product type"
+                                                                            disabled={!Array.isArray(getShopifyType?.payload?.result) || getShopifyType.payload?.result.length === 0}
+                                                                        >
+                                                                            {Array.isArray(getShopifyType?.payload?.result) &&
+                                                                                getShopifyType.payload?.result.map((val, idx) => (
+                                                                                    <Option key={idx} value={val}>
+                                                                                        {val}
+                                                                                    </Option>
+                                                                                ))
+                                                                            }
+                                                                        </Select>
+                                                                    </Form.Item>
+
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                    </Row>
-                                                </Col>
 
-                                                {/* Product Quantity */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Product Quantity:</label>
+                                                        {/* Product Desc */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Product Desc:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="Desc">
+                                                                        <Input.TextArea
+                                                                            rows={2}
+                                                                            style={{
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                padding: "12px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                            }}
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                        <Col xs={18} md={20}>
-                                                            <Form.Item name="quantity">
-                                                                <Input
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-                                                                        border: "1px solid #d1d1d1",
-                                                                        padding: "0 12px",
-                                                                    }}
-                                                                    placeholder="Enter quantity"
-                                                                />
-                                                            </Form.Item>
+
+                                                        {/* Product Quantity */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Product Quantity:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="quantity">
+                                                                        <Input style={inputStyle} placeholder="Enter quantity" />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                    </Row>
-                                                </Col>
 
-                                                {/* Print Tag Section */}
-                                                <Col xs={24} md={24}>
-                                                    <Row align="middle" gutter={[16, 8]}>
-                                                        <Col xs={6} md={4}>
-                                                            <label style={{
-                                                                fontSize: "16px",
-                                                                fontWeight: "500",
-                                                                color: "#555",
-                                                                fontFamily: "'Roboto', sans-serif",
-                                                                padding: "0 8px",
-                                                                display: "block",
-                                                                marginBottom: "8px",
-                                                            }}>Print Tag:</label>
+
+
+                                                        {/* Vendor */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Vendor:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="vendor">
+                                                                        <Input style={inputStyle} placeholder="Enter vendor" />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                        <Col xs={12} md={12}>
-                                                            <Form.Item name="tag">
-                                                                <Select
 
-                                                                    style={{
-                                                                        height: "40px",
-                                                                        fontSize: "14px",
-                                                                        width: "100%",
-                                                                        borderRadius: "8px",
-                                                                        fontFamily: "'Roboto', sans-serif",
-
-
-                                                                    }}
-                                                                    placeholder="Select Tag Option"
-                                                                >
-                                                                    {templates?.payload?.map((val, idx) => (
-                                                                        <Option key={idx} value={val?.id + " " + val.size}>
-
-                                                                            {val.name}
-                                                                        </Option>
-                                                                    ))}
-                                                                </Select>
-                                                            </Form.Item>
-
+                                                        {/* SKU */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>SKU:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="sku">
+                                                                        <Input style={inputStyle} placeholder="Enter SKU" />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                        <Col xs={6} md={6}>
-                                                            <Button
+                                                    </>
+                                                )}
 
-                                                                style={{
-                                                                    width: "100%",
-                                                                    background: "linear-gradient(135deg, #004e92, #13c2c2)",
-                                                                    color: "#fff",
-                                                                    fontWeight: "bold",
-                                                                    height: "45px",
-                                                                    borderRadius: "8px",
-                                                                    border: "none",
-                                                                }}
-                                                                onClick={templateFormat}
-                                                            >
-                                                                Print Label
-                                                            </Button>
+                                                {/* === Square Tab === */}
+                                                {activeTab === "square" && (
+                                                    <>
+                                                        {/* Product Desc */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Product Desc:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="Desc">
+                                                                        <Input.TextArea
+                                                                            rows={2}
+                                                                            style={{
+                                                                                fontSize: "14px",
+                                                                                width: "100%",
+                                                                                borderRadius: "8px",
+                                                                                border: "1px solid #d1d1d1",
+                                                                                padding: "12px",
+                                                                                fontFamily: "'Roboto', sans-serif",
+                                                                            }}
+                                                                        />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
                                                         </Col>
-                                                    </Row>
-                                                </Col>
+
+                                                        {/* Category */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Category:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="categories">
+                                                                        <Select
+                                                                            style={{ ...selectStyle, width: "80%" }}
+                                                                            placeholder="Select a category"
+                                                                            disabled={!Array.isArray(getCategory?.payload) || getCategory.payload.length === 0}
+                                                                        >
+                                                                            {Array.isArray(getCategory?.payload) &&
+                                                                                getCategory.payload.map((val, idx) => (
+                                                                                    <Option key={idx} value={val.id}>
+                                                                                        {val.name}
+                                                                                    </Option>
+                                                                                ))}
+                                                                        </Select>
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+
+                                                        {/* Product Quantity */}
+                                                        <Col xs={24} md={24}>
+                                                            <Row align="middle" gutter={[16, 8]}>
+                                                                <Col xs={6} md={4}>
+                                                                    <label style={labelStyle}>Product Quantity:</label>
+                                                                </Col>
+                                                                <Col xs={18} md={20}>
+                                                                    <Form.Item name="quantity">
+                                                                        <Input style={inputStyle} placeholder="Enter quantity" />
+                                                                    </Form.Item>
+                                                                </Col>
+                                                            </Row>
+                                                        </Col>
+                                                    </>
+                                                )}
 
                                                 {/* Push Square Button */}
-                                                {getConfiguration?.payload?.squareToken !== "" && (
+
+
+                                                {activeTab === "shopify" && getConfiguration?.payload?.squareToken !== "" && (
+                                                    <Col xs={24} md={24}>
+                                                        <Button
+                                                            style={{
+                                                                width: "100%",
+                                                                height: "45px",
+                                                                fontSize: "16px",
+                                                                fontWeight: "600",
+                                                                borderRadius: "8px",
+                                                                background: "linear-gradient(135deg, #004e92, #13c2c2)",
+                                                                color: "#fff",
+                                                                border: "none",
+                                                            }}
+                                                            onClick={pushShopifyCall}
+                                                        >
+                                                            Push Shopify
+                                                        </Button>
+                                                    </Col>
+                                                )}
+
+                                                {/* If Square Tab is Active */}
+                                                {activeTab === "square" && getConfiguration?.payload?.squareToken !== "" && (
                                                     <Col xs={24} md={24}>
                                                         <Button
                                                             style={{
@@ -875,6 +1170,8 @@ const NonIccidProduct = () => {
                                                         </Button>
                                                     </Col>
                                                 )}
+
+
                                             </Row>
                                         </Form>
                                     </div>
@@ -885,8 +1182,41 @@ const NonIccidProduct = () => {
                         </>
                     )}
                 </Row>
-            </Content>
-        </Layout>
+
+
+
+                <Modal
+                    title="Product Images"
+                    visible={isModalVisible}
+                    onCancel={handleCancel}
+                    footer={null}
+                    centered
+                    bodyStyle={{ maxHeight: "70vh", overflowY: "auto" }}
+                >
+                    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                        {squareImageUrl?.length > 0 ? (
+                            squareImageUrl.map((imgUrl, index) => (
+                                <img
+                                    key={index}
+                                    src={imgUrl}
+                                    alt={`Product ${index + 1}`}
+                                    style={{
+                                        width: "100%",
+                                        height: "auto",
+                                        borderRadius: "8px",
+                                        objectFit: "contain",
+                                    }}
+                                />
+                            ))
+                        ) : (
+                            <p style={{ textAlign: "center", color: "#999" }}>No Images Available</p>
+                        )}
+                    </div>
+                </Modal>
+
+
+            </Content >
+        </Layout >
     );
 };
 

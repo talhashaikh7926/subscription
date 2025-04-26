@@ -14,6 +14,12 @@ import {
     GET_CATEGORIES_REQUEST,
     GET_CATEGORIES_SUCCESS,
     GET_CATEGORIES_ERROR,
+    GET_PRODUCT_TYPE_REQUEST,
+    GET_PRODUCT_TYPE_SUCCESS,
+    GET_PRODUCT_TYPE_ERROR,
+    SHOPIFY_REQUEST,
+    SHOPIFY_SUCCESS,
+    SHOPIFY_ERROR
 } from '../types/types';
 import axios from 'axios';
 
@@ -96,6 +102,32 @@ export const getCategories = (username) => (dispatch) => {
         });
 }
 
+export const getProductType = (username) => (dispatch) => {
+    dispatch({ type: GET_PRODUCT_TYPE_REQUEST });
+    const token = JSON.parse(localStorage.getItem('token'));
+    return axios({
+        method: 'GET',
+        url: `getShopifyCategories?username=${username}`,
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        },
+    })
+        .then((response) => {
+            dispatch({
+                type: GET_PRODUCT_TYPE_SUCCESS,
+                payload: response.data
+            });
+            return response.data
+        })
+        .catch((error) => {
+            return dispatch({
+                type: GET_PRODUCT_TYPE_ERROR,
+                payload: error.response,
+            });
+        });
+}
+
 
 export const printTag = (userName, data) => (dispatch) => {
 
@@ -168,6 +200,49 @@ export const pushSquare = (userName,data) => (dispatch) => {
         .catch((error) => {
             return dispatch({
                 type: SQUARE_ERROR,
+                payload: error.response,
+            });
+        });
+};
+
+export const pushShopify = (userName,data) => (dispatch) => {
+
+    dispatch({ type: SHOPIFY_REQUEST });
+
+    const token = JSON.parse(localStorage.getItem('token'));
+    return axios({
+        method: 'POST',
+        url: `pushShopify`,
+        headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`
+        },
+        data: {
+            username: userName,
+            barcode: data?.barCode,
+            our_price: data?.finalPrice,
+            product_name: data.productName,
+            product_desc: data?.Desc,
+            productType: data?.productType,
+            product_quantity: data?.quantity,
+            image_url: data?.squareImageUrl,
+            compareAtPrice: data?.compareAtPrice,
+            cost: data?.cost,
+            vendor: data?.vendor,
+            sku: data?.sku
+
+
+        }
+    })
+        .then((response) => {
+            return dispatch({
+                type: SHOPIFY_SUCCESS,
+                payload: response.data,
+            });
+        })
+        .catch((error) => {
+            return dispatch({
+                type: SHOPIFY_ERROR,
                 payload: error.response,
             });
         });
