@@ -40,6 +40,7 @@ const Configurations = () => {
         dispatch(getConfig(token?.user_name));
     }, [dispatch, token?.user_name]);
 
+
     useEffect(() => {
         if (getConfiguration?.payload) {
             form.setFieldsValue({
@@ -52,20 +53,22 @@ const Configurations = () => {
             });
         }
     }, [getConfiguration?.payload, form]);
+    
 
     const handleShopifySubmit = () => {
         const data = {
             username: token?.user_name,
             shopifyToken: form.getFieldValue("shopifyToken"),
             storeName: form.getFieldValue("storeNameShopify"),
-            shopifyLocationId: form.getFieldValue("shopifyLocation"),
+            shopifyLocation : form.getFieldValue("shopifyLocation"),
 
         };
 
         dispatch(configToken(data)).then((res) => {
+         
             if (res.type === "TOKEN_SUCCESS") {
                 notification.success({
-                    message: "Shopify configuration saved!",
+                    message: res.payload.data.message,
                     className: "toast-success",
                     placement: "top",
                 });
@@ -89,14 +92,13 @@ const Configurations = () => {
             squareLocationId: form.getFieldValue("squareLocation"),
 
         };
-
-        console.log(data,'test square');
         
 
         dispatch(configToken(data)).then((res) => {
+    
             if (res.type === "TOKEN_SUCCESS") {
                 notification.success({
-                    message: "Square configuration saved!",
+                    message: res.payload.data.message,
                     className: "toast-success",
                     placement: "top",
                 });

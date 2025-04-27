@@ -51,9 +51,10 @@ export const configToken = (data) => (dispatch) => {
         data,
     })
         .then((response) => {
+            
             return dispatch({
                 type: TOKEN_SUCCESS,
-                payload: response.data,
+                payload: response,
             });
         })
         .catch((error) => {

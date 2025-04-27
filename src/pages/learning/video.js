@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Layout, Typography } from 'antd';
+import { getVideo } from '../../redux/actions/createVideo.action';
 
 const { Content } = Layout;
 const { Title } = Typography;
 
 const LearningVideo = () => {
+    const dispatch = useDispatch();
+    const [publicVideoUrl, setPublicVideoUrl] = useState(null);
+    const { getSubscription, getVideos } = useSelector((state) => state);
+    useEffect(() => {
+        dispatch(getVideo());
+    }, [dispatch]);
+    useEffect(() => {
+        if (getVideos?.payload?.length > 0) {
+            const publicVideos = getVideos.payload.filter(video => video.is_public === true);
+            if (publicVideos.length > 0) {
+                const randomIndex = Math.floor(Math.random() * publicVideos.length);
+                setPublicVideoUrl(publicVideos[randomIndex].video_url);
+
+            }
+        }
+    }, [getVideos]);
     return (
         <Layout
             style={{
@@ -66,17 +84,24 @@ const LearningVideo = () => {
                         transition: 'transform 0.3s, box-shadow 0.3s',
                     }}
                 >
-                    <iframe
-                        title="Demo Video"
-                        src="https://photos.onedrive.com/share/786723E1B453155C!sdb5f745ffd0143b38317364534fb86be?cid=786723E1B453155C&resId=786723E1B453155C!sdb5f745ffd0143b38317364534fb86be&ithint=video&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy83ODY3MjNlMWI0NTMxNTVjL0VWOTBYOXNCX2JORGd4YzJSVFQ3aHI0Qk8zdnhodFRZczI0Y2xLb2JYN1Z6UXc"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            border: 'none',
-                        }}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
+                       {publicVideoUrl ? (
+                                    <video
+                                        width="110%" // Increased width
+                                        height="500px" // Increased height
+                                        controls
+                                        autoPlay
+                                        poster="your-image-placeholder.jpg" // Optional: Add a thumbnail before video loads
+                                        style={{
+                                            borderRadius: '8px', // Rounded corners for the video player
+                                            overflow: 'hidden', // Ensures rounded corners are respected
+                                        }}
+                                    >
+                                        <source src={publicVideoUrl} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                ) : (
+                                    <p>Loading video...</p> // Show a loading message if the video is not yet available
+                                )}
                 </div>
             </Content>
         </Layout>
