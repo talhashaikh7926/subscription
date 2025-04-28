@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Form, Input, Button, Typography, Card, Row, Col, notification, Modal, Select, Spin, Tabs } from 'antd';
+import { Layout, Form, Input, Button, Typography, Table, Card, Row, Col, notification, Modal, Select, Spin, Tabs } from 'antd';
 import moment from 'moment';
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined } from '@ant-design/icons';
@@ -20,7 +20,10 @@ const NonIccidProduct = () => {
     const [activeTab, setActiveTab] = useState("print");
     const [imageUrl, setImageUrl] = useState("");
     const [squareImageUrl, setSquareImageUrl] = useState([]);
+    const [storeData, setStoreData] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isStoreModalVisible, setIsStoreModalVisible] = useState(false);
+
     const dispatch = useDispatch();
     const { Shopifylocation, getSubscriptionPlan, getUserInfo, templates, getCategory, barcodeDetails, getConfiguration, getShopifyType } = useSelector((state) => state);
 
@@ -103,6 +106,7 @@ const NonIccidProduct = () => {
         const BarCodeValue = form.getFieldValue("barCode");
         dispatch(getBarcodeDetail(BarCodeValue)).then((res) => {
             setSquareImageUrl(res?.product_images)
+            setStoreData(res?.stores || []);
             form.setFieldsValue({
                 Desc: res?.product_description,
                 productName: res?.product_title,
@@ -364,6 +368,33 @@ const NonIccidProduct = () => {
 
     }
 
+    const storeColumns = [
+        {
+            title: 'Currency',
+            dataIndex: 'currency',
+            key: 'currency',
+        },
+        {
+            title: 'Last Update',
+            dataIndex: 'last_update',
+            key: 'last_update',
+        },
+        {
+            title: 'Link',
+            dataIndex: 'link',
+            key: 'link',
+            render: (text) => text ? (
+                <a href={text} target="_blank" rel="noopener noreferrer">
+                    View Store
+                </a>
+            ) : (
+                "-"
+            ),
+        },
+    ];
+
+
+
     const labelStyle = {
         fontSize: "16px",
         fontWeight: "500",
@@ -411,6 +442,15 @@ const NonIccidProduct = () => {
         setIsModalVisible(false);
     };
 
+    const showStoreModal = () => {
+        setIsStoreModalVisible(true);
+    };
+
+    const handleStoreModalCancel = () => {
+        setIsStoreModalVisible(false);
+    };
+
+
     return (
 
         <Layout >
@@ -423,7 +463,7 @@ const NonIccidProduct = () => {
                 margin: "0 auto",
             }}
             >
-                <div style={{ textAlign: "center", position: "relative", marginBottom: "40px" }}>
+                <div style={{ textAlign: "left", position: "relative", marginBottom: "40px" }}>
                     <Title level={2} style={{
                         color: "#004e92",
                         fontFamily: "'Roboto', sans-serif",
@@ -434,31 +474,61 @@ const NonIccidProduct = () => {
                     </Title>
 
                     {/* Button positioned absolute inside the div */}
-                    {squareImageUrl?.length > 0 && (
-                        <Button
-                            type="primary"
-                            onClick={showModal}
+
+                    {(storeData?.length > 0 || squareImageUrl?.length > 0) && (
+                        <div
                             style={{
                                 position: "absolute",
                                 right: "0",
                                 top: "50%",
                                 transform: "translateY(-50%)",
-                                background: "linear-gradient(135deg, #13c2c2, #004e92)",
-                                border: "none",
-                                padding: "0 20px",
-                                height: "40px",
-                                fontWeight: "600",
-                                fontSize: "15px",
-                                borderRadius: "20px",
-                                fontFamily: "'Roboto', sans-serif",
-                                boxShadow: "0 4px 12px rgba(0, 78, 146, 0.3)",
-                                transition: "all 0.3s ease",
+                                display: "flex",
+                                gap: "12px", // space between buttons
                             }}
-
                         >
-                            Preview Images
-                        </Button>
+                            {storeData?.length > 0 && (
+                                <Button
+                                    type="primary"
+                                    onClick={showStoreModal}
+                                    style={{
+                                        background: "linear-gradient(135deg, #13c2c2, #004e92)",
+                                        border: "none",
+                                        padding: "0 20px",
+                                        height: "40px",
+                                        fontWeight: "600",
+                                        fontSize: "15px",
+                                        borderRadius: "20px",
+                                        fontFamily: "'Roboto', sans-serif",
+                                        boxShadow: "0 4px 12px rgba(0, 78, 146, 0.3)",
+                                        transition: "all 0.3s ease",
+                                    }}
+                                >
+                                    View Store
+                                </Button>
+                            )}
+                            {squareImageUrl?.length > 0 && (
+                                <Button
+                                    type="primary"
+                                    onClick={showModal}
+                                    style={{
+                                        background: "linear-gradient(135deg, #13c2c2, #004e92)",
+                                        border: "none",
+                                        padding: "0 20px",
+                                        height: "40px",
+                                        fontWeight: "600",
+                                        fontSize: "15px",
+                                        borderRadius: "20px",
+                                        fontFamily: "'Roboto', sans-serif",
+                                        boxShadow: "0 4px 12px rgba(0, 78, 146, 0.3)",
+                                        transition: "all 0.3s ease",
+                                    }}
+                                >
+                                    Preview Images
+                                </Button>
+                            )}
+                        </div>
                     )}
+
                 </div>
                 <Row gutter={[16, 16]} justify="center">
                     {getSubscriptionPlan?.loading && getUserInfo?.loading ? (
@@ -1211,6 +1281,67 @@ const NonIccidProduct = () => {
                         ) : (
                             <p style={{ textAlign: "center", color: "#999" }}>No Images Available</p>
                         )}
+                    </div>
+                </Modal>
+
+
+                <Modal
+                    title={
+                        <Title level={4} style={{ margin: 0, color: '#004e92', textAlign: 'center' }}>
+                            Store Details
+                        </Title>
+                    }
+                    visible={isStoreModalVisible}
+                    onCancel={handleStoreModalCancel}
+                    footer={null}
+                    centered
+                    width={800}
+                    bodyStyle={{
+                        padding: '20px',
+                        borderRadius: '12px',
+                        background: '#f0f5ff', // Light soft background
+                    }}
+                >
+                    <div style={{
+                        background: '#ffffff',
+                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+                    }}>
+                        <Table
+                            dataSource={storeData.map((item, index) => ({ ...item, key: index }))}
+                            columns={[
+                                {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Currency</span>,
+                                    dataIndex: 'currency',
+                                    key: 'currency',
+                                    align: 'center',
+                                },
+                                {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Last Update</span>,
+                                    dataIndex: 'last_update',
+                                    key: 'last_update',
+                                    align: 'center',
+                                },
+                                {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Link</span>,
+                                    dataIndex: 'link',
+                                    key: 'link',
+                                    align: 'center',
+                                    render: (text) => text ? (
+                                        <a href={text} target="_blank" rel="noopener noreferrer" style={{ color: '#1890ff', fontWeight: 500 }}>
+                                            🔗 View Store
+                                        </a>
+                                    ) : (
+                                        "-"
+                                    ),
+                                },
+                            ]}
+                            pagination={false}
+                            bordered={false}
+                            size="middle"
+                            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                        />
                     </div>
                 </Modal>
 
