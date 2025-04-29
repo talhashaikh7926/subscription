@@ -1295,22 +1295,25 @@ const NonIccidProduct = () => {
                     onCancel={handleStoreModalCancel}
                     footer={null}
                     centered
-                    width={800}
+                    width={1000} // Wider for more columns
                     bodyStyle={{
                         padding: '20px',
                         borderRadius: '12px',
-                        background: '#f0f5ff', // Light soft background
+                        background: '#f0f5ff',
                     }}
                 >
-                    <div style={{
-                        background: '#ffffff',
-                        borderRadius: '12px',
-                        overflow: 'hidden',
-                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
-                    }}>
+                    <div
+                        style={{
+                            background: '#ffffff',
+                            borderRadius: '12px',
+                            overflow: 'auto',
+                            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+                        }}
+                    >
                         <Table
                             dataSource={storeData.map((item, index) => ({ ...item, key: index }))}
                             columns={[
+
                                 {
                                     title: <span style={{ color: '#004e92', fontWeight: 600 }}>Currency</span>,
                                     dataIndex: 'currency',
@@ -1318,32 +1321,95 @@ const NonIccidProduct = () => {
                                     align: 'center',
                                 },
                                 {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Price</span>,
+                                    dataIndex: 'price',
+                                    key: 'price',
+                                    align: 'center',
+                                    render: (_, record) => {
+                                        const { price, currency } = record;
+                                        const currencySymbols = {
+                                            USD: '$',
+                                            CAD: '$',
+                                            EUR: '€',
+                                            GBP: '£',
+                                            PLN: 'zł',
+                                            INR: '₹',
+                                            JPY: '¥',
+                                            CNY: '¥',
+                                        };
+                                        const symbol = currencySymbols[currency] || currency || '';
+                                        const isPrefix = ['$', '€', '£', '₹', '¥','zł'].includes(symbol);
+                                        const formattedPrice = isPrefix ? `${symbol}${price}` : `${price} ${symbol}`;
+                            
+                                        return <span style={{ fontWeight: 500 }}>{formattedPrice}</span>;
+                                    },
+                                },
+                                {
                                     title: <span style={{ color: '#004e92', fontWeight: 600 }}>Last Update</span>,
                                     dataIndex: 'last_update',
                                     key: 'last_update',
                                     align: 'center',
                                 },
+
+                                {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Store Name</span>,
+                                    dataIndex: 'storeName',
+                                    key: 'storeName',
+                                    align: 'center',
+                                    render: text => <span style={{ fontWeight: 500 }}>{text || "-"}</span>,
+                                },
+                                {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Country</span>,
+                                    dataIndex: 'storeCountry',
+                                    key: 'storeCountry',
+                                    align: 'center',
+                                    render: text => text || "-",
+                                },
+                                {
+                                    title: <span style={{ color: '#004e92', fontWeight: 600 }}>Category</span>,
+                                    dataIndex: 'category',
+                                    key: 'category',
+                                    align: 'center',
+                                    render: text => (
+                                        <div style={{ maxWidth: '220px', whiteSpace: 'normal', wordWrap: 'break-word' }}>
+                                            {text}
+                                        </div>
+                                    ),
+                                },
+                               
+                              
+                             
                                 {
                                     title: <span style={{ color: '#004e92', fontWeight: 600 }}>Link</span>,
                                     dataIndex: 'link',
                                     key: 'link',
                                     align: 'center',
-                                    render: (text) => text ? (
-                                        <a href={text} target="_blank" rel="noopener noreferrer" style={{ color: '#1890ff', fontWeight: 500 }}>
-                                            🔗 View Store
-                                        </a>
-                                    ) : (
-                                        "-"
-                                    ),
+                                    render: (text) =>
+                                        text ? (
+                                            <a
+                                                href={text}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{ color: '#1890ff', fontWeight: 500 }}
+                                            >
+                                                🔗 View Store
+                                            </a>
+                                        ) : (
+                                            "-"
+                                        ),
                                 },
                             ]}
                             pagination={false}
                             bordered={false}
                             size="middle"
-                            rowClassName={(record, index) => index % 2 === 0 ? 'table-row-light' : 'table-row-dark'}
+                            scroll={{ x: 'max-content' }}
+                            rowClassName={(_, index) =>
+                                index % 2 === 0 ? 'table-row-light' : 'table-row-dark'
+                            }
                         />
                     </div>
                 </Modal>
+
 
 
             </Content >
