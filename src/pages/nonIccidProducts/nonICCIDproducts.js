@@ -40,6 +40,12 @@ const NonIccidProduct = () => {
         });
     }, [dispatch]);
 
+    const containerStyle = {
+        width: "100%",
+        maxWidth: "1000px",
+        margin: "-4px 50px 18px -25px"
+    };
+
 
     const calculatePrice = () => {
         const { retailPrice, operations, ourPrice } = form.getFieldsValue();
@@ -463,7 +469,7 @@ const NonIccidProduct = () => {
                 margin: "0 auto",
             }}
             >
-                <div style={{ textAlign: "left", position: "relative", marginBottom: "40px" }}>
+                <div style={{ textAlign: "center", position: "relative", marginBottom: "40px" }}>
                     <Title level={2} style={{
                         color: "#004e92",
                         fontFamily: "'Roboto', sans-serif",
@@ -475,15 +481,14 @@ const NonIccidProduct = () => {
 
                     {/* Button positioned absolute inside the div */}
 
+                    {/* Button container with flexbox layout */}
                     {(storeData?.length > 0 || squareImageUrl?.length > 0) && (
                         <div
                             style={{
-                                position: "absolute",
-                                right: "0",
-                                top: "50%",
-                                transform: "translateY(-50%)",
-                                display: "flex",
-                                gap: "12px", // space between buttons
+                                display: "flex",             // Use flexbox for button alignment
+                                gap: "12px",                 // Space between buttons
+                                justifyContent: "flex-start", // Align buttons to the left (can also be "center" or "flex-end")
+                                marginTop: "20px",           // Add space between other content and buttons
                             }}
                         >
                             {storeData?.length > 0 && (
@@ -528,6 +533,7 @@ const NonIccidProduct = () => {
                             )}
                         </div>
                     )}
+
 
                 </div>
                 <Row gutter={[16, 16]} justify="center">
@@ -666,15 +672,7 @@ const NonIccidProduct = () => {
                                 <>
 
                                     <div
-                                        style={{
-                                            maxWidth: "800px", // Container width
-                                            margin: "0 auto",
-                                            backgroundColor: "#ffffff", // Slightly different background for better contrast
-                                            padding: "20px", // Increased padding for better spacing
-                                            borderRadius: "12px", // Larger border radius for smoother edges
-                                            border: "1px solid #e0e0e0", // Soft border for inputs and buttons
-                                            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for 3D effect
-                                        }}
+                                        style={containerStyle}
                                     >
                                         <Form form={form} layout="horizontal">
                                             <Row gutter={[16, 16]} align="middle">
@@ -1338,9 +1336,9 @@ const NonIccidProduct = () => {
                                             CNY: '¥',
                                         };
                                         const symbol = currencySymbols[currency] || currency || '';
-                                        const isPrefix = ['$', '€', '£', '₹', '¥','zł'].includes(symbol);
+                                        const isPrefix = ['$', '€', '£', '₹', '¥', 'zł'].includes(symbol);
                                         const formattedPrice = isPrefix ? `${symbol}${price}` : `${price} ${symbol}`;
-                            
+
                                         return <span style={{ fontWeight: 500 }}>{formattedPrice}</span>;
                                     },
                                 },
@@ -1376,9 +1374,9 @@ const NonIccidProduct = () => {
                                         </div>
                                     ),
                                 },
-                               
-                              
-                             
+
+
+
                                 {
                                     title: <span style={{ color: '#004e92', fontWeight: 600 }}>Link</span>,
                                     dataIndex: 'link',

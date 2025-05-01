@@ -169,6 +169,15 @@ const Landing = () => {
 
                                     {/* Static feature list — assuming it's same for all plans */}
                                     <ul className="text-left fs18px px-3 text-blue mb-4 fix-panel">
+                                        {plan.subscription_price <= 0 && (
+                                            <li>50 SKU</li>
+                                        )}
+                                        {plan.subscription_price > 0 && plan.subscription_price <= 25 && (
+                                            <li>1000 SKU</li>
+                                        )}
+                                        {plan.subscription_price > 26 && (
+                                            <li>Unlimited SKU</li>
+                                        )}
                                         <li>Unlimited label printing</li>
                                         <li>Preview Barcode</li>
                                         <li>Zebra Printing</li>
@@ -606,7 +615,7 @@ const Landing = () => {
                                 <h3 className="text-blue fs38px mb-3 fw-bold">Used by thousands</h3>
                                 <p className="fs17px">
                                     Anyone can SignUp and use X LabelSync Pro to print labels. It's easy to
-                                    use, priced right, always available without Internet, helpfully
+                                    use, priced right, helpfully
                                     supported by humans when you need us, and constantly improving based
                                     on your feedback.
                                 </p>
@@ -636,12 +645,12 @@ const Landing = () => {
                                     300 dots-per-inch, ideal for barcodes and tiny text. Easy replacement
                                     and alternative to Recommen Zebra ZD421 300dpi.
                                 </p>
-                                <a
+                                {/* <a
                                     href="#"
                                     className="btn trusted-btn bg-blue text-white px-4 pt-2 pb-2 fw-bold fs17px mt-2"
                                 >
                                     Recommended Label Printer 👉
-                                </a>
+                                </a> */}
                             </motion.div>
                         </Col>
                         <Col className="col-sm-6 px-4 text-end">
@@ -674,14 +683,14 @@ const Landing = () => {
 
             <Container className="pt-5 pb-5">
                 <Row className="pt-2 pb-2 px-4">
-                    <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
+                <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
                         <Col className="media">
                             <Col className="media-left">
-                                <i className="fa fa-bank"></i>
+                                <i class="fa fa-paint-brush"></i>
                             </Col>
                             <Col className="media-body">
-                                <h4 className="media-heading"> Fun and Easy to Learn </h4>
-                                <p>  Like cooking in your own kitchen—everything has a place </p>
+                                <h4 className="media-heading"> Full Color or Black & White </h4>
+                                <p> Works with one-color thermal printers and full-color inkjet and laser printers </p>
                             </Col>
                         </Col>
                     </Col>
@@ -697,7 +706,7 @@ const Landing = () => {
                         </Col>
                     </Col>
 
-                    <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
+                    {/* <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
                         <Col className="media">
                             <Col className="media-left">
                                 <i className="fa fa-print"></i>
@@ -707,9 +716,9 @@ const Landing = () => {
                                 <p>   Need a new label printer? Bundle and Save </p>
                             </Col>
                         </Col>
-                    </Col>
+                    </Col> */}
 
-                    <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
+                    {/* <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
                         <Col className="media">
                             <Col className="media-left">
                                 <i class="fa fa-paint-brush"></i>
@@ -719,7 +728,7 @@ const Landing = () => {
                                 <p> Works with one-color thermal printers and full-color inkjet and laser printers </p>
                             </Col>
                         </Col>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
 

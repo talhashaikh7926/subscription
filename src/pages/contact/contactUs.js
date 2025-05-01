@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Row, Col, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from 'react-router-dom';
 import Nav from "react-bootstrap/Nav";
 import { contactUs } from "../../redux/actions/userDetail.action";
+
+import { FaqSearch } from '../../redux/actions/createFaq.action'
 import { notification } from "antd"; // Import Ant Design notifications
 
 const ContactUs = () => {
     const dispatch = useDispatch();
-
+    const { getFaq } = useSelector((state) => state);
     const navigate = useNavigate(); // Initialize navigate hook
 
     const handleShowMore = () => {
         navigate("/faq"); // Navigate to /faq when the button is clicked
     };
 
+    useEffect(() => {
+        dispatch(FaqSearch());
+    }, [dispatch]);
+
+    const faqs = getFaq?.payload || [];
     // State for form fields
     const [formData, setFormData] = useState({
         name: "",
@@ -310,7 +317,10 @@ const ContactUs = () => {
                 <Container>
                     <Row>
                         <Col className="col-sm-6 col-12">
-                            <Image src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F437x437%2Fff574f2738%2Ffaqs-icons.png&w=640&q=75" className="img-fluid" />
+                            <Image
+                                src="https://label.live/_next/image?url=https%3A%2F%2Fa.storyblok.com%2Ff%2F111664%2F437x437%2Fff574f2738%2Ffaqs-icons.png&w=640&q=75"
+                                className="img-fluid"
+                            />
                         </Col>
 
                         <Col className="col-sm-6 col-12 mt-auto mb-auto content-para">
@@ -318,11 +328,14 @@ const ContactUs = () => {
                             <p style={{ color: "#fff", fontSize: "17px" }}>
                                 Find answers to the most commonly asked questions about X LabelSync Pro.
                             </p>
+
                             <ul style={{ color: "#fff", fontSize: "17px" }}>
-                                <li>How to add data to a label?</li>
-                                <li>How to create a new project?</li>
-                                <li>How to add a new printer?</li>
-                                <li>How to change between printers?</li>
+                                {faqs.slice(0, 2).map((faq, index) => (
+                                    <li key={index}>
+                                        <strong>{faq.question}</strong>
+                                        <p>{faq.answer}</p>
+                                    </li>
+                                ))}
                             </ul>
 
                             {/* Show More Button */}
@@ -345,16 +358,14 @@ const ContactUs = () => {
                 </Container>
             </Container>
 
-
+            {/* 
             <Container fluid className="faq-bg-sec right-bg-move position-relative pt-4 pb-4">
                 <Container>
                     <Row>
 
                         <Col className="col-sm-5 col-12 mt-auto mb-auto content-para pr-4">
                             <h2 className="fw-bold fs42px text-white"> Don’t want to install any software? </h2>
-                            {/* <p style={{ color: "#fff", fontSize: "17px" }}>
-                                Find answers to the most commonly asked questions about Label LIVE.
-                              </p> */}
+                         
                             <ul style={{ color: "#fff", fontSize: "17px" }}>
                                 <li> Stop stressing over barcodes </li>
                                 <li> Let us design your barcode and label </li>
@@ -379,11 +390,11 @@ const ContactUs = () => {
                         </Col>
                     </Row>
                 </Container>
-            </Container>
+            </Container> */}
 
 
 
-            <Container fluid className="bg-white pt-5 pb-5">
+            {/* <Container fluid className="bg-white pt-5 pb-5">
                 <Container>
                     <Row className="px-sm-4 px-1">
                         <Col className="col-sm-4 mb-4">
@@ -391,7 +402,7 @@ const ContactUs = () => {
                                 <i class="fa fa-file-text-o"></i>
                                 <h3 className="text-blue fw-bold"> Guides </h3>
                                 <p className="text-grey"> How to make X LabelSync Pro work for you, in detail. </p>
-                                {/* <a href="#" className="btn read-btn"> Read the guides </a> */}
+                             
                             </Col>
                         </Col>
 
@@ -400,7 +411,7 @@ const ContactUs = () => {
                                 <i class="fa fa-question"></i>
                                 <h3 className="text-blue fw-bold"> Find Answers </h3>
                                 <p className="text-grey"> If you have questions... we have answers. Check out our in-depth FAQs. </p>
-                                {/* <a href="#" className="btn read-btn"> View the FAQs </a> */}
+                                
                             </Col>
                         </Col>
 
@@ -409,12 +420,12 @@ const ContactUs = () => {
                                 <i class="fa fa-barcode"></i>
                                 <h3 className="text-blue fw-bold"> Barcodes </h3>
                                 <p className="text-grey"> See the barcodes we support and learn how to use them in your labels. </p>
-                                {/* <a href="#" className="btn read-btn"> See more barcodes </a> */}
+                               
                             </Col>
                         </Col>
                     </Row>
                 </Container>
-            </Container>
+            </Container> */}
 
 
             <Container fluid className="bg-gradiant pt-5 pb-4 footer-sec">
