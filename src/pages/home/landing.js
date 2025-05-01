@@ -51,34 +51,71 @@ const Landing = () => {
 
     return (
         <Layout className="bg-transparent">
-            <Container className="header-absolute position-absolute mx-auto">
+            <Container
+                className="header-absolute position-absolute mx-auto"
+                style={{
+                    zIndex: 1050,
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    background: 'linear-gradient(135deg, #000428 0%, #004e92 30%, #6db3f2 60%, #e5e5e5 100%)',
+
+                    padding: "10px 20px",
+                    width: "100%",
+                }}
+            >
                 <Row>
                     <Col className="col-sm-12">
-                        <Navbar expand="lg" className="w-100">
+                        <Navbar
+                            expand="lg"
+                            style={{ width: "100%" }}
+                            variant="dark"
+                        >
                             {/* Brand */}
-                            <Navbar.Brand href="/" className="fs25px text-white fw-bold">
+                            <Navbar.Brand
+                                href="/"
+                                className="fw-bold"
+                                style={{
+                                    fontSize: "25px",
+                                    color: "#ffffff",
+                                }}
+                            >
                                 X LabelSync Pro
                             </Navbar.Brand>
 
-                            {/* Mobile Toggle */}
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            {/* Toggle Button */}
+                            <Navbar.Toggle
+                                aria-controls="basic-navbar-nav"
+                                style={{ borderColor: "#fff" }}
+                            />
 
-                            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                                <Nav className="me-auto d-flex align-items-center gap-3">
+                            {/* Collapsible Links */}
+                            <Navbar.Collapse
+                                id="basic-navbar-nav"
+                                className="justify-content-end"
+                            >
+                                <Nav
+                                    className="ms-auto d-flex align-items-center gap-3"
+                                    style={{ marginTop: "10px" }}
+                                >
                                     {/* SignUp */}
                                     <Nav.Link
-                                        href="/login"
-                                        className="text-white fw-bold"
+                                        href="/signup"
                                         style={{
                                             padding: "8px 16px",
                                             borderRadius: "8px",
                                             backgroundColor: "#004e92",
                                             color: "#fff",
                                             fontSize: "14px",
+                                            fontWeight: "bold",
                                             transition: "background-color 0.3s ease",
                                         }}
-                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#0061c2")}
-                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#004e92")}
+                                        onMouseEnter={(e) =>
+                                            (e.target.style.backgroundColor = "#0061c2")
+                                        }
+                                        onMouseLeave={(e) =>
+                                            (e.target.style.backgroundColor = "#004e92")
+                                        }
                                     >
                                         SignUp
                                     </Nav.Link>
@@ -86,17 +123,21 @@ const Landing = () => {
                                     {/* Login */}
                                     <Nav.Link
                                         href="/login"
-                                        className="text-white fw-bold"
                                         style={{
                                             padding: "8px 16px",
                                             borderRadius: "8px",
                                             backgroundColor: "#002D69",
                                             color: "#fff",
                                             fontSize: "14px",
+                                            fontWeight: "bold",
                                             transition: "background-color 0.3s ease",
                                         }}
-                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#004e92")}
-                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#002D69")}
+                                        onMouseEnter={(e) =>
+                                            (e.target.style.backgroundColor = "#004e92")
+                                        }
+                                        onMouseLeave={(e) =>
+                                            (e.target.style.backgroundColor = "#002D69")
+                                        }
                                     >
                                         Login
                                     </Nav.Link>
@@ -118,7 +159,6 @@ const Landing = () => {
                                     >
                                         Contact Us
                                     </Button>
-
                                 </Nav>
                             </Navbar.Collapse>
                         </Navbar>
@@ -683,7 +723,7 @@ const Landing = () => {
 
             <Container className="pt-5 pb-5">
                 <Row className="pt-2 pb-2 px-4">
-                <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
+                    <Col className="col-sm-6 icon-box pt-4 pb-4 m-auto">
                         <Col className="media">
                             <Col className="media-left">
                                 <i class="fa fa-paint-brush"></i>
