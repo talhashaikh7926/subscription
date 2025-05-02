@@ -469,26 +469,38 @@ const NonIccidProduct = () => {
                 margin: "0 auto",
             }}
             >
-                <div style={{ textAlign: "center", position: "relative", marginBottom: "40px" }}>
-                    <Title level={2} style={{
-                        color: "#004e92",
-                        fontFamily: "'Roboto', sans-serif",
-                        fontWeight: "700",
-                        margin: 0,
-                    }}>
+                <div
+                    style={{
+                        display: "flex",
+                        flexWrap: "wrap",               // Allow wrapping on smaller screens
+                        alignItems: "center",           // Vertically center items
+                        justifyContent: "space-between", // Space between heading and buttons
+                        rowGap: "16px",                 // Vertical spacing on wrap
+                        marginBottom: "40px",
+                    }}
+                >
+                    {/* Title */}
+                    <Title
+                        level={2}
+                        style={{
+                            color: "#004e92",
+                            fontFamily: "'Roboto', sans-serif",
+                            fontWeight: "700",
+                            margin: 0,
+                            fontSize: "28px",
+                        }}
+                    >
                         X LabelSync Pro
                     </Title>
 
-                    {/* Button positioned absolute inside the div */}
-
-                    {/* Button container with flexbox layout */}
+                    {/* Conditional Buttons */}
                     {(storeData?.length > 0 || squareImageUrl?.length > 0) && (
                         <div
                             style={{
-                                display: "flex",             // Use flexbox for button alignment
-                                gap: "12px",                 // Space between buttons
-                                justifyContent: "flex-start", // Align buttons to the left (can also be "center" or "flex-end")
-                                marginTop: "20px",           // Add space between other content and buttons
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: "12px",
+                                justifyContent: "flex-start",
                             }}
                         >
                             {storeData?.length > 0 && (
@@ -533,9 +545,8 @@ const NonIccidProduct = () => {
                             )}
                         </div>
                     )}
-
-
                 </div>
+
                 <Row gutter={[16, 16]} justify="center">
                     {getSubscriptionPlan?.loading && getUserInfo?.loading ? (
                         <div
